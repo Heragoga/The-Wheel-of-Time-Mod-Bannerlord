@@ -31,6 +31,13 @@ namespace WoT_Main.Support
         }
         
 
+        public static Settlement getSettlement(string name)
+        {
+            Settlement settlement = Settlement.Find(name);
+            return settlement;
+            
+        }
+
         public static void displayMessageInChat(String s)
         {
             InformationManager.DisplayMessage(new InformationMessage(s));

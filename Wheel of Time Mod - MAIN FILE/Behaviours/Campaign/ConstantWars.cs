@@ -56,7 +56,7 @@ namespace WoT_Main.Behaviours
                     if(war != null && war.isValid())
                     {
                         war.declareWar();
-                        campaignSupport.displayMessageInChat(war.generateMessage());
+                        
                     }
                 }
             }
@@ -87,10 +87,7 @@ namespace WoT_Main.Behaviours
                 }
             }
 
-            foreach (string s in warsSave)
-            {
-                campaignSupport.displayMessageInChat(s, Colors.Yellow);
-            }
+            
         }
         private void load()
         {

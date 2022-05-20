@@ -223,16 +223,21 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Behaviours\Campaign\PartyMapStuckFix.cs" />
     <Compile Include="Behaviours\Campaign\RandomEvents.cs" />
     <Compile Include="Behaviours\Campaign\ConstantWars.cs" />
     <Compile Include="Behaviours\Battle\NoFriendlyFire.cs" />
     <Compile Include="Behaviours\Campaign\ShadowAlwaysAtWar.cs" />
     <Compile Include="Behaviours\Campaign\ShayolGhulCaptureMechanic.cs" />
     <Compile Include="CampaignEventSystem\innerFactionWarEvents.cs" />
-    <Compile Include="CampaignEventSystem\NormalWar.cs" />
+    <Compile Include="CampaignEventSystem\Scenarios\Scenario.cs" />
+    <Compile Include="CampaignEventSystem\Scenarios\TaxCollectorArrivesToRegion.cs" />
     <Compile Include="CampaignEventSystem\war.cs" />
+    <Compile Include="CampaignEventSystem\WoTMapDistanceModel.cs" />
+    <Compile Include="Cheats\DebugCheats.cs" />
     <Compile Include="Cheats\eventSystemCheats.cs" />
     <Compile Include="Main.cs" />
+    <Compile Include="Patches\campaign.cs" />
     <Compile Include="Patches\mainMenu.cs" />
     <Compile Include="Patches\xmlLoading.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

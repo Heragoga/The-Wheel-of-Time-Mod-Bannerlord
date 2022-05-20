@@ -75,7 +75,7 @@ namespace WoT_Main.Behaviours
       
         private void randomEvent()
         {
-            succesionWar();
+            
         }
 
         private void succesionWar()

@@ -18,6 +18,7 @@ using SandBox;
 using TaleWorlds.SaveSystem;
 using TaleWorlds.SaveSystem.Load;
 using WoT_Main.Cheats;
+using WoT_Main.Behaviours.Campaign;
 
 namespace WoT_Main
 {
@@ -87,7 +88,8 @@ namespace WoT_Main
                 starter.AddBehavior(new ShayolGhulCaptureMechanic());
                 starter.AddBehavior(new RandomEvents(constantWars));
                 starter.AddBehavior(new ShadowAlwaysAtWar(constantWars));
-                
+                starter.AddBehavior(new PartyMapStuckFix());
+
                 
             }
         }  
