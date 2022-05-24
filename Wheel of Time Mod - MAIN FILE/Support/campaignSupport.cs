@@ -12,11 +12,13 @@ namespace WoT_Main.Support
 {
     public class campaignSupport
     {
+        //get a Kingodm 
         public static Kingdom getFaction(String name)
         {
 
             Kingdom[] kingdoms = Kingdom.All.ToArray();
 
+            //Just a cycle TODO better comparisson
             foreach (Kingdom kingdom in kingdoms)
             {
                 if (kingdom.Name.ToString().Equals(name, StringComparison.OrdinalIgnoreCase))
@@ -47,6 +49,7 @@ namespace WoT_Main.Support
             InformationManager.DisplayMessage(new InformationMessage(s, consoleColor));
         }
 
+        //just some relic, might need it in the future
         public static bool isClanPartOfKingdomArray(Kingdom[] kingdoms, Clan clan)
         {
             foreach (Kingdom kingdom in kingdoms)
@@ -62,18 +65,23 @@ namespace WoT_Main.Support
             }
             return false;
         }
+
+        //really a shame that taleworlds didn't implement that properly
         public static void changeFactionBanner(object obj, Banner banner)
         {
-
-            foreach (FieldInfo fieldInfo in obj.GetType().GetFields(BindingFlags.Instance | BindingFlags.NonPublic))
+            if(obj != null && banner != null && (obj.GetType() == typeof(Kingdom) || obj.GetType() == typeof(Clan)))
             {
-
-                if (fieldInfo.GetValue(obj).GetType() == typeof(Banner))
+                foreach (FieldInfo fieldInfo in obj.GetType().GetFields(BindingFlags.Instance | BindingFlags.NonPublic))
                 {
-                    fieldInfo.SetValue(obj, banner);
 
+                    if (fieldInfo.GetValue(obj).GetType() == typeof(Banner))
+                    {
+                        fieldInfo.SetValue(obj, banner);
+
+                    }
                 }
             }
+            
         }
 
         public static void changeClanBanner(Clan clan, Banner banner)

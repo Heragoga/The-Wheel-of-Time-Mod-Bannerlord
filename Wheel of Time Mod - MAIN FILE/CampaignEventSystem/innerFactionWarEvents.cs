@@ -19,6 +19,9 @@ namespace WoT_Main.CampaignEventSystem
     class innerFactionWarEvents
     {
         //intensity means how many clans will be on the adversarys faction side
+
+        //somewhat complicated code to declare a war of succesion (rebels all led by one of the most powerfull clans in the faction)
+        //pretending to be the true faction
         public static War succesionWar(Kingdom factionName, int amountOfRebels)
         { 
             Kingdom faction = null;
@@ -28,6 +31,8 @@ namespace WoT_Main.CampaignEventSystem
 
             Clan[] leaderClansForRebels = new Clan[amountOfRebels];
 
+
+            //gathers the most powerfull clans 
             if (totalAmountOfLordsInFormerFaction >= 2 && amountOfRebels >= 2)
             {
 
@@ -68,6 +73,8 @@ namespace WoT_Main.CampaignEventSystem
                 Kingdom[] subFactions = new Kingdom[amountOfRebels];
                 KingdomManager kingdomManager = new KingdomManager();
                 
+
+                //creates the rebels kingdoms
                 for(int i = 0; i < subFactions.Length; i++)
                 {
                     if(subFactions != null)
@@ -83,6 +90,7 @@ namespace WoT_Main.CampaignEventSystem
 
                 Clan[] remainingClans = faction.Clans.ToArray();
                 
+                //distributes the remaining clans between the rebels
                 foreach(Clan clan in remainingClans)
                 {
                     
@@ -103,91 +111,5 @@ namespace WoT_Main.CampaignEventSystem
                 return null;
             }
         }
-        public static War succesionWar(string factionName, int amountOfRebels)
-        {
-            Kingdom faction = null;
-            faction = campaignSupport.getFaction(factionName);
-
-            int totalAmountOfLordsInFormerFaction = faction.Lords.Count();
-
-            Clan[] leaderClansForRebels = new Clan[amountOfRebels];
-
-            if (totalAmountOfLordsInFormerFaction >= 2 && amountOfRebels >= 2)
-            {
-
-
-                for (int i = 0; i < leaderClansForRebels.Length; i++)
-                {
-                    if (i == 0)
-                    {
-                        leaderClansForRebels[i] = faction.Leader.Clan;
-                        continue;
-                    }
-                    Clan[] formerFactionClans = faction.Clans.ToArray();
-
-                    Clan mostPowerfullClan = null;
-                    foreach (Clan clan in formerFactionClans)
-                    {
-                        if (clan != faction.Leader.Clan && !leaderClansForRebels.Contains(clan))
-                        {
-                            if (mostPowerfullClan != null)
-                            {
-                                if (clan.TotalStrength > mostPowerfullClan.TotalStrength)
-                                {
-                                    mostPowerfullClan = clan;
-                                }
-                            }
-                            else
-                            {
-                                mostPowerfullClan = clan;
-                            }
-                        }
-                    }
-                    if (mostPowerfullClan != null)
-                    {
-                        leaderClansForRebels[i] = mostPowerfullClan;
-                    }
-                }
-
-                Kingdom[] subFactions = new Kingdom[amountOfRebels];
-                KingdomManager kingdomManager = new KingdomManager();
-
-                for (int i = 0; i < subFactions.Length; i++)
-                {
-                    if (subFactions != null)
-                    {
-                        kingdomManager.CreateKingdom(new TextObject(leaderClansForRebels[i].Name.ToString() + "'s " + faction.Name), new TextObject(leaderClansForRebels[i].Name.ToString() + "'s " + faction.Name), leaderClansForRebels[i].Culture, leaderClansForRebels[i]);
-
-                        subFactions[i] = campaignSupport.getFaction(leaderClansForRebels[i].Name.ToString() + "'s " + faction.Name);
-                        Banner newBanner = campaignSupport.generateBanner();
-                        campaignSupport.changeFactionBanner(subFactions[i], newBanner);
-
-                    }
-                }
-
-                Clan[] remainingClans = faction.Clans.ToArray();
-
-                foreach (Clan clan in remainingClans)
-                {
-
-                    ChangeKingdomAction.ApplyByJoinToKingdom(clan, subFactions.GetRandomElement(), false);
-                    campaignSupport.changeClanBanner(clan, clan.Kingdom.Banner);
-
-                }
-
-                if (Hero.MainHero.Clan.Kingdom == faction)
-                {
-                    Hero.MainHero.Clan.Kingdom = subFactions.GetRandomElement();
-                }
-
-                return new War(subFactions.ToList());
-            }
-            else
-            {
-                return null;
-            }
-        }
-
-
     }
 }

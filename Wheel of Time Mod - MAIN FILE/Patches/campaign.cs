@@ -20,6 +20,7 @@ namespace WoT_Main.Patches
         [HarmonyPatch]
         public static class WorldMapDebugPatch
         {
+            //Testing, the method crashes, tried to get it by face id, but it doesn't seem to depend on that
             [HarmonyPrefix]
             [HarmonyPatch(typeof(MapScene), "GetNavigationMeshCenterPosition")]
             public static bool PreFix(ref MapScene __instance, ref PathFaceRecord face, ref Vec2 __result)
@@ -29,7 +30,7 @@ namespace WoT_Main.Patches
                 var v = fieldInfo.GetValue(__instance);
                 Scene scene = (Scene)v;
                 scene.GetNavMeshCenterPosition(face.FaceIndex, ref zero);
-                campaignSupport.displayMessageInChat("executed customn methid");
+                
                 __result =  zero.AsVec2;
 
 
@@ -37,6 +38,8 @@ namespace WoT_Main.Patches
             }
         }
 
+
+        //Need to find a workaround around using GetNavigationMeshCenterPosition
         [HarmonyPatch]
         public static class DefaultMapDistanceModelPatch
         {
@@ -48,8 +51,6 @@ namespace WoT_Main.Patches
             {
                 List<Settlement> _settlementsToConsider = new List<Settlement>();
 
-                
-
                 for(int i = 0; i < Settlement.All.Count; i++)
                 {
                     _settlementsToConsider.Add(Settlement.All[i]);
@@ -58,8 +59,7 @@ namespace WoT_Main.Patches
                 Settlement settlement;
                 if (!_navigationMeshClosestSettlementCache.TryGetValue(face.FaceIndex, out settlement))
                 {
-                     
-                    
+                      
                     Vec2 navigationMeshCenterPosition = Campaign.Current.MapSceneWrapper.GetNavigationMeshCenterPosition(face);
                     float num = float.MaxValue;
                     foreach (Settlement settlement2 in _settlementsToConsider)

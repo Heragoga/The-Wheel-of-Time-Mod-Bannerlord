@@ -16,7 +16,7 @@ using WoT_Main.CampaignEventSystem;
 namespace WoT_Main.Behaviours
 {
 
-     
+     //Currently experimenting with it, NOT FINISHED
     public class RandomEvents : CampaignBehaviorBase
     {
         List<Kingdom> originalKingdoms = null;
@@ -24,7 +24,7 @@ namespace WoT_Main.Behaviours
         bool outOfKingdoms = false;
         public RandomEvents(ConstantWars constantWars)
         {
-            campaignSupport.displayMessageInChat("random events initialized", Colors.Green);
+            
             if(originalKingdoms == null)
             {
 
@@ -75,9 +75,11 @@ namespace WoT_Main.Behaviours
       
         private void randomEvent()
         {
-            
+            //TODO: implement Scenaro choser
         }
 
+        //Method for a succesion war, determines the amount of rebels and wether there are kingdoms at all to declare a war in
+        //TODO: make succesion war a scenario
         private void succesionWar()
         {
             if (outOfKingdoms)
@@ -147,7 +149,7 @@ namespace WoT_Main.Behaviours
                     {
                         campaignSupport.displayMessageInChat(ex.Message, Colors.Red);
                     }
-
+                    //message to the player
                     InformationManager.ShowInquiry(new InquiryData("Succesion war in " + victim.Name.ToString() + "!", "The rebels are: " + inquiryText + ".", true, false, "Ok", null, null, null), true);
 
                 }

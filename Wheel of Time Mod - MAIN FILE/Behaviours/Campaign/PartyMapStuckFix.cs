@@ -14,6 +14,8 @@ using TaleWorlds.InputSystem;
 
 namespace WoT_Main.Behaviours.Campaign
 {
+    //Teleports a party a little bit forward if it is in a place for too long, not very efficient, not sure how to improve it
+    //basically moves a party up in "danger"
     public class PartyMapStuckFix : CampaignBehaviorBase
     {
         float amountToMove = 0.5f;
@@ -63,26 +65,16 @@ namespace WoT_Main.Behaviours.Campaign
                     else
                     {
                         Vec2 targetPos = mobileParty.TargetPosition;
+                        Vec2 currentPos = mobileParty.Position2D;
                         float xChange = 0;
                         float yChange = 0;
 
-                        if (targetPos.X > mobileParty.Position2D.X)
-                        {
-                            xChange = amountToMove;
-                        }
-                        else if(targetPos.X < mobileParty.Position2D.X)
-                        {
-                            xChange = -amountToMove;
-                        }
+                        Vec2 normalizedDirection = targetPos - currentPos;
+                        float x = (float)Math.Sqrt(normalizedDirection.x * normalizedDirection.x + normalizedDirection.y * normalizedDirection.y);
+                        normalizedDirection = new Vec2(normalizedDirection.x * (1 / x), normalizedDirection.x * (1 / x));
 
-                        if (targetPos.Y > mobileParty.Position2D.Y)
-                        {
-                            yChange = amountToMove;
-                        }
-                        else if (targetPos.Y < mobileParty.Position2D.Y)
-                        {
-                            yChange = -amountToMove;
-                        }
+                        xChange = normalizedDirection.x;
+                        yChange = normalizedDirection.y;
 
                         try
                         {

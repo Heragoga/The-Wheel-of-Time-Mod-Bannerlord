@@ -14,9 +14,10 @@ namespace WoT_Main.Support
     {
         public static void removeInitialStateOption(String name)
         {
+
             try
             {
-
+                //gets the field that needs removal and it's value
                 FieldInfo fieldInfo = typeof(TaleWorlds.MountAndBlade.Module).GetField("_initialStateOptions", BindingFlags.NonPublic | BindingFlags.Instance);
                 var v = fieldInfo.GetValue(TaleWorlds.MountAndBlade.Module.CurrentModule);
                 List<InitialStateOption> newInitialStateOptionList;
@@ -29,6 +30,8 @@ namespace WoT_Main.Support
                 {
                     return;
                 }
+
+                //searches for the menu options which needs to be removed and removes it out of the localy held copy of the list
                 foreach (InitialStateOption initialStateOption1 in newInitialStateOptionList)
                 {
                     if (initialStateOption1.Id.Contains(name))
@@ -39,6 +42,7 @@ namespace WoT_Main.Support
                     }
 
                 }
+                //updates the value
                 fieldInfo.SetValue(typeof(TaleWorlds.MountAndBlade.Module).GetField("_initialStateOptions", BindingFlags.NonPublic | BindingFlags.Instance), newInitialStateOptionList);
             }
             catch (Exception ex)
@@ -48,7 +52,9 @@ namespace WoT_Main.Support
             }
         }
         public static void removeGameModel(IGameStarter gameStarter)
-        {
+        {   
+
+            //Doesn't work properly, was experimenting with it
             try
             {
 
@@ -85,34 +91,35 @@ namespace WoT_Main.Support
 
         public static void changeInitialStateOptionName(String initialStateOptionName, String newName)
         {
-            try
-            {
-                FieldInfo fieldInfo = typeof(TaleWorlds.MountAndBlade.Module).GetField("_initialStateOption", BindingFlags.NonPublic | BindingFlags.Instance);
-                var v = fieldInfo.GetValue(TaleWorlds.MountAndBlade.Module.CurrentModule);
-                if(v.GetType() == typeof(List<InitialStateOption>))
-                {
-                    List<InitialStateOption> initialStateOptions = (List<InitialStateOption>)v;
-                    foreach(InitialStateOption initialStateOption in initialStateOptions)
-                    {
-                        if(initialStateOption.Name.ToString().Contains(initialStateOptionName))
-                        {
-                            typeof(InitialStateOption).GetProperty("Name", BindingFlags.Public | BindingFlags.Instance).SetValue(initialStateOption, new TextObject (newName, null));
-                        }
-                    }
-
-                    fieldInfo.SetValue(TaleWorlds.MountAndBlade.Module.CurrentModule, initialStateOptions);
-                }
-                else
-                {
-                    return;
-                }
-
-            }
-            catch (Exception ex)
-            {
-
-                campaignSupport.displayMessageInChat(ex.Message, Color.White);
-            }
+            //Doesn't work, don't use
+            //try
+            //{
+            //    FieldInfo fieldInfo = typeof(TaleWorlds.MountAndBlade.Module).GetField("_initialStateOption", BindingFlags.NonPublic | BindingFlags.Instance);
+            //    var v = fieldInfo.GetValue(TaleWorlds.MountAndBlade.Module.CurrentModule);
+            //    if(v.GetType() == typeof(List<InitialStateOption>))
+            //    {
+            //        List<InitialStateOption> initialStateOptions = (List<InitialStateOption>)v;
+            //        foreach(InitialStateOption initialStateOption in initialStateOptions)
+            //        {
+            //            if(initialStateOption.Name.ToString().Contains(initialStateOptionName))
+            //            {
+            //                typeof(InitialStateOption).GetProperty("Name", BindingFlags.Public | BindingFlags.Instance).SetValue(initialStateOption, new TextObject (newName, null));
+            //            }
+            //        }
+            //
+            //        fieldInfo.SetValue(TaleWorlds.MountAndBlade.Module.CurrentModule, initialStateOptions);
+            //    }
+            //    else
+            //    {
+            //        return;
+            //    }
+            //
+            //}
+            //catch (Exception ex)
+            //{
+            //
+            //    campaignSupport.displayMessageInChat(ex.Message, Color.White);
+            //}
         }
     }
 }

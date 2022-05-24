@@ -62,6 +62,8 @@ namespace WoT_Main.Behaviours
             }
 
         }
+
+        //saves all the wars in an array, DO NOT EDIT otherwise loading will break down
         private void save()
         {
             foreach (War war in wars)
@@ -89,6 +91,7 @@ namespace WoT_Main.Behaviours
 
             
         }
+        // loads the wars from a list of strings
         private void load()
         {
             string[] strings = warsSave.ToArray();

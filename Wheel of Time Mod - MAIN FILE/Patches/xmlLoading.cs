@@ -12,6 +12,8 @@ namespace WoT_Main.Patches
 {
     class xmlLoading
     {
+        //Relic
+
         //[HarmonyPatch(typeof(GameTextManager), "LoadGameTexts")]
         //public class GameTextManagerLoadGameTexts
         //{

@@ -11,7 +11,8 @@ using WoT_Main.Support;
 
 namespace WoT_Main.CampaignEventSystem
 {
-    
+    //class which contaisn a war, can either be a list of kingdoms which all fight against each other or a single kingdom which faces the entire world
+    //DO NOT EDIT else loading and saving wont work
     public class War
     {
         public List<Kingdom> kingdoms;
@@ -28,6 +29,8 @@ namespace WoT_Main.CampaignEventSystem
             againstAll = true;
         }
 
+        //to redecalre the wars
+        //IMPORTANT check wheather war is already declared BEFORE using this method
         public void declareWar()
         {
             if (!againstAll)
@@ -50,12 +53,9 @@ namespace WoT_Main.CampaignEventSystem
                 
                 foreach (Kingdom kingdom in allKingdoms)
                 {
-                    
-                    
+
                     FactionManager.DeclareWar(kingdom, againstAllKingdom);
-                    
-                   
-                    
+
                 }
             }
         }
@@ -69,6 +69,7 @@ namespace WoT_Main.CampaignEventSystem
             return false;
         }
 
+        //generates a message for debuggin purposes
         public string generateMessage()
         {
             string str = "";

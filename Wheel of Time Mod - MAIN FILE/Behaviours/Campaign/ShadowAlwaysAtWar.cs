@@ -9,6 +9,7 @@ using WoT_Main.Support;
 
 namespace WoT_Main.Behaviours
 {
+    //ensures that the shadow always stays at war with everybody else
     public class ShadowAlwaysAtWar : CampaignBehaviorBase
     {
         private ConstantWars constantWars;
@@ -28,6 +29,7 @@ namespace WoT_Main.Behaviours
 
         public override void SyncData(IDataStore dataStore) { }
 
+        //just adds the shadow-war if it's no longer there
         private void shadowWar() 
         {
 

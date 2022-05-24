@@ -7,13 +7,13 @@ using TaleWorlds.CampaignSystem;
 using WoT_Main.CampaignEventSystem;
 using System.Windows;
 using WoT_Main.Behaviours;
+using WoT_Main.Support;
 
 namespace WoT_Main.Cheats
 {
+	//for testing, doesn't add the war to ConstantWars
     class eventSystemCheats
     {
-		
-		
 
 		[TaleWorlds.Library.CommandLineFunctionality.CommandLineArgumentFunction("declareSuccesionWar", "WoT_Main")]
 		public static string FullCompanion(List<string> strings)
@@ -39,19 +39,8 @@ namespace WoT_Main.Cheats
 			faction += strings[0];
 			int amountofRebels = Convert.ToInt32(strings[1]);
 
-            try
-            {
-				innerFactionWarEvents.succesionWar(faction, amountofRebels);
-				
-				
-			}
-			catch(Exception ex)
-            {
-
-            }
+			innerFactionWarEvents.succesionWar(campaignSupport.getFaction(faction), amountofRebels);
 			
-			
-
 			return "Success";
 		}
 	}

@@ -17,6 +17,8 @@ namespace WoT_Main.CampaignEventSystem.Scenarios
         string _attacker = "";
         string _victim = "";
 
+        //still not finished, first implementation of scenario, likley doesn't work
+
         public TaxCollectorArrivesToRegion(List<string> strings)
         {
 

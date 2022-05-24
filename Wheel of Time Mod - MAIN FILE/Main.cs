@@ -29,7 +29,7 @@ namespace WoT_Main
         {
 
             base.OnBeforeInitialModuleScreenSetAsRoot();
-
+            //Just for confirmation
             campaignSupport.displayMessageInChat("WoT Core loaded", Color.White);
 
         }
@@ -38,27 +38,28 @@ namespace WoT_Main
         {
 
             base.OnSubModuleLoad();
+
             TextObject coreContentDisabledReason = new TextObject("Disabled during installation.", null);
-            //Removes all the Menu Options (Initial State Options the mod doesn't need), Battle because it is broken, new Campaign because
+
+            //Removing Start screen options which are not needed for the mod
+
             startScreenSupport.removeInitialStateOption("CustomBattle");
             startScreenSupport.removeInitialStateOption("StoryModeNewGame");
             startScreenSupport.removeInitialStateOption("Credits");
             startScreenSupport.removeInitialStateOption("SandBoxNewGame");
             
-
-
-           
+            //Adds out customn gamemode, currently not much
             TaleWorlds.MountAndBlade.Module.CurrentModule.AddInitialStateOption(new InitialStateOption("SandBoxNewGame", new TextObject("New WoT Campaign", null), 3, delegate ()
             {
                 MBGameManager.StartNewGame(new WoTCampaignManager());
             }, () => new ValueTuple<bool, TextObject>(TaleWorlds.MountAndBlade.Module.CurrentModule.IsOnlyCoreContentEnabled, coreContentDisabledReason)));
 
+            //Bread
             InitialStateOption initialStateOption = new InitialStateOption("Donate", new TextObject("Donate"), 1233, Donate, menuFunc);
             TaleWorlds.MountAndBlade.Module.CurrentModule.AddInitialStateOption(initialStateOption);
 
             Harmony harmony = new Harmony("WoT_Main.HarmonyPatches");
             harmony.PatchAll();
-
         }
         
 
@@ -67,6 +68,7 @@ namespace WoT_Main
 
             base.OnMissionBehaviorInitialize(mission);
 
+            //Mission behaviour which disables friendly fire
             mission.AddMissionBehavior(new NoFriendlyFire());
 
         }
@@ -89,15 +91,12 @@ namespace WoT_Main
                 starter.AddBehavior(new RandomEvents(constantWars));
                 starter.AddBehavior(new ShadowAlwaysAtWar(constantWars));
                 starter.AddBehavior(new PartyMapStuckFix());
-
-                
             }
         }  
         
-
-
         private void Donate()
         {
+            //Open browser and navigate to given link
             System.Diagnostics.Process.Start("https://www.patreon.com/WoT_Mod");
         }
         
@@ -105,10 +104,5 @@ namespace WoT_Main
         {
             return (false, null);
         }
-
-       
-
-      
-      
     }
 }

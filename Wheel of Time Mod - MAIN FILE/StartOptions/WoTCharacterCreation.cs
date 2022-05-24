@@ -8,11 +8,12 @@ using TaleWorlds.Localization;
 
 namespace TaleWorlds.CampaignSystem.CharacterCreationContent
 {
-    // Token: 0x02000222 RID: 546
+    
     public class WoTCharacterCreation : CharacterCreationContentBase
 	{
-		// Token: 0x17000A21 RID: 2593
-		// (get) Token: 0x06002573 RID: 9587 RVA: 0x000958E9 File Offset: 0x00093AE9
+
+		//Code copied from taleworld's binarys, strings, locations etc. can be changed
+
 		public override TextObject ReviewPageDescription
 		{
 			get
@@ -38,7 +39,6 @@ namespace TaleWorlds.CampaignSystem.CharacterCreationContent
 			}
 		}
 
-		// Token: 0x06002575 RID: 9589 RVA: 0x000958FF File Offset: 0x00093AFF
 		protected override void OnCultureSelected()
 		{
 			base.SelectedTitleType = 1;
@@ -46,13 +46,13 @@ namespace TaleWorlds.CampaignSystem.CharacterCreationContent
 			Clan.PlayerClan.ChangeClanName(FactionHelper.GenerateClanNameforPlayer());
 		}
 
-		// Token: 0x06002576 RID: 9590 RVA: 0x0009591E File Offset: 0x00093B1E
+		
 		public override int GetSelectedParentType()
 		{
 			return base.SelectedParentType;
 		}
 
-		// Token: 0x06002577 RID: 9591 RVA: 0x00095928 File Offset: 0x00093B28
+		
 		public override void OnCharacterCreationFinalized()
 		{
 			CultureObject culture = CharacterObject.PlayerCharacter.Culture;

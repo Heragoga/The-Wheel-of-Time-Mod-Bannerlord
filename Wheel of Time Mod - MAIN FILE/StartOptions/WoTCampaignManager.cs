@@ -15,7 +15,7 @@ namespace SandBox
 	
 	public class WoTCampaignManager : MBGameManager
 	{
-		
+		//Code copied from Taleworlds
 		public WoTCampaignManager()
 		{
 			this._loadingSavedGame = false;

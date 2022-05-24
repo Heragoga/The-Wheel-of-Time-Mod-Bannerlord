@@ -233,12 +233,10 @@
     <Compile Include="CampaignEventSystem\Scenarios\Scenario.cs" />
     <Compile Include="CampaignEventSystem\Scenarios\TaxCollectorArrivesToRegion.cs" />
     <Compile Include="CampaignEventSystem\war.cs" />
-    <Compile Include="CampaignEventSystem\WoTMapDistanceModel.cs" />
     <Compile Include="Cheats\DebugCheats.cs" />
     <Compile Include="Cheats\eventSystemCheats.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="Patches\campaign.cs" />
-    <Compile Include="Patches\mainMenu.cs" />
     <Compile Include="Patches\xmlLoading.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Support\campaignSupport.cs" />
