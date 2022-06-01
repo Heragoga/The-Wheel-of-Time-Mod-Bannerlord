@@ -28,7 +28,7 @@ namespace TaleWorlds.CampaignSystem.CharacterCreationContent
 		{
 			get
 			{
-				yield return typeof(CharacterCreationCultureStage);
+				//yield return typeof(CharacterCreationCultureStage);
 				yield return typeof(CharacterCreationFaceGeneratorStage);
 				yield return typeof(CharacterCreationGenericStage);
 				yield return typeof(CharacterCreationBannerEditorStage);
@@ -78,10 +78,10 @@ namespace TaleWorlds.CampaignSystem.CharacterCreationContent
 		// Token: 0x06002578 RID: 9592 RVA: 0x000959C2 File Offset: 0x00093BC2
 		protected override void OnInitialized(CharacterCreation characterCreation)
 		{
-			
-			this.AddOriginMenu(characterCreation);
-			this.AddLifeMenu(characterCreation);
-			this.AddAgeSelectionMenu(characterCreation);
+			this.AddTestMenu(characterCreation);
+			//this.AddOriginMenu(characterCreation);
+			//this.AddLifeMenu(characterCreation);
+			//this.AddAgeSelectionMenu(characterCreation);
 		}
 
 		// Token: 0x06002579 RID: 9593 RVA: 0x000959EE File Offset: 0x00093BEE
@@ -89,60 +89,128 @@ namespace TaleWorlds.CampaignSystem.CharacterCreationContent
 		{
 		}
 
+		protected void AddTestMenu(CharacterCreation characterCreation)
+		{
+			CharacterCreationMenu characterCreationMenu = new CharacterCreationMenu(new TextObject("Origin", null), new TextObject("You were...", null), new CharacterCreationOnInit(this.ChildhoodOnInit), CharacterCreationMenu.MenuTypes.MultipleChoice);
+
+			CharacterCreationCategory characterCreationCategory = characterCreationMenu.AddMenuCategory(null);
+
+			characterCreationCategory.AddCategoryOption(new TextObject("test", null), new List<SkillObject>
+				{
+				DefaultSkills.Athletics,
+				DefaultSkills.TwoHanded
+				},
+				DefaultCharacterAttributes.Vigor, this.FocusToAdd, this.SkillLevelToAdd, this.AttributeLevelToAdd, null, new CharacterCreationOnSelect(WoTCharacterCreation.ChildhoodYourLeadershipSkillsOnConsequence), new CharacterCreationApplyFinalEffects(WoTCharacterCreation.ChildhoodGoodLeadingOnApply), new TextObject("testtesttest", null), null, 0, 0, 0, 0, 0);
+			characterCreation.AddNewMenu(characterCreationMenu);
+		}
 
 		// Token: 0x0600257B RID: 9595 RVA: 0x00096A18 File Offset: 0x00094C18
 		protected void AddOriginMenu(CharacterCreation characterCreation)
 		{
+			CultureObject culture = null;
+
+			CultureObject[] cultures = base.GetCultures().ToArray();
+			foreach(CultureObject culture1 in cultures)
+            {
+				if(culture1.Name.ToString() == "sturgia")
+                {
+					culture = culture1;
+                }
+            }
+
+			base.SetSelectedCulture(culture, characterCreation);
 
 			CharacterCreationMenu characterCreationMenu = new CharacterCreationMenu(new TextObject("Origin", null), new TextObject("You were...", null), new CharacterCreationOnInit(this.ChildhoodOnInit), CharacterCreationMenu.MenuTypes.MultipleChoice);
-			if (base.GetSelectedCulture().Id.ToString() == "sturgia")
-            {
-				
-				CharacterCreationCategory characterCreationCategory = characterCreationMenu.AddMenuCategory(null);
-				characterCreationCategory.AddCategoryOption(new TextObject("kidnapped as a child by the shadowspawn.", null), new List<SkillObject>
+
+			CharacterCreationCategory characterCreationCategory = characterCreationMenu.AddMenuCategory(null);
+			//if (base.GetSelectedCulture().Id.ToString() == "sturgia")
+            //{
+			//	
+			//	
+			//	characterCreationCategory.AddCategoryOption(new TextObject("kidnapped as a child by the shadowspawn.", null), new List<SkillObject>
+			//	{
+			//	DefaultSkills.Athletics,
+			//	DefaultSkills.TwoHanded
+			//	}, 
+			//	DefaultCharacterAttributes.Vigor, this.FocusToAdd, this.SkillLevelToAdd, this.AttributeLevelToAdd, null, new CharacterCreationOnSelect(WoTCharacterCreation.ChildhoodYourLeadershipSkillsOnConsequence), new CharacterCreationApplyFinalEffects(WoTCharacterCreation.ChildhoodGoodLeadingOnApply), new TextObject("As a young child your village was raided by a hord of trollocs led by a ruthless myrdaal, but they were not there to kill. At least not the children. They took you and all who couldn't hold a spear and defend themselves to the nearest city of the shadow. Those who survived the long journey and your hard life there became involuntary darkfriends, forced to kill in the name of the Dark One against their will.", null), null, 0, 0, 0, 0, 0);
+			//
+			//	//---------------------------
+			//	characterCreationCategory.AddCategoryOption(new TextObject(" a child of darkfriends.", null), new List<SkillObject>
+			//	{
+			//	DefaultSkills.Roguery,
+			//	DefaultSkills.Riding
+			//	}, DefaultCharacterAttributes.Vigor, this.FocusToAdd, this.SkillLevelToAdd, this.AttributeLevelToAdd, null, new CharacterCreationOnSelect(WoTCharacterCreation.ChildhoodYourBrawnOnConsequence), new CharacterCreationApplyFinalEffects(WoTCharacterCreation.ChildhoodGoodAthleticsOnApply), new TextObject("You were born to a family long in the shadows service. Nowing nothing but the Dark One as your master you became like all your kin, a darkfriend.", null), null, 0, 0, 0, 0, 0);
+			//
+			//	//--------------------------
+			//
+			//	characterCreationCategory.AddCategoryOption(new TextObject(" a result of human and animals breeding, a trolloc.", null), new List<SkillObject>
+			//	{
+			//	DefaultSkills.Athletics,
+			//	DefaultSkills.Polearm
+			//	}, DefaultCharacterAttributes.Control, this.FocusToAdd, this.SkillLevelToAdd, this.AttributeLevelToAdd, null, new CharacterCreationOnSelect(WoTCharacterCreation.ChildhoodAttentionToDetailOnConsequence), new CharacterCreationApplyFinalEffects(WoTCharacterCreation.ChildhoodGoodMemoryOnApply), new TextObject("Your mind is weak, but your fury and muscle great, a trolloc, a beast designed to kill and ravage in the Dark Ones name.", null), null, 0, 0, 0, 0, 0);
+			//
+			//	//_____________________
+			//
+			//	
+			//	characterCreationCategory.AddCategoryOption(new TextObject("{=Y3UcaX74}your aptitude for numbers.", null), new List<SkillObject>
+			//	{
+			//	DefaultSkills.Engineering,
+			//	DefaultSkills.Trade
+			//	}, DefaultCharacterAttributes.Intelligence, this.FocusToAdd, this.SkillLevelToAdd, this.AttributeLevelToAdd, null, new CharacterCreationOnSelect(WoTCharacterCreation.ChildhoodAptitudeForNumbersOnConsequence), new CharacterCreationApplyFinalEffects(WoTCharacterCreation.ChildhoodGoodMathOnApply), new TextObject("{=DFidSjIf}Most children around you had only the most rudimentary education, but you lingered after class to study letters and mathematics. You were fascinated by the marketplace - weights and measures, tallies and accounts, the chatter about profits and losses.", null), null, 0, 0, 0, 0, 0);
+			//	characterCreationCategory.AddCategoryOption(new TextObject("{=GEYzLuwb}your way with people.", null), new List<SkillObject>
+			//	{
+			//	DefaultSkills.Charm,
+			//	DefaultSkills.Leadership
+			//	}, DefaultCharacterAttributes.Social, this.FocusToAdd, this.SkillLevelToAdd, this.AttributeLevelToAdd, null, new CharacterCreationOnSelect(WoTCharacterCreation.ChildhoodWayWithPeopleOnConsequence), new CharacterCreationApplyFinalEffects(WoTCharacterCreation.ChildhoodGoodMannersOnApply), new TextObject("{=w2TEQq26}You were always attentive to other people, good at guessing their motivations. You studied how individuals were swayed, and tried out what you learned from adults on your friends.", null), null, 0, 0, 0, 0, 0);
+			//	characterCreationCategory.AddCategoryOption(new TextObject("{=MEgLE2kj}your skill with horses.", null), new List<SkillObject>
+			//	{
+			//	DefaultSkills.Riding,
+			//	DefaultSkills.Medicine
+			//	}, DefaultCharacterAttributes.Endurance, this.FocusToAdd, this.SkillLevelToAdd, this.AttributeLevelToAdd, null, new CharacterCreationOnSelect(WoTCharacterCreation.ChildhoodSkillsWithHorsesOnConsequence), new CharacterCreationApplyFinalEffects(WoTCharacterCreation.ChildhoodAffinityWithAnimalsOnApply), new TextObject("{=ngazFofr}You were always drawn to animals, and spent as much time as possible hanging out in the village stables. You could calm horses, and were sometimes called upon to break in new colts. You learned the basics of veterinary arts, much of which is applicable to humans as well.", null), null, 0, 0, 0, 0, 0);
+			//}
+			
+			characterCreationCategory.AddCategoryOption(new TextObject("kidnapped as a child by the shadowspawn.", null), new List<SkillObject>
 				{
 				DefaultSkills.Athletics,
 				DefaultSkills.TwoHanded
-				}, 
-				DefaultCharacterAttributes.Vigor, this.FocusToAdd, this.SkillLevelToAdd, this.AttributeLevelToAdd, null, new CharacterCreationOnSelect(WoTCharacterCreation.ChildhoodYourLeadershipSkillsOnConsequence), new CharacterCreationApplyFinalEffects(WoTCharacterCreation.ChildhoodGoodLeadingOnApply), new TextObject("As a young child your village was raided by a hord of trollocs led by a ruthless myrdaal, but they were not there to kill. At least not the children. They took you and all who couldn't hold a spear and defend themselves to the nearest city of the shadow. Those who survived the long journey and your hard life there became involuntary darkfriends, forced to kill in the name of the Dark One against their will.", null), null, 0, 0, 0, 0, 0);
+				},
+			DefaultCharacterAttributes.Vigor, this.FocusToAdd, this.SkillLevelToAdd, this.AttributeLevelToAdd, null, new CharacterCreationOnSelect(WoTCharacterCreation.ChildhoodYourLeadershipSkillsOnConsequence), new CharacterCreationApplyFinalEffects(WoTCharacterCreation.ChildhoodGoodLeadingOnApply), new TextObject("As a young child your village was raided by a hord of trollocs led by a ruthless myrdaal, but they were not there to kill. At least not the children. They took you and all who couldn't hold a spear and defend themselves to the nearest city of the shadow. Those who survived the long journey and your hard life there became involuntary darkfriends, forced to kill in the name of the Dark One against their will.", null), null, 0, 0, 0, 0, 0);
 
-				//---------------------------
-				characterCreationCategory.AddCategoryOption(new TextObject(" a child of darkfriends.", null), new List<SkillObject>
+			//---------------------------
+			characterCreationCategory.AddCategoryOption(new TextObject(" a child of darkfriends.", null), new List<SkillObject>
 				{
 				DefaultSkills.Roguery,
 				DefaultSkills.Riding
 				}, DefaultCharacterAttributes.Vigor, this.FocusToAdd, this.SkillLevelToAdd, this.AttributeLevelToAdd, null, new CharacterCreationOnSelect(WoTCharacterCreation.ChildhoodYourBrawnOnConsequence), new CharacterCreationApplyFinalEffects(WoTCharacterCreation.ChildhoodGoodAthleticsOnApply), new TextObject("You were born to a family long in the shadows service. Nowing nothing but the Dark One as your master you became like all your kin, a darkfriend.", null), null, 0, 0, 0, 0, 0);
 
-				//--------------------------
+			//--------------------------
 
-				characterCreationCategory.AddCategoryOption(new TextObject(" a result of human and animals breeding, a trolloc.", null), new List<SkillObject>
+			characterCreationCategory.AddCategoryOption(new TextObject(" a result of human and animals breeding, a trolloc.", null), new List<SkillObject>
 				{
 				DefaultSkills.Athletics,
 				DefaultSkills.Polearm
 				}, DefaultCharacterAttributes.Control, this.FocusToAdd, this.SkillLevelToAdd, this.AttributeLevelToAdd, null, new CharacterCreationOnSelect(WoTCharacterCreation.ChildhoodAttentionToDetailOnConsequence), new CharacterCreationApplyFinalEffects(WoTCharacterCreation.ChildhoodGoodMemoryOnApply), new TextObject("Your mind is weak, but your fury and muscle great, a trolloc, a beast designed to kill and ravage in the Dark Ones name.", null), null, 0, 0, 0, 0, 0);
 
-				//_____________________
+			//_____________________
 
-				
-				characterCreationCategory.AddCategoryOption(new TextObject("{=Y3UcaX74}your aptitude for numbers.", null), new List<SkillObject>
+
+			characterCreationCategory.AddCategoryOption(new TextObject("{=Y3UcaX74}your aptitude for numbers.", null), new List<SkillObject>
 				{
 				DefaultSkills.Engineering,
 				DefaultSkills.Trade
 				}, DefaultCharacterAttributes.Intelligence, this.FocusToAdd, this.SkillLevelToAdd, this.AttributeLevelToAdd, null, new CharacterCreationOnSelect(WoTCharacterCreation.ChildhoodAptitudeForNumbersOnConsequence), new CharacterCreationApplyFinalEffects(WoTCharacterCreation.ChildhoodGoodMathOnApply), new TextObject("{=DFidSjIf}Most children around you had only the most rudimentary education, but you lingered after class to study letters and mathematics. You were fascinated by the marketplace - weights and measures, tallies and accounts, the chatter about profits and losses.", null), null, 0, 0, 0, 0, 0);
-				characterCreationCategory.AddCategoryOption(new TextObject("{=GEYzLuwb}your way with people.", null), new List<SkillObject>
+			characterCreationCategory.AddCategoryOption(new TextObject("{=GEYzLuwb}your way with people.", null), new List<SkillObject>
 				{
 				DefaultSkills.Charm,
 				DefaultSkills.Leadership
 				}, DefaultCharacterAttributes.Social, this.FocusToAdd, this.SkillLevelToAdd, this.AttributeLevelToAdd, null, new CharacterCreationOnSelect(WoTCharacterCreation.ChildhoodWayWithPeopleOnConsequence), new CharacterCreationApplyFinalEffects(WoTCharacterCreation.ChildhoodGoodMannersOnApply), new TextObject("{=w2TEQq26}You were always attentive to other people, good at guessing their motivations. You studied how individuals were swayed, and tried out what you learned from adults on your friends.", null), null, 0, 0, 0, 0, 0);
-				characterCreationCategory.AddCategoryOption(new TextObject("{=MEgLE2kj}your skill with horses.", null), new List<SkillObject>
+			characterCreationCategory.AddCategoryOption(new TextObject("{=MEgLE2kj}your skill with horses.", null), new List<SkillObject>
 				{
 				DefaultSkills.Riding,
 				DefaultSkills.Medicine
 				}, DefaultCharacterAttributes.Endurance, this.FocusToAdd, this.SkillLevelToAdd, this.AttributeLevelToAdd, null, new CharacterCreationOnSelect(WoTCharacterCreation.ChildhoodSkillsWithHorsesOnConsequence), new CharacterCreationApplyFinalEffects(WoTCharacterCreation.ChildhoodAffinityWithAnimalsOnApply), new TextObject("{=ngazFofr}You were always drawn to animals, and spent as much time as possible hanging out in the village stables. You could calm horses, and were sometimes called upon to break in new colts. You learned the basics of veterinary arts, much of which is applicable to humans as well.", null), null, 0, 0, 0, 0, 0);
-			}
 
-			
-			
+
 			characterCreation.AddNewMenu(characterCreationMenu);
 		}
 
@@ -922,6 +990,15 @@ namespace TaleWorlds.CampaignSystem.CharacterCreationContent
 		// Token: 0x060025D7 RID: 9687 RVA: 0x00098E44 File Offset: 0x00097044
 		protected void ChildhoodOnInit(CharacterCreation characterCreation)
 		{
+			CultureObject[] cultures = CharacterCreationContentBase.Instance.GetCultures().ToArray();
+			foreach (CultureObject culture in cultures)
+			{
+				if (culture.Id.ToString() == "sturgia")
+				{
+					base.SetSelectedCulture(culture, characterCreation);
+				}
+			}
+			
 			characterCreation.IsPlayerAlone = true;
 			characterCreation.HasSecondaryCharacter = false;
 			characterCreation.ClearFaceGenPrefab();
@@ -929,7 +1006,7 @@ namespace TaleWorlds.CampaignSystem.CharacterCreationContent
 			string text = string.Concat(new object[]
 			{
 				"player_char_creation_childhood_age_",
-				base.GetSelectedCulture().StringId,
+				"sturgia",
 				"_",
 				base.SelectedParentType
 			});

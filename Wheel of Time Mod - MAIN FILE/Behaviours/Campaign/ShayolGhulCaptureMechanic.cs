@@ -39,7 +39,7 @@ namespace WoT_Main.Behaviours
         {
             // not very efficient, player needs to controll Shayol Ghul 
             IFaction shadow = settlement.MapFaction;
-            if (!wonTheGame && settlement.OwnerClan == Hero.MainHero.Clan && shadow != null && settlement.Name.ToString() == "Shayol Ghul")
+            if (!wonTheGame && settlement.OwnerClan == Hero.MainHero.Clan && shadow != null && settlement.Name.ToString() == "Shayol Ghul" )
             {
                 //message
                 InformationManager.ShowInquiry(new InquiryData("Shayol Ghul is taken!", "Shayol ghul is taken..." + Environment.NewLine + "but what to do with the dark one?", true, true, "I AM THE" + Environment.NewLine + "DARK ONE!!!", "Kill him and " + Environment.NewLine + "dissolve the shadow.", takeControllOfShadow, dissolveShadow), true);

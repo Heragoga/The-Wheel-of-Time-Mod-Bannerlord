@@ -46,13 +46,13 @@ namespace WoT_Main
             startScreenSupport.removeInitialStateOption("CustomBattle");
             startScreenSupport.removeInitialStateOption("StoryModeNewGame");
             startScreenSupport.removeInitialStateOption("Credits");
-            startScreenSupport.removeInitialStateOption("SandBoxNewGame");
+            //startScreenSupport.removeInitialStateOption("SandBoxNewGame");
             
             //Adds out customn gamemode, currently not much
-            TaleWorlds.MountAndBlade.Module.CurrentModule.AddInitialStateOption(new InitialStateOption("SandBoxNewGame", new TextObject("New WoT Campaign", null), 3, delegate ()
-            {
-                MBGameManager.StartNewGame(new WoTCampaignManager());
-            }, () => new ValueTuple<bool, TextObject>(TaleWorlds.MountAndBlade.Module.CurrentModule.IsOnlyCoreContentEnabled, coreContentDisabledReason)));
+            //TaleWorlds.MountAndBlade.Module.CurrentModule.AddInitialStateOption(new InitialStateOption("SandBoxNewGame", new TextObject("New WoT Campaign", null), 3, delegate ()
+            //{
+            //    MBGameManager.StartNewGame(new WoTCampaignManager());
+            //}, () => new ValueTuple<bool, TextObject>(TaleWorlds.MountAndBlade.Module.CurrentModule.IsOnlyCoreContentEnabled, coreContentDisabledReason)));
 
             //Bread
             InitialStateOption initialStateOption = new InitialStateOption("Donate", new TextObject("Donate"), 1233, Donate, menuFunc);
