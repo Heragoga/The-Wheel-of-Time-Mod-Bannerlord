@@ -20,37 +20,37 @@ using WoT_Main.Support;
 
 namespace WoT_Main.Patches
 {
-    [HarmonyPatch]
-    public static class ClanNamingStageFix
-    {
-
-        [HarmonyPrefix]
-        [HarmonyPatch(typeof(CharacterCreationReviewStageVM), "AddReviewedItems")]
-        public static bool Prefix(ref CharacterCreationReviewStageVM __instance)
-        {
-            FieldInfo fieldInfo = typeof(CharacterCreationReviewStageVM).GetField("_currentContent", BindingFlags.Instance | BindingFlags.NonPublic);
-
-            var v = fieldInfo.GetValue(__instance);
-
-            FieldInfo fieldInfo2 = typeof(CharacterCreationContentBase).GetField("_culture", BindingFlags.Instance | BindingFlags.NonPublic);
-
-            CultureObject culture = null;
-
-            CultureObject[] cultures = MBObjectManager.Instance.GetObjectTypeList<CultureObject>().ToArray();
-            foreach (CultureObject culture1 in cultures)
-            {
-                if (culture1.Name.ToString().ToLower() == "The White Tower".ToLower())
-                {
-                    culture = culture1;
-                }
-               
-            }
-            fieldInfo2.SetValue(v, culture);
-            return true;
-        }
-    }
-
-    [HarmonyPatch]
+   //[HarmonyPatch]
+   //public static class ClanNamingStageFix
+   //{
+   //
+   //    [HarmonyPrefix]
+   //    [HarmonyPatch(typeof(CharacterCreationReviewStageVM), "AddReviewedItems")]
+   //    public static bool Prefix(ref CharacterCreationReviewStageVM __instance)
+   //    {
+   //        FieldInfo fieldInfo = typeof(CharacterCreationReviewStageVM).GetField("_currentContent", BindingFlags.Instance | //BindingFlags.NonPublic);
+   //
+   //        var v = fieldInfo.GetValue(__instance);
+   //
+   //        FieldInfo fieldInfo2 = typeof(CharacterCreationContentBase).GetField("_culture", BindingFlags.Instance | //BindingFlags.NonPublic);
+   //
+   //        CultureObject culture = null;
+   //
+   //        CultureObject[] cultures = MBObjectManager.Instance.GetObjectTypeList<CultureObject>().ToArray();
+   //        foreach (CultureObject culture1 in cultures)
+   //        {
+   //            if (culture1.Name.ToString().ToLower() == "The White Tower".ToLower())
+   //            {
+   //                culture = culture1;
+   //            }
+   //           
+   //        }
+   //        fieldInfo2.SetValue(v, culture);
+   //        return true;
+   //    }
+   //}
+   //
+   //[HarmonyPatch]
    public static class CultureStageSkiper
    {
        
