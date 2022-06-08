@@ -106,7 +106,7 @@ namespace WoT_Main
 				DefaultSkills.Polearm
 			};
 			CharacterAttribute effectedAttribute = DefaultCharacterAttributes.Vigor;
-			characterCreationCategory.AddCategoryOption(new TextObject("kidnapped as a child", null), effectedSkills1, effectedAttribute, this.FocusToAdd, this.SkillLevelToAdd, this.AttributeLevelToAdd, null, null, null, new TextObject("As a child you were draged from your home village by the forces of the shadow. You have spent most of your life in the company of others, involuntarely working for the shadow.", null), null, 0, 0, 0, 0, 0);
+			characterCreationCategory.AddCategoryOption(new TextObject("kidnapped as a child", null), effectedSkills1, effectedAttribute, this.FocusToAdd, this.SkillLevelToAdd, this.AttributeLevelToAdd, null, Shadowspawn_Origin_Kidnapped_Child_Origin_On_Apply, null, new TextObject("As a child you were draged from your home village by the forces of the shadow. You have spent most of your life in the company of others, involuntarely working for the shadow.", null), null, 0, 0, 0, 0, 0);
 
 			List<SkillObject> effectedSkills2 = new List<SkillObject>
 			{
@@ -114,13 +114,13 @@ namespace WoT_Main
 				DefaultSkills.Athletics
 			};
 			CharacterAttribute effectedAttribute2 = DefaultCharacterAttributes.Vigor;
-			characterCreationCategory.AddCategoryOption(new TextObject("born of trollocs", null), effectedSkills2, effectedAttribute2, this.FocusToAdd, this.SkillLevelToAdd, this.AttributeLevelToAdd, null, null, null, new TextObject("In a dirty trolloc-breeding pit you first saw light. As one of many siblings you began your life as the cheap, worthless monsters the shadow used as their main force, yet you were better than others, you survived when most died.", null), null, 0, 0, 0, 0, 0);
+			characterCreationCategory.AddCategoryOption(new TextObject("born of trollocs", null), effectedSkills2, effectedAttribute2, this.FocusToAdd, this.SkillLevelToAdd, this.AttributeLevelToAdd, null, Shadowspawn_Origin_Trolloc_Origin_On_Apply, null, new TextObject("In a dirty trolloc-breeding pit you first saw light. As one of many siblings you began your life as the cheap, worthless monsters the shadow used as their main force, yet you were better than others, you survived when most died.", null), null, 0, 0, 0, 0, 0);
 
             characterCreationCategory.AddCategoryOption(new TextObject("born in a family of darkfriends", null), new List<SkillObject>{
 				DefaultSkills.Roguery,
 				DefaultSkills.Bow
 			},
-			DefaultCharacterAttributes.Cunning, this.FocusToAdd, this.SkillLevelToAdd, this.AttributeLevelToAdd, null, null, null, new TextObject("Your family stood in the service of the dark one for a long time. So do you, a young darkfriend, convinced of the ideals of the shadow since childhood, ready to give his life for the dark one.", null), null, 0, 0, 0, 0, 0);
+			DefaultCharacterAttributes.Cunning, this.FocusToAdd, this.SkillLevelToAdd, this.AttributeLevelToAdd, null, Shadowspawn_Origin_Darkfriends_Origin_On_Apply, null, new TextObject("Your family stood in the service of the dark one for a long time. So do you, a young darkfriend, convinced of the ideals of the shadow since childhood, ready to give his life for the dark one.", null), null, 0, 0, 0, 0, 0);
 
 
            
@@ -128,7 +128,7 @@ namespace WoT_Main
 				DefaultSkills.Throwing,
 				DefaultSkills.Medicine
 				},
-				DefaultCharacterAttributes.Intelligence, this.FocusToAdd, this.SkillLevelToAdd, this.AttributeLevelToAdd, null, null, null, new TextObject("As soon as you obtained the shal, you joined the black Ajah. The reasons were many: the normal sisters simply didn't understand you, you despised the laws forbidding research in dark parts of channeling and either way the lord of chaos was your prefered master, not some mortal Amyrlin. / Involuntarily or out of your free will you landed in the ranks of the Samma N'Sei, channeling the one power for the dark one.", null), null, 0, 0, 0, 0, 0);
+				DefaultCharacterAttributes.Intelligence, this.FocusToAdd, this.SkillLevelToAdd, this.AttributeLevelToAdd, null, Shadowspawn_Origin_Channeler_Origin_On_Apply, null, new TextObject("As soon as you obtained the shal, you joined the black Ajah. The reasons were many: the normal sisters simply didn't understand you, you despised the laws forbidding research in dark parts of channeling and either way the lord of chaos was your prefered master, not some mortal Amyrlin. / Involuntarily or out of your free will you landed in the ranks of the Samma N'Sei, channeling the one power for the dark one.", null), null, 0, 0, 0, 0, 0);
 			
 			
 			
@@ -137,33 +137,89 @@ namespace WoT_Main
 				DefaultSkills.Tactics,
 				DefaultSkills.Steward
 				},
-				DefaultCharacterAttributes.Intelligence, this.FocusToAdd, this.SkillLevelToAdd, this.AttributeLevelToAdd, null, null, null, new TextObject("You were part of the ruling class of the shadowspawn. Your father, a powerful dreadlord insured an excellent childhood, away from slaves, trollocs and filth. You were tought in many disciplines, mainly how to command and organise troops.", null), null, 0, 0, 0, 0, 0);
+				DefaultCharacterAttributes.Intelligence, this.FocusToAdd, this.SkillLevelToAdd, this.AttributeLevelToAdd, null, Shadowspawn_Origin_Dreadlord_Origin_On_Apply, null, new TextObject("You were part of the ruling class of the shadowspawn. Your father, a powerful dreadlord insured an excellent childhood, away from slaves, trollocs and filth. You were tought in many disciplines, mainly how to command and organise troops.", null), null, 0, 0, 0, 0, 0);
 
 			characterCreationCategory.AddCategoryOption(new TextObject("an offspring of slaves", null), new List<SkillObject>{
 				DefaultSkills.Roguery,
 				DefaultSkills.Polearm
 				},
-				DefaultCharacterAttributes.Cunning, this.FocusToAdd, this.SkillLevelToAdd, this.AttributeLevelToAdd, null, null, null, new TextObject("Your life was hard, working from morning till dawn. As an offspring of slaves you had no saying in what was done to you, your darkfriend-owner decided everything about you.", null), null, 0, 0, 0, 0, 0);
+				DefaultCharacterAttributes.Cunning, this.FocusToAdd, this.SkillLevelToAdd, this.AttributeLevelToAdd, null, Shadowspawn_Origin_Slaves_Origin_On_Apply, null, new TextObject("Your life was hard, working from morning till dawn. As an offspring of slaves you had no saying in what was done to you, your darkfriend-owner decided everything about you.", null), null, 0, 0, 0, 0, 0);
 
 
 			characterCreation.AddNewMenu(characterCreationMenu);
 		}
 		protected void AddProfessionMenu(CharacterCreation characterCreation)
 		{
-			CharacterCreationMenu characterCreationMenu = new CharacterCreationMenu(new TextObject("Origin", null), new TextObject("You were...", null), new CharacterCreationOnInit(this.OriginOnInit), CharacterCreationMenu.MenuTypes.MultipleChoice);
+			CharacterCreationMenu characterCreationMenu = new CharacterCreationMenu(new TextObject("Profession", null), new TextObject("You earned your living as a...", null), new CharacterCreationOnInit(this.OriginOnInit), CharacterCreationMenu.MenuTypes.MultipleChoice);
 			CharacterCreationCategory characterCreationCategory = characterCreationMenu.AddMenuCategory(null);
-			List<SkillObject> effectedSkills = new List<SkillObject>
-			{
-				DefaultSkills.Riding,
-				DefaultSkills.Polearm
-			};
-			CharacterAttribute effectedAttribute = DefaultCharacterAttributes.Vigor;
-			characterCreationCategory.AddCategoryOption(new TextObject("{=InN5ZZt3}A landlord's retainers", null), effectedSkills, effectedAttribute, this.FocusToAdd, this.SkillLevelToAdd, this.AttributeLevelToAdd, null, null, null, new TextObject("{=ivKl4mV2}Your father was a trusted lieutenant of the local landowning aristocrat. He rode with the lord's cavalry, fighting as an armored lancer.", null), null, 0, 0, 0, 0, 0);
-			effectedSkills = new List<SkillObject>
-			{
+
+
+			characterCreationCategory.AddCategoryOption(new TextObject("as a farmer", null), new List<SkillObject>{
+				DefaultSkills.Scouting,
+				DefaultSkills.Steward
+				},
+				DefaultCharacterAttributes.Control, this.FocusToAdd, this.SkillLevelToAdd, this.AttributeLevelToAdd, null, null, null, new TextObject("Tilling, sowing and harvesting, this was the rythm of your life. An honest, though boring job.", null), null, 0, 0, 0, 0, 0);
+			characterCreationCategory.AddCategoryOption(new TextObject("as a blacksmith's apprentice", null), new List<SkillObject>{
+				DefaultSkills.Crafting,
+				DefaultSkills.Engineering
+				},
+				DefaultCharacterAttributes.Endurance, this.FocusToAdd, this.SkillLevelToAdd, this.AttributeLevelToAdd, null, null, null, new TextObject("Your village's blacksmith took you under his hood, teaching you everaything you need.", null), null, 0, 0, 0, 0, 0);
+			characterCreationCategory.AddCategoryOption(new TextObject("as a hunter in the woods", null), new List<SkillObject>{
+				DefaultSkills.Scouting,
+				DefaultSkills.Bow
+				},
+				DefaultCharacterAttributes.Endurance, this.FocusToAdd, this.SkillLevelToAdd, this.AttributeLevelToAdd, null, null, null, new TextObject("Hunting all kinds of animals was your main profession, laying traps, sniffing out gain, a tedious yet rewarding job.", null), null, 0, 0, 0, 0, 0);
+			characterCreationCategory.AddCategoryOption(new TextObject("as a merchant's assistant", null), new List<SkillObject>{
 				DefaultSkills.Trade,
+				DefaultSkills.Leadership
+				},
+				DefaultCharacterAttributes.Social, this.FocusToAdd, this.SkillLevelToAdd, this.AttributeLevelToAdd, null, null, null, new TextObject("Travelling from town to town, buying and selling, this is how you pased your days, a job which gave you a lot of profit, yet involved the risks of the dangerous roads.", null), null, 0, 0, 0, 0, 0);
+			characterCreationCategory.AddCategoryOption(new TextObject("as a fisher", null), new List<SkillObject>{
+				DefaultSkills.Throwing,
+				DefaultSkills.Medicine
+				},
+				DefaultCharacterAttributes.Control, this.FocusToAdd, this.SkillLevelToAdd, this.AttributeLevelToAdd, Profession_fisher_condition, null, null, new TextObject("On a boat you cought fishes, making a living out of it.", null), null, 0, 0, 0, 0, 0);
+
+			characterCreationCategory.AddCategoryOption(new TextObject("as a sheep herder", null), new List<SkillObject>{
+				DefaultSkills.Riding,
+				DefaultSkills.Bow
+				},
+				DefaultCharacterAttributes.Endurance, this.FocusToAdd, this.SkillLevelToAdd, this.AttributeLevelToAdd, Profession_sheep_condition, null, null, new TextObject("In the wide planes you herded sheep, defending them from wolfs with the help of your trusty bow and dog.", null), null, 0, 0, 0, 0, 0);
+
+			characterCreationCategory.AddCategoryOption(new TextObject("as a trolloc breeder", null), new List<SkillObject>{
+				DefaultSkills.Riding,
+				DefaultSkills.Bow
+				},
+				DefaultCharacterAttributes.Endurance, this.FocusToAdd, this.SkillLevelToAdd, this.AttributeLevelToAdd, Profession_trolloc_condition, null, null, new TextObject("You watched over the trolloc breeding pits, an ugly job which always left you quesy afterwards.", null), null, 0, 0, 0, 0, 0);
+			characterCreationCategory.AddCategoryOption(new TextObject("as a engineer on fortification", null), new List<SkillObject>{
+				DefaultSkills.Engineering,
+				DefaultSkills.Tactics
+				},
+				DefaultCharacterAttributes.Cunning, this.FocusToAdd, this.SkillLevelToAdd, this.AttributeLevelToAdd, Profession_fortify_condition, null, null, new TextObject("You fortified towns, villages and camps with your crew, getting a good feal of how to defend your fortifications and how to attack them.", null), null, 0, 0, 0, 0, 0);
+
+			characterCreationCategory.AddCategoryOption(new TextObject("as a raider and bandit", null), new List<SkillObject>{
+				DefaultSkills.Tactics,
+				DefaultSkills.OneHanded
+				},
+				DefaultCharacterAttributes.Intelligence, this.FocusToAdd, this.SkillLevelToAdd, this.AttributeLevelToAdd, Profession_raider_condition, null, null, new TextObject("As a bandit you scowerd the lands, raping, robing and killing. 'Take everything and leave nothing', this was your moto.", null), null, 0, 0, 0, 0, 0);
+
+			characterCreationCategory.AddCategoryOption(new TextObject("as a pirate", null), new List<SkillObject>{
+				DefaultSkills.Tactics,
+				DefaultSkills.Crossbow
+				},
+				DefaultCharacterAttributes.Vigor, this.FocusToAdd, this.SkillLevelToAdd, this.AttributeLevelToAdd, Profession_pirate_condition, null, null, new TextObject("On a boat under the service of your captain you raided and boarded smaller traiding vehicles, even plundering a village on accasion.", null), null, 0, 0, 0, 0, 0);
+
+			characterCreationCategory.AddCategoryOption(new TextObject("as a stable hand", null), new List<SkillObject>{
+				DefaultSkills.Riding,
+				DefaultSkills.Throwing
+				},
+				DefaultCharacterAttributes.Endurance, this.FocusToAdd, this.SkillLevelToAdd, this.AttributeLevelToAdd, Profession_horse_condition, null, null, new TextObject("You worked at stables, grooming, riding and caring horses. A great job your employers said to you, until realised everything was about clearing away shit.", null), null, 0, 0, 0, 0, 0);
+
+			characterCreationCategory.AddCategoryOption(new TextObject("as a healer", null), new List<SkillObject>{
+				DefaultSkills.Medicine,
 				DefaultSkills.Charm
-			};
+				},
+				DefaultCharacterAttributes.Social, this.FocusToAdd, this.SkillLevelToAdd, this.AttributeLevelToAdd, Profession_healer_condition, null, null, new TextObject("You were your villages hedge doctor's/wisdom's apprentice, learning the use of herbs to heal wounds and sicknesses.", null), null, 0, 0, 0, 0, 0);
 
 			characterCreation.AddNewMenu(characterCreationMenu);
 		}
@@ -514,534 +570,75 @@ namespace WoT_Main
 			characterCreation.AddNewMenu(characterCreationMenu);
 		}
 
-		// Token: 0x06002580 RID: 9600 RVA: 0x000984A4 File Offset: 0x000966A4
-		protected void ParentsOnInit(CharacterCreation characterCreation)
+		protected void Shadowspawn_Origin_Kidnapped_Child_Origin_On_Apply(CharacterCreation characterCreation)
+        {
+			ChangePlayerOutfit(characterCreation, "poor_CC_1");
+        }
+		
+		protected void Shadowspawn_Origin_Trolloc_Origin_On_Apply(CharacterCreation characterCreation)
 		{
-			characterCreation.IsPlayerAlone = false;
-			characterCreation.HasSecondaryCharacter = false;
-			WoTCharacterCreation.ClearMountEntity(characterCreation);
-			characterCreation.ClearFaceGenPrefab();
-			if (base.PlayerBodyProperties != CharacterObject.PlayerCharacter.GetBodyProperties(CharacterObject.PlayerCharacter.Equipment, -1))
-			{
-				base.PlayerBodyProperties = CharacterObject.PlayerCharacter.GetBodyProperties(CharacterObject.PlayerCharacter.Equipment, -1);
-				BodyProperties playerBodyProperties = base.PlayerBodyProperties;
-				BodyProperties playerBodyProperties2 = base.PlayerBodyProperties;
-				FaceGen.GenerateParentKey(base.PlayerBodyProperties, ref playerBodyProperties, ref playerBodyProperties2);
-				playerBodyProperties = new BodyProperties(new DynamicBodyProperties(33f, 0.3f, 0.2f), playerBodyProperties.StaticProperties);
-				playerBodyProperties2 = new BodyProperties(new DynamicBodyProperties(33f, 0.5f, 0.5f), playerBodyProperties2.StaticProperties);
-				base.MotherFacegenCharacter = new FaceGenChar(playerBodyProperties, new Equipment(), true, "anim_mother_1");
-				base.FatherFacegenCharacter = new FaceGenChar(playerBodyProperties2, new Equipment(), false, "anim_father_1");
-			}
-			characterCreation.ChangeFaceGenChars(new List<FaceGenChar>
-			{
-				base.MotherFacegenCharacter,
-				base.FatherFacegenCharacter
-			});
-			this.ChangeParentsOutfit(characterCreation, "", "", true, true);
-			this.ChangeParentsAnimation(characterCreation);
+			ChangePlayerOutfit(characterCreation, "trolloc_CC_1");
 		}
-
-		// Token: 0x06002581 RID: 9601 RVA: 0x000985D8 File Offset: 0x000967D8
-		protected void ChangeParentsOutfit(CharacterCreation characterCreation, string fatherItemId = "", string motherItemId = "", bool isLeftHandItemForFather = true, bool isLeftHandItemForMother = true)
-		{
-			characterCreation.ClearFaceGenPrefab();
-			List<Equipment> list = new List<Equipment>();
-			MBEquipmentRoster @object = Game.Current.ObjectManager.GetObject<MBEquipmentRoster>(string.Concat(new object[]
-			{
-				"mother_char_creation_",
-				base.SelectedParentType,
-				"_",
-				base.GetSelectedCulture().StringId
-			}));
-			Equipment equipment = ((@object != null) ? @object.DefaultEquipment : null) ?? MBEquipmentRoster.EmptyEquipment;
-			MBEquipmentRoster object2 = Game.Current.ObjectManager.GetObject<MBEquipmentRoster>(string.Concat(new object[]
-			{
-				"father_char_creation_",
-				base.SelectedParentType,
-				"_",
-				base.GetSelectedCulture().StringId
-			}));
-			Equipment equipment2 = ((object2 != null) ? object2.DefaultEquipment : null) ?? MBEquipmentRoster.EmptyEquipment;
-			if (motherItemId != "")
-			{
-				ItemObject object3 = Game.Current.ObjectManager.GetObject<ItemObject>(motherItemId);
-				if (object3 != null)
-				{
-					equipment.AddEquipmentToSlotWithoutAgent(isLeftHandItemForMother ? EquipmentIndex.WeaponItemBeginSlot : EquipmentIndex.Weapon1, new EquipmentElement(object3, null, null, false));
-				}
-				else
-				{
-					characterCreation.ChangeCharacterPrefab(motherItemId, isLeftHandItemForMother ? Game.Current.HumanMonster.MainHandItemBoneIndex : Game.Current.HumanMonster.OffHandItemBoneIndex);
-				}
-			}
-			if (fatherItemId != "")
-			{
-				ItemObject object4 = Game.Current.ObjectManager.GetObject<ItemObject>(fatherItemId);
-				if (object4 != null)
-				{
-					equipment2.AddEquipmentToSlotWithoutAgent(isLeftHandItemForFather ? EquipmentIndex.WeaponItemBeginSlot : EquipmentIndex.Weapon1, new EquipmentElement(object4, null, null, false));
-				}
-			}
-			list.Add(equipment);
-			list.Add(equipment2);
-			characterCreation.ChangeCharactersEquipment(list);
-		}
-
-		// Token: 0x06002582 RID: 9602 RVA: 0x00098760 File Offset: 0x00096960
-		protected void ChangeParentsAnimation(CharacterCreation characterCreation)
-		{
-			characterCreation.ChangeCharsAnimation(new List<string>
-			{
-				"anim_mother_" + base.SelectedParentType,
-				"anim_father_" + base.SelectedParentType
-			});
-		}
-
-		// Token: 0x06002583 RID: 9603 RVA: 0x000987B0 File Offset: 0x000969B0
-		protected void SetParentAndOccupationType(CharacterCreation characterCreation, int parentType, WoTCharacterCreation.OccupationTypes occupationType, string fatherItemId = "", string motherItemId = "", bool isLeftHandItemForFather = true, bool isLeftHandItemForMother = true)
-		{
-			base.SelectedParentType = parentType;
-			this._familyOccupationType = occupationType;
-			characterCreation.ChangeFaceGenChars(new List<FaceGenChar>
-			{
-				base.MotherFacegenCharacter,
-				base.FatherFacegenCharacter
-			});
-			this.ChangeParentsAnimation(characterCreation);
-			this.ChangeParentsOutfit(characterCreation, fatherItemId, motherItemId, isLeftHandItemForFather, isLeftHandItemForMother);
-		}
-
-		// Token: 0x06002584 RID: 9604 RVA: 0x00098804 File Offset: 0x00096A04
-		protected void EmpireLandlordsRetainerOnConsequence(CharacterCreation characterCreation)
-		{
-			this.SetParentAndOccupationType(characterCreation, 1, WoTCharacterCreation.OccupationTypes.Retainer, "", "", true, true);
-		}
-
-		// Token: 0x06002585 RID: 9605 RVA: 0x0009881B File Offset: 0x00096A1B
-		protected void EmpireMerchantOnConsequence(CharacterCreation characterCreation)
-		{
-			this.SetParentAndOccupationType(characterCreation, 2, WoTCharacterCreation.OccupationTypes.Merchant, "", "", true, true);
-		}
-
-		// Token: 0x06002586 RID: 9606 RVA: 0x00098832 File Offset: 0x00096A32
-		protected void EmpireFreeholderOnConsequence(CharacterCreation characterCreation)
-		{
-			this.SetParentAndOccupationType(characterCreation, 3, WoTCharacterCreation.OccupationTypes.Farmer, "", "", true, true);
-		}
-
-		// Token: 0x06002587 RID: 9607 RVA: 0x00098849 File Offset: 0x00096A49
-		protected void EmpireArtisanOnConsequence(CharacterCreation characterCreation)
-		{
-			this.SetParentAndOccupationType(characterCreation, 4, WoTCharacterCreation.OccupationTypes.Artisan, "", "", true, true);
-		}
-
-		// Token: 0x06002588 RID: 9608 RVA: 0x00098860 File Offset: 0x00096A60
-		protected void EmpireWoodsmanOnConsequence(CharacterCreation characterCreation)
-		{
-			this.SetParentAndOccupationType(characterCreation, 5, WoTCharacterCreation.OccupationTypes.Hunter, "", "", true, true);
-		}
-
-		// Token: 0x06002589 RID: 9609 RVA: 0x00098877 File Offset: 0x00096A77
-		protected void EmpireVagabondOnConsequence(CharacterCreation characterCreation)
-		{
-			this.SetParentAndOccupationType(characterCreation, 6, WoTCharacterCreation.OccupationTypes.Vagabond, "", "", true, true);
-		}
-
-		// Token: 0x0600258A RID: 9610 RVA: 0x0009888E File Offset: 0x00096A8E
-		protected void EmpireLandlordsRetainerOnApply(CharacterCreation characterCreation)
-		{
-			this.FinalizeParents();
-		}
-
-		// Token: 0x0600258B RID: 9611 RVA: 0x00098896 File Offset: 0x00096A96
-		protected void EmpireMerchantOnApply(CharacterCreation characterCreation)
-		{
-			this.FinalizeParents();
-		}
-
-		// Token: 0x0600258C RID: 9612 RVA: 0x0009889E File Offset: 0x00096A9E
-		protected void EmpireFreeholderOnApply(CharacterCreation characterCreation)
-		{
-			this.FinalizeParents();
-		}
-
-		// Token: 0x0600258D RID: 9613 RVA: 0x000988A6 File Offset: 0x00096AA6
-		protected void EmpireArtisanOnApply(CharacterCreation characterCreation)
-		{
-			this.FinalizeParents();
-		}
-
-		// Token: 0x0600258E RID: 9614 RVA: 0x000988AE File Offset: 0x00096AAE
-		protected void EmpireWoodsmanOnApply(CharacterCreation characterCreation)
-		{
-			this.FinalizeParents();
-		}
-
-		// Token: 0x0600258F RID: 9615 RVA: 0x000988B6 File Offset: 0x00096AB6
-		protected void EmpireVagabondOnApply(CharacterCreation characterCreation)
-		{
-			this.FinalizeParents();
-		}
-
-		// Token: 0x06002590 RID: 9616 RVA: 0x000988BE File Offset: 0x00096ABE
-		protected void VlandiaBaronsRetainerOnConsequence(CharacterCreation characterCreation)
-		{
-			this.SetParentAndOccupationType(characterCreation, 1, WoTCharacterCreation.OccupationTypes.Retainer, "", "", true, true);
-		}
-
-		// Token: 0x06002591 RID: 9617 RVA: 0x000988D5 File Offset: 0x00096AD5
-		protected void VlandiaMerchantOnConsequence(CharacterCreation characterCreation)
-		{
-			this.SetParentAndOccupationType(characterCreation, 2, WoTCharacterCreation.OccupationTypes.Merchant, "", "", true, true);
-		}
-
-		// Token: 0x06002592 RID: 9618 RVA: 0x000988EC File Offset: 0x00096AEC
-		protected void VlandiaYeomanOnConsequence(CharacterCreation characterCreation)
-		{
-			this.SetParentAndOccupationType(characterCreation, 3, WoTCharacterCreation.OccupationTypes.Farmer, "", "", true, true);
-		}
-
-		// Token: 0x06002593 RID: 9619 RVA: 0x00098903 File Offset: 0x00096B03
-		protected void VlandiaBlacksmithOnConsequence(CharacterCreation characterCreation)
-		{
-			this.SetParentAndOccupationType(characterCreation, 4, WoTCharacterCreation.OccupationTypes.Artisan, "", "", true, true);
-		}
-
-		// Token: 0x06002594 RID: 9620 RVA: 0x0009891A File Offset: 0x00096B1A
-		protected void VlandiaHunterOnConsequence(CharacterCreation characterCreation)
-		{
-			this.SetParentAndOccupationType(characterCreation, 5, WoTCharacterCreation.OccupationTypes.Hunter, "", "", true, true);
-		}
-
-		// Token: 0x06002595 RID: 9621 RVA: 0x00098931 File Offset: 0x00096B31
-		protected void VlandiaMercenaryOnConsequence(CharacterCreation characterCreation)
-		{
-			this.SetParentAndOccupationType(characterCreation, 6, WoTCharacterCreation.OccupationTypes.Mercenary, "", "", true, true);
-		}
-
-		// Token: 0x06002596 RID: 9622 RVA: 0x00098948 File Offset: 0x00096B48
-		protected void VlandiaBaronsRetainerOnApply(CharacterCreation characterCreation)
-		{
-			this.FinalizeParents();
-		}
-
-		// Token: 0x06002597 RID: 9623 RVA: 0x00098950 File Offset: 0x00096B50
-		protected void VlandiaMerchantOnApply(CharacterCreation characterCreation)
-		{
-			this.FinalizeParents();
-		}
-
-		// Token: 0x06002598 RID: 9624 RVA: 0x00098958 File Offset: 0x00096B58
-		protected void VlandiaYeomanOnApply(CharacterCreation characterCreation)
-		{
-			this.FinalizeParents();
-		}
-
-		// Token: 0x06002599 RID: 9625 RVA: 0x00098960 File Offset: 0x00096B60
-		protected void VlandiaBlacksmithOnApply(CharacterCreation characterCreation)
-		{
-			this.FinalizeParents();
-		}
-
-		// Token: 0x0600259A RID: 9626 RVA: 0x00098968 File Offset: 0x00096B68
-		protected void VlandiaHunterOnApply(CharacterCreation characterCreation)
-		{
-			this.FinalizeParents();
-		}
-
-		// Token: 0x0600259B RID: 9627 RVA: 0x00098970 File Offset: 0x00096B70
-		protected void VlandiaMercenaryOnApply(CharacterCreation characterCreation)
-		{
-			this.FinalizeParents();
-		}
-
-		// Token: 0x0600259C RID: 9628 RVA: 0x00098978 File Offset: 0x00096B78
-		protected void SturgiaBoyarsCompanionOnConsequence(CharacterCreation characterCreation)
-		{
-			this.SetParentAndOccupationType(characterCreation, 1, WoTCharacterCreation.OccupationTypes.Retainer, "", "", true, true);
-		}
-
-		// Token: 0x0600259D RID: 9629 RVA: 0x0009898F File Offset: 0x00096B8F
-		protected void SturgiaTraderOnConsequence(CharacterCreation characterCreation)
-		{
-			this.SetParentAndOccupationType(characterCreation, 2, WoTCharacterCreation.OccupationTypes.Merchant, "", "", true, true);
-		}
-
-		// Token: 0x0600259E RID: 9630 RVA: 0x000989A6 File Offset: 0x00096BA6
-		protected void SturgiaFreemanOnConsequence(CharacterCreation characterCreation)
-		{
-			this.SetParentAndOccupationType(characterCreation, 3, WoTCharacterCreation.OccupationTypes.Farmer, "", "", true, true);
-		}
-
-		// Token: 0x0600259F RID: 9631 RVA: 0x000989BD File Offset: 0x00096BBD
-		protected void SturgiaArtisanOnConsequence(CharacterCreation characterCreation)
-		{
-			this.SetParentAndOccupationType(characterCreation, 4, WoTCharacterCreation.OccupationTypes.Artisan, "", "", true, true);
-		}
-
-		// Token: 0x060025A0 RID: 9632 RVA: 0x000989D4 File Offset: 0x00096BD4
-		protected void SturgiaHunterOnConsequence(CharacterCreation characterCreation)
-		{
-			this.SetParentAndOccupationType(characterCreation, 5, WoTCharacterCreation.OccupationTypes.Hunter, "", "", true, true);
-		}
-
-		// Token: 0x060025A1 RID: 9633 RVA: 0x000989EB File Offset: 0x00096BEB
-		protected void SturgiaVagabondOnConsequence(CharacterCreation characterCreation)
-		{
-			this.SetParentAndOccupationType(characterCreation, 6, WoTCharacterCreation.OccupationTypes.Vagabond, "", "", true, true);
-		}
-
-		// Token: 0x060025A2 RID: 9634 RVA: 0x00098A02 File Offset: 0x00096C02
-		protected void SturgiaBoyarsCompanionOnApply(CharacterCreation characterCreation)
-		{
-			this.FinalizeParents();
-		}
-
-		// Token: 0x060025A3 RID: 9635 RVA: 0x00098A0A File Offset: 0x00096C0A
-		protected void SturgiaTraderOnApply(CharacterCreation characterCreation)
-		{
-			this.FinalizeParents();
-		}
-
-		// Token: 0x060025A4 RID: 9636 RVA: 0x00098A12 File Offset: 0x00096C12
-		protected void SturgiaFreemanOnApply(CharacterCreation characterCreation)
-		{
-			this.FinalizeParents();
-		}
-
-		// Token: 0x060025A5 RID: 9637 RVA: 0x00098A1A File Offset: 0x00096C1A
-		protected void SturgiaArtisanOnApply(CharacterCreation characterCreation)
-		{
-			this.FinalizeParents();
-		}
-
-		// Token: 0x060025A6 RID: 9638 RVA: 0x00098A22 File Offset: 0x00096C22
-		protected void SturgiaHunterOnApply(CharacterCreation characterCreation)
-		{
-			this.FinalizeParents();
-		}
-
-		// Token: 0x060025A7 RID: 9639 RVA: 0x00098A2A File Offset: 0x00096C2A
-		protected void SturgiaVagabondOnApply(CharacterCreation characterCreation)
-		{
-			this.FinalizeParents();
-		}
-
-		// Token: 0x060025A8 RID: 9640 RVA: 0x00098A32 File Offset: 0x00096C32
-		protected void AseraiTribesmanOnConsequence(CharacterCreation characterCreation)
-		{
-			this.SetParentAndOccupationType(characterCreation, 1, WoTCharacterCreation.OccupationTypes.Retainer, "", "", true, true);
-		}
-
-		// Token: 0x060025A9 RID: 9641 RVA: 0x00098A49 File Offset: 0x00096C49
-		protected void AseraiWariorSlaveOnConsequence(CharacterCreation characterCreation)
-		{
-			this.SetParentAndOccupationType(characterCreation, 2, WoTCharacterCreation.OccupationTypes.Mercenary, "", "", true, true);
-		}
-
-		// Token: 0x060025AA RID: 9642 RVA: 0x00098A60 File Offset: 0x00096C60
-		protected void AseraiMerchantOnConsequence(CharacterCreation characterCreation)
-		{
-			this.SetParentAndOccupationType(characterCreation, 3, WoTCharacterCreation.OccupationTypes.Merchant, "", "", true, true);
-		}
-
-		// Token: 0x060025AB RID: 9643 RVA: 0x00098A77 File Offset: 0x00096C77
-		protected void AseraiOasisFarmerOnConsequence(CharacterCreation characterCreation)
-		{
-			this.SetParentAndOccupationType(characterCreation, 4, WoTCharacterCreation.OccupationTypes.Farmer, "", "", true, true);
-		}
-
-		// Token: 0x060025AC RID: 9644 RVA: 0x00098A8E File Offset: 0x00096C8E
-		protected void AseraiBedouinOnConsequence(CharacterCreation characterCreation)
-		{
-			this.SetParentAndOccupationType(characterCreation, 5, WoTCharacterCreation.OccupationTypes.Herder, "", "", true, true);
-		}
-
-		// Token: 0x060025AD RID: 9645 RVA: 0x00098AA5 File Offset: 0x00096CA5
-		protected void AseraiBackAlleyThugOnConsequence(CharacterCreation characterCreation)
-		{
-			this.SetParentAndOccupationType(characterCreation, 6, WoTCharacterCreation.OccupationTypes.Artisan, "", "", true, true);
-		}
-
-		// Token: 0x060025AE RID: 9646 RVA: 0x00098ABC File Offset: 0x00096CBC
-		protected void AseraiTribesmanOnApply(CharacterCreation characterCreation)
-		{
-			this.FinalizeParents();
-		}
-
-		// Token: 0x060025AF RID: 9647 RVA: 0x00098AC4 File Offset: 0x00096CC4
-		protected void AseraiWariorSlaveOnApply(CharacterCreation characterCreation)
-		{
-			this.FinalizeParents();
-		}
-
-		// Token: 0x060025B0 RID: 9648 RVA: 0x00098ACC File Offset: 0x00096CCC
-		protected void AseraiMerchantOnApply(CharacterCreation characterCreation)
-		{
-			this.FinalizeParents();
-		}
-
-		// Token: 0x060025B1 RID: 9649 RVA: 0x00098AD4 File Offset: 0x00096CD4
-		protected void AseraiOasisFarmerOnApply(CharacterCreation characterCreation)
-		{
-			this.FinalizeParents();
-		}
-
-		// Token: 0x060025B2 RID: 9650 RVA: 0x00098ADC File Offset: 0x00096CDC
-		protected void AseraiBedouinOnApply(CharacterCreation characterCreation)
-		{
-			this.FinalizeParents();
-		}
-
-		// Token: 0x060025B3 RID: 9651 RVA: 0x00098AE4 File Offset: 0x00096CE4
-		protected void AseraiBackAlleyThugOnApply(CharacterCreation characterCreation)
-		{
-			this.FinalizeParents();
-		}
-
-		// Token: 0x060025B4 RID: 9652 RVA: 0x00098AEC File Offset: 0x00096CEC
-		protected void BattaniaChieftainsHearthguardOnConsequence(CharacterCreation characterCreation)
-		{
-			this.SetParentAndOccupationType(characterCreation, 1, WoTCharacterCreation.OccupationTypes.Retainer, "", "", true, true);
-		}
-
-		// Token: 0x060025B5 RID: 9653 RVA: 0x00098B03 File Offset: 0x00096D03
-		protected void BattaniaHealerOnConsequence(CharacterCreation characterCreation)
-		{
-			this.SetParentAndOccupationType(characterCreation, 2, WoTCharacterCreation.OccupationTypes.Healer, "", "", true, true);
-		}
-
-		// Token: 0x060025B6 RID: 9654 RVA: 0x00098B1B File Offset: 0x00096D1B
-		protected void BattaniaTribesmanOnConsequence(CharacterCreation characterCreation)
-		{
-			this.SetParentAndOccupationType(characterCreation, 3, WoTCharacterCreation.OccupationTypes.Farmer, "", "", true, true);
-		}
-
-		// Token: 0x060025B7 RID: 9655 RVA: 0x00098B32 File Offset: 0x00096D32
-		protected void BattaniaSmithOnConsequence(CharacterCreation characterCreation)
-		{
-			this.SetParentAndOccupationType(characterCreation, 4, WoTCharacterCreation.OccupationTypes.Artisan, "", "", true, true);
-		}
-
-		// Token: 0x060025B8 RID: 9656 RVA: 0x00098B49 File Offset: 0x00096D49
-		protected void BattaniaWoodsmanOnConsequence(CharacterCreation characterCreation)
-		{
-			this.SetParentAndOccupationType(characterCreation, 5, WoTCharacterCreation.OccupationTypes.Hunter, "", "", true, true);
-		}
-
-		// Token: 0x060025B9 RID: 9657 RVA: 0x00098B60 File Offset: 0x00096D60
-		protected void BattaniaBardOnConsequence(CharacterCreation characterCreation)
-		{
-			this.SetParentAndOccupationType(characterCreation, 6, WoTCharacterCreation.OccupationTypes.Bard, "", "", true, true);
-		}
-
-		// Token: 0x060025BA RID: 9658 RVA: 0x00098B77 File Offset: 0x00096D77
-		protected void BattaniaChieftainsHearthguardOnApply(CharacterCreation characterCreation)
-		{
-			this.FinalizeParents();
-		}
-
-		// Token: 0x060025BB RID: 9659 RVA: 0x00098B7F File Offset: 0x00096D7F
-		protected void BattaniaHealerOnApply(CharacterCreation characterCreation)
-		{
-			this.FinalizeParents();
-		}
-
-		// Token: 0x060025BC RID: 9660 RVA: 0x00098B87 File Offset: 0x00096D87
-		protected void BattaniaTribesmanOnApply(CharacterCreation characterCreation)
+		
+		protected void Shadowspawn_Origin_Darkfriends_Origin_On_Apply(CharacterCreation characterCreation)
 		{
-			this.FinalizeParents();
+			ChangePlayerOutfit(characterCreation, "middle_CC_1");
 		}
-
-		// Token: 0x060025BD RID: 9661 RVA: 0x00098B8F File Offset: 0x00096D8F
-		protected void BattaniaSmithOnApply(CharacterCreation characterCreation)
+		
+		protected void Shadowspawn_Origin_Channeler_Origin_On_Apply(CharacterCreation characterCreation)
 		{
-			this.FinalizeParents();
+			ChangePlayerOutfit(characterCreation, "channeler_CC_1");
 		}
-
-		// Token: 0x060025BE RID: 9662 RVA: 0x00098B97 File Offset: 0x00096D97
-		protected void BattaniaWoodsmanOnApply(CharacterCreation characterCreation)
+		protected void Shadowspawn_Origin_Dreadlord_Origin_On_Apply(CharacterCreation characterCreation)
 		{
-			this.FinalizeParents();
+			ChangePlayerOutfit(characterCreation, "rich_CC_1");
 		}
-
-		// Token: 0x060025BF RID: 9663 RVA: 0x00098B9F File Offset: 0x00096D9F
-		protected void BattaniaBardOnApply(CharacterCreation characterCreation)
+		protected void Shadowspawn_Origin_Slaves_Origin_On_Apply(CharacterCreation characterCreation)
 		{
-			this.FinalizeParents();
+			ChangePlayerOutfit(characterCreation, "poor_CC_2");
 		}
-
-		// Token: 0x060025C0 RID: 9664 RVA: 0x00098BA7 File Offset: 0x00096DA7
-		protected void KhuzaitNoyansKinsmanOnConsequence(CharacterCreation characterCreation)
+		
+		protected void Shadowspawn_Origin_Kidnapped_Child_Origin_On_Consequence(CharacterCreation characterCreation)
 		{
-			this.SetParentAndOccupationType(characterCreation, 1, WoTCharacterCreation.OccupationTypes.Retainer, "", "", true, true);
-		}
 
-		// Token: 0x060025C1 RID: 9665 RVA: 0x00098BBE File Offset: 0x00096DBE
-		protected void KhuzaitMerchantOnConsequence(CharacterCreation characterCreation)
-		{
-			this.SetParentAndOccupationType(characterCreation, 2, WoTCharacterCreation.OccupationTypes.Merchant, "", "", true, true);
 		}
 
-		// Token: 0x060025C2 RID: 9666 RVA: 0x00098BD5 File Offset: 0x00096DD5
-		protected void KhuzaitTribesmanOnConsequence(CharacterCreation characterCreation)
-		{
-			this.SetParentAndOccupationType(characterCreation, 3, WoTCharacterCreation.OccupationTypes.Herder, "", "", true, true);
-		}
 
-		// Token: 0x060025C3 RID: 9667 RVA: 0x00098BEC File Offset: 0x00096DEC
-		protected void KhuzaitFarmerOnConsequence(CharacterCreation characterCreation)
+		protected bool Profession_fisher_condition()
 		{
-			this.SetParentAndOccupationType(characterCreation, 4, WoTCharacterCreation.OccupationTypes.Farmer, "", "", true, true);
+			return base.GetSelectedCulture().StringId == "battania" || base.GetSelectedCulture().StringId == "vlandia" || base.GetSelectedCulture().StringId == "Tarabon" || base.GetSelectedCulture().StringId == "Altara"  || base.GetSelectedCulture().StringId == "Tear" || base.GetSelectedCulture().StringId == "Mayene" || base.GetSelectedCulture().StringId == "Seanchan";
 		}
 
-		// Token: 0x060025C4 RID: 9668 RVA: 0x00098C03 File Offset: 0x00096E03
-		protected void KhuzaitShamanOnConsequence(CharacterCreation characterCreation)
+		protected bool Profession_sheep_condition()
 		{
-			this.SetParentAndOccupationType(characterCreation, 5, WoTCharacterCreation.OccupationTypes.Healer, "", "", true, true);
+			return base.GetSelectedCulture().StringId == "empire" || base.GetSelectedCulture().StringId == "Murandy" || base.GetSelectedCulture().StringId == "Amamdicia" || base.GetSelectedCulture().StringId == "Ghealdan" || base.GetSelectedCulture().StringId == "Cairhien" || base.GetSelectedCulture().StringId == "Cairhien" || base.GetSelectedCulture().StringId == "Arafel" || base.GetSelectedCulture().StringId == "Shienar" || base.GetSelectedCulture().StringId == "WhiteTower" || base.GetSelectedCulture().StringId == "BlackTower" || base.GetSelectedCulture().StringId == "khuzait" || base.GetSelectedCulture().StringId == "Dragonsworn";
 		}
-
-		// Token: 0x060025C5 RID: 9669 RVA: 0x00098C1B File Offset: 0x00096E1B
-		protected void KhuzaitNomadOnConsequence(CharacterCreation characterCreation)
+		protected bool Profession_trolloc_condition()
 		{
-			this.SetParentAndOccupationType(characterCreation, 6, WoTCharacterCreation.OccupationTypes.Herder, "", "", true, true);
+			return base.GetSelectedCulture().StringId == "sturgia";
 		}
-
-		// Token: 0x060025C6 RID: 9670 RVA: 0x00098C32 File Offset: 0x00096E32
-		protected void KhuzaitNoyansKinsmanOnApply(CharacterCreation characterCreation)
+		protected bool Profession_fortify_condition()
 		{
-			this.FinalizeParents();
+			return base.GetSelectedCulture().StringId == "battania" || base.GetSelectedCulture().StringId == "Kandor" || base.GetSelectedCulture().StringId == "Arafel" || base.GetSelectedCulture().StringId == "Shienar" || base.GetSelectedCulture().StringId == "sturgia" || base.GetSelectedCulture().StringId == "Dragonsworn";
 		}
 
-		// Token: 0x060025C7 RID: 9671 RVA: 0x00098C3A File Offset: 0x00096E3A
-		protected void KhuzaitMerchantOnApply(CharacterCreation characterCreation)
+		protected bool Profession_raider_condition()
 		{
-			this.FinalizeParents();
+			return base.GetSelectedCulture().StringId == "khuzait" || base.GetSelectedCulture().StringId == "Cairhien" || base.GetSelectedCulture().StringId == "empire" || base.GetSelectedCulture().StringId == "WhiteTower" || base.GetSelectedCulture().StringId == "BlackTower" || base.GetSelectedCulture().StringId == "FarMadding";
 		}
-
-		// Token: 0x060025C8 RID: 9672 RVA: 0x00098C42 File Offset: 0x00096E42
-		protected void KhuzaitTribesmanOnApply(CharacterCreation characterCreation)
+		protected bool Profession_pirate_condition()
 		{
-			this.FinalizeParents();
+			return base.GetSelectedCulture().StringId == "aserai" || base.GetSelectedCulture().StringId == "Tear" || base.GetSelectedCulture().StringId == "Mayene";
 		}
-
-		// Token: 0x060025C9 RID: 9673 RVA: 0x00098C4A File Offset: 0x00096E4A
-		protected void KhuzaitFarmerOnApply(CharacterCreation characterCreation)
+		protected bool Profession_horse_condition()
 		{
-			this.FinalizeParents();
+			return base.GetSelectedCulture().StringId == "vlandia" || base.GetSelectedCulture().StringId == "Tarabon" || base.GetSelectedCulture().StringId == "FarMadding";
 		}
-
-		// Token: 0x060025CA RID: 9674 RVA: 0x00098C52 File Offset: 0x00096E52
-		protected void KhuzaitShamanOnApply(CharacterCreation characterCreation)
+		protected bool Profession_healer_condition()
 		{
-			this.FinalizeParents();
+			return base.GetSelectedCulture().StringId == "Ghealdan" || base.GetSelectedCulture().StringId == "Amamdicia" || base.GetSelectedCulture().StringId == "Altara" || base.GetSelectedCulture().StringId == "Murandy";
 		}
 
-		// Token: 0x060025CB RID: 9675 RVA: 0x00098C5A File Offset: 0x00096E5A
-		protected void KhuzaitNomadOnApply(CharacterCreation characterCreation)
-		{
-			this.FinalizeParents();
-		}
 
 		// Token: 0x060025CC RID: 9676 RVA: 0x00098C62 File Offset: 0x00096E62
 		protected bool EmpireParentsOnCondition()
@@ -1080,36 +677,7 @@ namespace WoT_Main
 		}
 
 		// Token: 0x060025D2 RID: 9682 RVA: 0x00098CEC File Offset: 0x00096EEC
-		protected void FinalizeParents()
-		{
-			CharacterObject @object = Game.Current.ObjectManager.GetObject<CharacterObject>("main_hero_mother");
-			CharacterObject object2 = Game.Current.ObjectManager.GetObject<CharacterObject>("main_hero_father");
-			@object.HeroObject.ModifyPlayersFamilyAppearance(base.MotherFacegenCharacter.BodyProperties.StaticProperties);
-			object2.HeroObject.ModifyPlayersFamilyAppearance(base.FatherFacegenCharacter.BodyProperties.StaticProperties);
-			@object.HeroObject.Weight = base.MotherFacegenCharacter.BodyProperties.Weight;
-			@object.HeroObject.Build = base.MotherFacegenCharacter.BodyProperties.Build;
-			object2.HeroObject.Weight = base.FatherFacegenCharacter.BodyProperties.Weight;
-			object2.HeroObject.Build = base.FatherFacegenCharacter.BodyProperties.Build;
-			EquipmentHelper.AssignHeroEquipmentFromEquipment(@object.HeroObject, base.MotherFacegenCharacter.Equipment);
-			EquipmentHelper.AssignHeroEquipmentFromEquipment(object2.HeroObject, base.FatherFacegenCharacter.Equipment);
-			@object.Culture = Hero.MainHero.Culture;
-			object2.Culture = Hero.MainHero.Culture;
-			StringHelpers.SetCharacterProperties("PLAYER", CharacterObject.PlayerCharacter, null, false);
-			TextObject textObject = GameTexts.FindText("str_player_father_name", Hero.MainHero.Culture.StringId);
-			object2.HeroObject.SetName(textObject, textObject);
-			TextObject textObject2 = new TextObject("{=XmvaRfLM}{PLAYER_FATHER.NAME} was the father of {PLAYER.LINK}. He was slain when raiders attacked the inn at which his family was staying.", null);
-			StringHelpers.SetCharacterProperties("PLAYER_FATHER", object2, textObject2, false);
-			object2.HeroObject.EncyclopediaText = textObject2;
-			TextObject textObject3 = GameTexts.FindText("str_player_mother_name", Hero.MainHero.Culture.StringId);
-			@object.HeroObject.SetName(textObject3, textObject3);
-			TextObject textObject4 = new TextObject("{=hrhvEWP8}{PLAYER_MOTHER.NAME} was the mother of {PLAYER.LINK}. She was slain when raiders attacked the inn at which her family was staying.", null);
-			StringHelpers.SetCharacterProperties("PLAYER_MOTHER", @object, textObject4, false);
-			@object.HeroObject.EncyclopediaText = textObject4;
-			@object.HeroObject.UpdateHomeSettlement();
-			object2.HeroObject.UpdateHomeSettlement();
-			@object.HeroObject.HasMet = true;
-			object2.HeroObject.HasMet = true;
-		}
+	
 
 		// Token: 0x060025D3 RID: 9683 RVA: 0x00098F0C File Offset: 0x0009710C
 		protected static List<FaceGenChar> ChangePlayerFaceWithAge(float age, string actionName = "act_childhood_schooled")
