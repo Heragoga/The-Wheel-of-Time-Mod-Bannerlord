@@ -7,6 +7,7 @@ using TaleWorlds.CampaignSystem.CharacterCreationContent;
 using TaleWorlds.Core;
 using TaleWorlds.Library;
 using TaleWorlds.Localization;
+using TaleWorlds.ObjectSystem;
 
 namespace WoT_Main
 {
@@ -15,6 +16,9 @@ namespace WoT_Main
 	{
 		// Token: 0x17000A22 RID: 2594
 		// (get) Token: 0x06002573 RID: 9587 RVA: 0x00095B19 File Offset: 0x00093D19
+		private string clothing = "";
+		private string weapon = "";
+		private bool channeler = false;
 		public override TextObject ReviewPageDescription
 		{
 			get
@@ -82,7 +86,7 @@ namespace WoT_Main
 		{
 			this.AddOriginMenu(characterCreation);
 			this.AddProfessionMenu(characterCreation);
-			this.AddAchievementMenu(characterCreation);
+			this.AddTalentMenu(characterCreation);
 		}
 
 		// Token: 0x06002579 RID: 9593 RVA: 0x00095C1E File Offset: 0x00093E1E
@@ -106,7 +110,7 @@ namespace WoT_Main
 				DefaultSkills.Polearm
 			};
 			CharacterAttribute effectedAttribute = DefaultCharacterAttributes.Vigor;
-			characterCreationCategory.AddCategoryOption(new TextObject("kidnapped as a child", null), effectedSkills1, effectedAttribute, this.FocusToAdd, this.SkillLevelToAdd, this.AttributeLevelToAdd, null, Shadowspawn_Origin_Kidnapped_Child_Origin_On_Apply, null, new TextObject("As a child you were draged from your home village by the forces of the shadow. You have spent most of your life in the company of others, involuntarely working for the shadow.", null), null, 0, 0, 0, 0, 0);
+			characterCreationCategory.AddCategoryOption(new TextObject("kidnapped as a child", null), effectedSkills1, effectedAttribute, this.FocusToAdd, this.SkillLevelToAdd, this.AttributeLevelToAdd, null, Shadowspawn_Origin_Kidnapped_Child_Origin_On_Apply, Shadowspawn_Origin_Kidnapped_Child_Origin_On_Apply, new TextObject("As a child you were draged from your home village by the forces of the shadow. You have spent most of your life in the company of others, involuntarely working for the shadow.", null), null, 0, 0, 0, 0, 0);
 
 			List<SkillObject> effectedSkills2 = new List<SkillObject>
 			{
@@ -114,13 +118,13 @@ namespace WoT_Main
 				DefaultSkills.Athletics
 			};
 			CharacterAttribute effectedAttribute2 = DefaultCharacterAttributes.Vigor;
-			characterCreationCategory.AddCategoryOption(new TextObject("born of trollocs", null), effectedSkills2, effectedAttribute2, this.FocusToAdd, this.SkillLevelToAdd, this.AttributeLevelToAdd, null, Shadowspawn_Origin_Trolloc_Origin_On_Apply, null, new TextObject("In a dirty trolloc-breeding pit you first saw light. As one of many siblings you began your life as the cheap, worthless monsters the shadow used as their main force, yet you were better than others, you survived when most died.", null), null, 0, 0, 0, 0, 0);
+			characterCreationCategory.AddCategoryOption(new TextObject("born of trollocs", null), effectedSkills2, effectedAttribute2, this.FocusToAdd, this.SkillLevelToAdd, this.AttributeLevelToAdd, null, Shadowspawn_Origin_Trolloc_Origin_On_Apply, Shadowspawn_Origin_Trolloc_Origin_On_Apply, new TextObject("In a dirty trolloc-breeding pit you first saw light. As one of many siblings you began your life as the cheap, worthless monsters the shadow used as their main force, yet you were better than others, you survived when most died.", null), null, 0, 0, 0, 0, 0);
 
             characterCreationCategory.AddCategoryOption(new TextObject("born in a family of darkfriends", null), new List<SkillObject>{
 				DefaultSkills.Roguery,
 				DefaultSkills.Bow
 			},
-			DefaultCharacterAttributes.Cunning, this.FocusToAdd, this.SkillLevelToAdd, this.AttributeLevelToAdd, null, Shadowspawn_Origin_Darkfriends_Origin_On_Apply, null, new TextObject("Your family stood in the service of the dark one for a long time. So do you, a young darkfriend, convinced of the ideals of the shadow since childhood, ready to give his life for the dark one.", null), null, 0, 0, 0, 0, 0);
+			DefaultCharacterAttributes.Cunning, this.FocusToAdd, this.SkillLevelToAdd, this.AttributeLevelToAdd, null, Shadowspawn_Origin_Darkfriends_Origin_On_Apply, Shadowspawn_Origin_Darkfriends_Origin_On_Apply, new TextObject("Your family stood in the service of the dark one for a long time. So do you, a young darkfriend, convinced of the ideals of the shadow since childhood, ready to give his life for the dark one.", null), null, 0, 0, 0, 0, 0);
 
 
            
@@ -128,7 +132,7 @@ namespace WoT_Main
 				DefaultSkills.Throwing,
 				DefaultSkills.Medicine
 				},
-				DefaultCharacterAttributes.Intelligence, this.FocusToAdd, this.SkillLevelToAdd, this.AttributeLevelToAdd, null, Shadowspawn_Origin_Channeler_Origin_On_Apply, null, new TextObject("As soon as you obtained the shal, you joined the black Ajah. The reasons were many: the normal sisters simply didn't understand you, you despised the laws forbidding research in dark parts of channeling and either way the lord of chaos was your prefered master, not some mortal Amyrlin. / Involuntarily or out of your free will you landed in the ranks of the Samma N'Sei, channeling the one power for the dark one.", null), null, 0, 0, 0, 0, 0);
+				DefaultCharacterAttributes.Intelligence, this.FocusToAdd, this.SkillLevelToAdd, this.AttributeLevelToAdd, null, Shadowspawn_Origin_Channeler_Origin_On_Apply, Shadowspawn_Origin_Channeler_Origin_On_Apply, new TextObject("As soon as you obtained the shal, you joined the black Ajah. The reasons were many: the normal sisters simply didn't understand you, you despised the laws forbidding research in dark parts of channeling and either way the lord of chaos was your prefered master, not some mortal Amyrlin. / Involuntarily or out of your free will you landed in the ranks of the Samma N'Sei, channeling the one power for the dark one.", null), null, 0, 0, 0, 0, 0);
 			
 			
 			
@@ -137,20 +141,20 @@ namespace WoT_Main
 				DefaultSkills.Tactics,
 				DefaultSkills.Steward
 				},
-				DefaultCharacterAttributes.Intelligence, this.FocusToAdd, this.SkillLevelToAdd, this.AttributeLevelToAdd, null, Shadowspawn_Origin_Dreadlord_Origin_On_Apply, null, new TextObject("You were part of the ruling class of the shadowspawn. Your father, a powerful dreadlord insured an excellent childhood, away from slaves, trollocs and filth. You were tought in many disciplines, mainly how to command and organise troops.", null), null, 0, 0, 0, 0, 0);
+				DefaultCharacterAttributes.Intelligence, this.FocusToAdd, this.SkillLevelToAdd, this.AttributeLevelToAdd, null, Shadowspawn_Origin_Dreadlord_Origin_On_Apply, Shadowspawn_Origin_Dreadlord_Origin_On_Apply, new TextObject("You were part of the ruling class of the shadowspawn. Your father, a powerful dreadlord insured an excellent childhood, away from slaves, trollocs and filth. You were tought in many disciplines, mainly how to command and organise troops.", null), null, 0, 0, 0, 0, 0);
 
 			characterCreationCategory.AddCategoryOption(new TextObject("an offspring of slaves", null), new List<SkillObject>{
 				DefaultSkills.Roguery,
 				DefaultSkills.Polearm
 				},
-				DefaultCharacterAttributes.Cunning, this.FocusToAdd, this.SkillLevelToAdd, this.AttributeLevelToAdd, null, Shadowspawn_Origin_Slaves_Origin_On_Apply, null, new TextObject("Your life was hard, working from morning till dawn. As an offspring of slaves you had no saying in what was done to you, your darkfriend-owner decided everything about you.", null), null, 0, 0, 0, 0, 0);
+				DefaultCharacterAttributes.Cunning, this.FocusToAdd, this.SkillLevelToAdd, this.AttributeLevelToAdd, null, Shadowspawn_Origin_Slaves_Origin_On_Apply, Shadowspawn_Origin_Slaves_Origin_On_Apply, new TextObject("Your life was hard, working from morning till dawn. As an offspring of slaves you had no saying in what was done to you, your darkfriend-owner decided everything about you.", null), null, 0, 0, 0, 0, 0);
 
 
 			characterCreation.AddNewMenu(characterCreationMenu);
 		}
 		protected void AddProfessionMenu(CharacterCreation characterCreation)
 		{
-			CharacterCreationMenu characterCreationMenu = new CharacterCreationMenu(new TextObject("Profession", null), new TextObject("You earned your living as a...", null), new CharacterCreationOnInit(this.OriginOnInit), CharacterCreationMenu.MenuTypes.MultipleChoice);
+			CharacterCreationMenu characterCreationMenu = new CharacterCreationMenu(new TextObject("Profession", null), new TextObject("You earned your living as a...", null), new CharacterCreationOnInit(this.ProfessionOnInit), CharacterCreationMenu.MenuTypes.MultipleChoice);
 			CharacterCreationCategory characterCreationCategory = characterCreationMenu.AddMenuCategory(null);
 
 
@@ -158,87 +162,148 @@ namespace WoT_Main
 				DefaultSkills.Scouting,
 				DefaultSkills.Steward
 				},
-				DefaultCharacterAttributes.Control, this.FocusToAdd, this.SkillLevelToAdd, this.AttributeLevelToAdd, null, null, null, new TextObject("Tilling, sowing and harvesting, this was the rythm of your life. An honest, though boring job.", null), null, 0, 0, 0, 0, 0);
+				DefaultCharacterAttributes.Control, this.FocusToAdd, this.SkillLevelToAdd, this.AttributeLevelToAdd, null, Profession_farmer_consequence, null, new TextObject("Tilling, sowing and harvesting, this was the rythm of your life. An honest, though boring job.", null), null, 0, 0, 0, 0, 0);
 			characterCreationCategory.AddCategoryOption(new TextObject("as a blacksmith's apprentice", null), new List<SkillObject>{
 				DefaultSkills.Crafting,
 				DefaultSkills.Engineering
 				},
-				DefaultCharacterAttributes.Endurance, this.FocusToAdd, this.SkillLevelToAdd, this.AttributeLevelToAdd, null, null, null, new TextObject("Your village's blacksmith took you under his hood, teaching you everaything you need.", null), null, 0, 0, 0, 0, 0);
+				DefaultCharacterAttributes.Endurance, this.FocusToAdd, this.SkillLevelToAdd, this.AttributeLevelToAdd, null, Profession_blacksmith_consequence, null, new TextObject("Your village's blacksmith took you under his hood, teaching you everaything you need.", null), null, 0, 0, 0, 0, 0);
 			characterCreationCategory.AddCategoryOption(new TextObject("as a hunter in the woods", null), new List<SkillObject>{
 				DefaultSkills.Scouting,
 				DefaultSkills.Bow
 				},
-				DefaultCharacterAttributes.Endurance, this.FocusToAdd, this.SkillLevelToAdd, this.AttributeLevelToAdd, null, null, null, new TextObject("Hunting all kinds of animals was your main profession, laying traps, sniffing out gain, a tedious yet rewarding job.", null), null, 0, 0, 0, 0, 0);
+				DefaultCharacterAttributes.Endurance, this.FocusToAdd, this.SkillLevelToAdd, this.AttributeLevelToAdd, null, Profession_hunter_consequence, null, new TextObject("Hunting all kinds of animals was your main profession, laying traps, sniffing out gain, a tedious yet rewarding job.", null), null, 0, 0, 0, 0, 0);
 			characterCreationCategory.AddCategoryOption(new TextObject("as a merchant's assistant", null), new List<SkillObject>{
 				DefaultSkills.Trade,
 				DefaultSkills.Leadership
 				},
-				DefaultCharacterAttributes.Social, this.FocusToAdd, this.SkillLevelToAdd, this.AttributeLevelToAdd, null, null, null, new TextObject("Travelling from town to town, buying and selling, this is how you pased your days, a job which gave you a lot of profit, yet involved the risks of the dangerous roads.", null), null, 0, 0, 0, 0, 0);
+				DefaultCharacterAttributes.Social, this.FocusToAdd, this.SkillLevelToAdd, this.AttributeLevelToAdd, null, Profession_trader_consequence, null, new TextObject("Travelling from town to town, buying and selling, this is how you pased your days, a job which gave you a lot of profit, yet involved the risks of the dangerous roads.", null), null, 0, 0, 0, 0, 0);
 			characterCreationCategory.AddCategoryOption(new TextObject("as a fisher", null), new List<SkillObject>{
 				DefaultSkills.Throwing,
 				DefaultSkills.Medicine
 				},
-				DefaultCharacterAttributes.Control, this.FocusToAdd, this.SkillLevelToAdd, this.AttributeLevelToAdd, Profession_fisher_condition, null, null, new TextObject("On a boat you cought fishes, making a living out of it.", null), null, 0, 0, 0, 0, 0);
+				DefaultCharacterAttributes.Control, this.FocusToAdd, this.SkillLevelToAdd, this.AttributeLevelToAdd, Profession_fisher_condition, Profession_fisher_consequence, null, new TextObject("On a boat you cought fishes, making a living out of it.", null), null, 0, 0, 0, 0, 0);
 
 			characterCreationCategory.AddCategoryOption(new TextObject("as a sheep herder", null), new List<SkillObject>{
 				DefaultSkills.Riding,
 				DefaultSkills.Bow
 				},
-				DefaultCharacterAttributes.Endurance, this.FocusToAdd, this.SkillLevelToAdd, this.AttributeLevelToAdd, Profession_sheep_condition, null, null, new TextObject("In the wide planes you herded sheep, defending them from wolfs with the help of your trusty bow and dog.", null), null, 0, 0, 0, 0, 0);
+				DefaultCharacterAttributes.Endurance, this.FocusToAdd, this.SkillLevelToAdd, this.AttributeLevelToAdd, Profession_sheep_condition, Profession_sheep_consequence, null, new TextObject("In the wide planes you herded sheep, defending them from wolfs with the help of your trusty bow and dog.", null), null, 0, 0, 0, 0, 0);
 
 			characterCreationCategory.AddCategoryOption(new TextObject("as a trolloc breeder", null), new List<SkillObject>{
 				DefaultSkills.Riding,
 				DefaultSkills.Bow
 				},
-				DefaultCharacterAttributes.Endurance, this.FocusToAdd, this.SkillLevelToAdd, this.AttributeLevelToAdd, Profession_trolloc_condition, null, null, new TextObject("You watched over the trolloc breeding pits, an ugly job which always left you quesy afterwards.", null), null, 0, 0, 0, 0, 0);
+				DefaultCharacterAttributes.Endurance, this.FocusToAdd, this.SkillLevelToAdd, this.AttributeLevelToAdd, Profession_trolloc_condition, Profession_trolloc_consequence, null, new TextObject("You watched over the trolloc breeding pits, an ugly job which always left you quesy afterwards.", null), null, 0, 0, 0, 0, 0);
 			characterCreationCategory.AddCategoryOption(new TextObject("as a engineer on fortification", null), new List<SkillObject>{
 				DefaultSkills.Engineering,
 				DefaultSkills.Tactics
 				},
-				DefaultCharacterAttributes.Cunning, this.FocusToAdd, this.SkillLevelToAdd, this.AttributeLevelToAdd, Profession_fortify_condition, null, null, new TextObject("You fortified towns, villages and camps with your crew, getting a good feal of how to defend your fortifications and how to attack them.", null), null, 0, 0, 0, 0, 0);
+				DefaultCharacterAttributes.Cunning, this.FocusToAdd, this.SkillLevelToAdd, this.AttributeLevelToAdd, Profession_fortify_condition, Profession_fortify_consequence, null, new TextObject("You fortified towns, villages and camps with your crew, getting a good feal of how to defend your fortifications and how to attack them.", null), null, 0, 0, 0, 0, 0);
 
 			characterCreationCategory.AddCategoryOption(new TextObject("as a raider and bandit", null), new List<SkillObject>{
 				DefaultSkills.Tactics,
 				DefaultSkills.OneHanded
 				},
-				DefaultCharacterAttributes.Intelligence, this.FocusToAdd, this.SkillLevelToAdd, this.AttributeLevelToAdd, Profession_raider_condition, null, null, new TextObject("As a bandit you scowerd the lands, raping, robing and killing. 'Take everything and leave nothing', this was your moto.", null), null, 0, 0, 0, 0, 0);
+				DefaultCharacterAttributes.Intelligence, this.FocusToAdd, this.SkillLevelToAdd, this.AttributeLevelToAdd, Profession_raider_condition, Profession_raider_consequence, null, new TextObject("As a bandit you scowerd the lands, raping, robing and killing. 'Take everything and leave nothing', this was your moto.", null), null, 0, 0, 0, 0, 0);
 
 			characterCreationCategory.AddCategoryOption(new TextObject("as a pirate", null), new List<SkillObject>{
 				DefaultSkills.Tactics,
 				DefaultSkills.Crossbow
 				},
-				DefaultCharacterAttributes.Vigor, this.FocusToAdd, this.SkillLevelToAdd, this.AttributeLevelToAdd, Profession_pirate_condition, null, null, new TextObject("On a boat under the service of your captain you raided and boarded smaller traiding vehicles, even plundering a village on accasion.", null), null, 0, 0, 0, 0, 0);
+				DefaultCharacterAttributes.Vigor, this.FocusToAdd, this.SkillLevelToAdd, this.AttributeLevelToAdd, Profession_pirate_condition, Profession_pirate_consequence, null, new TextObject("On a boat under the service of your captain you raided and boarded smaller traiding vehicles, even plundering a village on accasion.", null), null, 0, 0, 0, 0, 0);
 
 			characterCreationCategory.AddCategoryOption(new TextObject("as a stable hand", null), new List<SkillObject>{
 				DefaultSkills.Riding,
 				DefaultSkills.Throwing
 				},
-				DefaultCharacterAttributes.Endurance, this.FocusToAdd, this.SkillLevelToAdd, this.AttributeLevelToAdd, Profession_horse_condition, null, null, new TextObject("You worked at stables, grooming, riding and caring horses. A great job your employers said to you, until realised everything was about clearing away shit.", null), null, 0, 0, 0, 0, 0);
+				DefaultCharacterAttributes.Endurance, this.FocusToAdd, this.SkillLevelToAdd, this.AttributeLevelToAdd, Profession_horse_condition, Profession_horse_consequence, null, new TextObject("You worked at stables, grooming, riding and caring horses. A great job your employers said to you, until realised everything was about clearing away shit.", null), null, 0, 0, 0, 0, 0);
 
 			characterCreationCategory.AddCategoryOption(new TextObject("as a healer", null), new List<SkillObject>{
 				DefaultSkills.Medicine,
 				DefaultSkills.Charm
 				},
-				DefaultCharacterAttributes.Social, this.FocusToAdd, this.SkillLevelToAdd, this.AttributeLevelToAdd, Profession_healer_condition, null, null, new TextObject("You were your villages hedge doctor's/wisdom's apprentice, learning the use of herbs to heal wounds and sicknesses.", null), null, 0, 0, 0, 0, 0);
+				DefaultCharacterAttributes.Social, this.FocusToAdd, this.SkillLevelToAdd, this.AttributeLevelToAdd, Profession_healer_condition, Profession_healer_consequence, null, new TextObject("You were your villages hedge doctor's/wisdom's apprentice, learning the use of herbs to heal wounds and sicknesses.", null), null, 0, 0, 0, 0, 0);
 
 			characterCreation.AddNewMenu(characterCreationMenu);
 		}
-		protected void AddAchievementMenu(CharacterCreation characterCreation)
+		protected void AddTalentMenu(CharacterCreation characterCreation)
 		{
-			CharacterCreationMenu characterCreationMenu = new CharacterCreationMenu(new TextObject("Origin", null), new TextObject("You were...", null), new CharacterCreationOnInit(this.OriginOnInit), CharacterCreationMenu.MenuTypes.MultipleChoice);
-			CharacterCreationCategory characterCreationCategory = characterCreationMenu.AddMenuCategory(null);
-			List<SkillObject> effectedSkills = new List<SkillObject>
-			{
+			CharacterCreationMenu characterCreationMenu = new CharacterCreationMenu(new TextObject("Talent", null), new TextObject("You were exceptionaly well with...", null), new CharacterCreationOnInit(this.TalentOnInit), CharacterCreationMenu.MenuTypes.MultipleChoice);
+
+
+			CharacterCreationCategory characterCreationCategory = characterCreationMenu.AddMenuCategory(Channeler_on_condition);
+			characterCreationCategory.AddCategoryOption(new TextObject("fireballs", null), new List<SkillObject>{
+				DefaultSkills.Throwing,
+				DefaultSkills.Riding
+				},
+				DefaultCharacterAttributes.Vigor, this.FocusToAdd, this.SkillLevelToAdd, this.AttributeLevelToAdd, null, Talent_Fireball_Consequence, null, new TextObject("You were very well with fireballs, making your enemys burn.", null), null, 0, 0, 0, 0, 0);
+			characterCreationCategory.AddCategoryOption(new TextObject("windstorms", null), new List<SkillObject>{
+				DefaultSkills.Throwing,
+				DefaultSkills.OneHanded
+				},
+				DefaultCharacterAttributes.Vigor, this.FocusToAdd, this.SkillLevelToAdd, this.AttributeLevelToAdd, null, Talent_Windstorms_Consequence, null, new TextObject("You were very well with windstorms, bundling the wind to blast your enemys to oblivion.", null), null, 0, 0, 0, 0, 0);
+			characterCreationCategory.AddCategoryOption(new TextObject("lightning", null), new List<SkillObject>{
+				DefaultSkills.Throwing,
+				DefaultSkills.TwoHanded
+				},
+				DefaultCharacterAttributes.Vigor, this.FocusToAdd, this.SkillLevelToAdd, this.AttributeLevelToAdd, null, Talent_Lightning_Consequence, null, new TextObject("You were very well with lightning, making the sky burn your enemys to a cinder like Zeus.", null), null, 0, 0, 0, 0, 0);
+			characterCreationCategory.AddCategoryOption(new TextObject("rolling earth and fire", null), new List<SkillObject>{
+				DefaultSkills.Throwing,
+				DefaultSkills.Polearm
+				},
+			DefaultCharacterAttributes.Vigor, this.FocusToAdd, this.SkillLevelToAdd, this.AttributeLevelToAdd, null, Talent_Earth_Consequence, null, new TextObject("You were very well with rolling earth and fire, making the ground virtaly consume your enemys.", null), null, 0, 0, 0, 0, 0);
+			characterCreationCategory.AddCategoryOption(new TextObject("an airshield", null), new List<SkillObject>{
+				DefaultSkills.Throwing,
+				DefaultSkills.Bow
+				},
+			DefaultCharacterAttributes.Vigor, this.FocusToAdd, this.SkillLevelToAdd, this.AttributeLevelToAdd, null, Talent_Shield_Consequence, null, new TextObject("You were very well withan airshield, creating a protective shield of air.", null), null, 0, 0, 0, 0, 0);
+
+
+
+
+			CharacterCreationCategory characterCreationCategory1 = characterCreationMenu.AddMenuCategory(NO_Channeler_on_condition);
+			characterCreationCategory1.AddCategoryOption(new TextObject("a spear", null), new List<SkillObject>{
+				DefaultSkills.Polearm,
+				DefaultSkills.Athletics
+				},
+				DefaultCharacterAttributes.Vigor, this.FocusToAdd, this.SkillLevelToAdd, this.AttributeLevelToAdd, null, Talent_Spear_Consequence, null, new TextObject("You were the best man to have in a spear wall.", null), null, 0, 0, 0, 0, 0);
+			characterCreationCategory1.AddCategoryOption(new TextObject("a short bow", null), new List<SkillObject>{
+				DefaultSkills.Bow,
+				DefaultSkills.Athletics
+				},
+				DefaultCharacterAttributes.Vigor, this.FocusToAdd, this.SkillLevelToAdd, this.AttributeLevelToAdd, null, Talent_Bow_Consequence, null, new TextObject("You could manage to hit a target a mile away, some said, either way every bow-competition ended with your victory.", null), null, 0, 0, 0, 0, 0);
+			characterCreationCategory1.AddCategoryOption(new TextObject("a crossbow", null), new List<SkillObject>{
+				DefaultSkills.Crossbow,
+				DefaultSkills.Athletics
+				},
+				DefaultCharacterAttributes.Vigor, this.FocusToAdd, this.SkillLevelToAdd, this.AttributeLevelToAdd, null, Talent_CrossBow_Consequence, null, new TextObject("In a crossbowline you were the fastest one to reload and the fastest one to hit flesh.", null), null, 0, 0, 0, 0, 0);
+			characterCreationCategory1.AddCategoryOption(new TextObject("a throwing spear", null), new List<SkillObject>{
+				DefaultSkills.Throwing,
+				DefaultSkills.Athletics
+				},
+				DefaultCharacterAttributes.Vigor, this.FocusToAdd, this.SkillLevelToAdd, this.AttributeLevelToAdd, null, Talent_throwing_Consequence, null, new TextObject("No matter the size, shape or weight of a spear, you could throw it anywhere precisly.", null), null, 0, 0, 0, 0, 0);
+			characterCreationCategory1.AddCategoryOption(new TextObject("a sword", null), new List<SkillObject>{
+				DefaultSkills.OneHanded,
+				DefaultSkills.TwoHanded
+				},
+				DefaultCharacterAttributes.Vigor, this.FocusToAdd, this.SkillLevelToAdd, this.AttributeLevelToAdd, No_Channeler_but_horse_on_condition, Talent_sword_Consequence, null, new TextObject("Some called you almost a blademaster, you were that good with a sword, winning every duel.", null), null, 0, 0, 0, 0, 0);
+			characterCreationCategory1.AddCategoryOption(new TextObject("on horseback", null), new List<SkillObject>{
 				DefaultSkills.Riding,
 				DefaultSkills.Polearm
-			};
-			CharacterAttribute effectedAttribute = DefaultCharacterAttributes.Vigor;
-			characterCreationCategory.AddCategoryOption(new TextObject("{=InN5ZZt3}A landlord's retainers", null), effectedSkills, effectedAttribute, this.FocusToAdd, this.SkillLevelToAdd, this.AttributeLevelToAdd, null, null, null, new TextObject("{=ivKl4mV2}Your father was a trusted lieutenant of the local landowning aristocrat. He rode with the lord's cavalry, fighting as an armored lancer.", null), null, 0, 0, 0, 0, 0);
-			effectedSkills = new List<SkillObject>
-			{
-				DefaultSkills.Trade,
-				DefaultSkills.Charm
-			};
+				},
+				DefaultCharacterAttributes.Vigor, this.FocusToAdd, this.SkillLevelToAdd, this.AttributeLevelToAdd, No_Channeler_but_horse_on_condition, Talent_horse_Consequence, null, new TextObject("As soon as you were on horseback you were an enemy few would dare to face.", null), null, 0, 0, 0, 0, 0);
+			characterCreationCategory1.AddCategoryOption(new TextObject("with a buckler", null), new List<SkillObject>{
+				DefaultSkills.OneHanded,
+				DefaultSkills.Athletics
+				},
+				DefaultCharacterAttributes.Vigor, this.FocusToAdd, this.SkillLevelToAdd, this.AttributeLevelToAdd, No_Channeler_no_horse_on_condition, Talent_buckler_Consequence, null, new TextObject("With a hide buckler you could fend of almost any attack.", null), null, 0, 0, 0, 0, 0);
+			characterCreationCategory1.AddCategoryOption(new TextObject("with a longbow", null), new List<SkillObject>{
+				DefaultSkills.Bow,
+				DefaultSkills.Athletics
+				},
+				DefaultCharacterAttributes.Vigor, this.FocusToAdd, this.SkillLevelToAdd, this.AttributeLevelToAdd, No_Channeler_no_horse_on_condition, Talent_horse_Consequence, null, new TextObject("You best shot with a long bow over great distances.", null), null, 0, 0, 0, 0, 0);
+
 
 			characterCreation.AddNewMenu(characterCreationMenu);
 		}
@@ -573,29 +638,53 @@ namespace WoT_Main
 		protected void Shadowspawn_Origin_Kidnapped_Child_Origin_On_Apply(CharacterCreation characterCreation)
         {
 			ChangePlayerOutfit(characterCreation, "poor_CC_1");
-        }
+			clothing = "poor_CC_1";
+			ApplyEquipments(characterCreation);
+			RefreshPlayerAppearance(characterCreation);
+			channeler = false;
+		}
 		
 		protected void Shadowspawn_Origin_Trolloc_Origin_On_Apply(CharacterCreation characterCreation)
 		{
 			ChangePlayerOutfit(characterCreation, "trolloc_CC_1");
+			clothing = "trolloc_CC_1";
+			ApplyEquipments(characterCreation);
+			RefreshPlayerAppearance(characterCreation);
+			channeler = false;
 		}
 		
 		protected void Shadowspawn_Origin_Darkfriends_Origin_On_Apply(CharacterCreation characterCreation)
 		{
 			ChangePlayerOutfit(characterCreation, "middle_CC_1");
+			clothing = "middle_CC_1";
+			ApplyEquipments(characterCreation);
+			RefreshPlayerAppearance(characterCreation);
+			channeler = false;
 		}
 		
 		protected void Shadowspawn_Origin_Channeler_Origin_On_Apply(CharacterCreation characterCreation)
 		{
 			ChangePlayerOutfit(characterCreation, "channeler_CC_1");
+			clothing = "channeler_CC_1";
+			ApplyEquipments(characterCreation);
+			RefreshPlayerAppearance(characterCreation);
+			channeler = true;
 		}
 		protected void Shadowspawn_Origin_Dreadlord_Origin_On_Apply(CharacterCreation characterCreation)
 		{
 			ChangePlayerOutfit(characterCreation, "rich_CC_1");
+			clothing = "rich_CC_1";
+			ApplyEquipments(characterCreation);
+			RefreshPlayerAppearance(characterCreation);
+			channeler = true;
 		}
 		protected void Shadowspawn_Origin_Slaves_Origin_On_Apply(CharacterCreation characterCreation)
 		{
 			ChangePlayerOutfit(characterCreation, "poor_CC_2");
+			clothing = "poor_CC_2";
+			ApplyEquipments(characterCreation);
+			RefreshPlayerAppearance(characterCreation);
+			channeler = false;
 		}
 		
 		protected void Shadowspawn_Origin_Kidnapped_Child_Origin_On_Consequence(CharacterCreation characterCreation)
@@ -637,6 +726,181 @@ namespace WoT_Main
 		protected bool Profession_healer_condition()
 		{
 			return base.GetSelectedCulture().StringId == "Ghealdan" || base.GetSelectedCulture().StringId == "Amamdicia" || base.GetSelectedCulture().StringId == "Altara" || base.GetSelectedCulture().StringId == "Murandy";
+		}
+
+		protected void Profession_farmer_consequence(CharacterCreation characterCreation)
+		{
+			RefreshPropsAndClothing(characterCreation, false, "peasant_2haxe_1_t1", true, "");
+		}
+		protected void Profession_trader_consequence(CharacterCreation characterCreation)
+		{
+			RefreshPropsAndClothing(characterCreation, false, "lowland_throwing_knife", true, "");
+		}
+		protected void Profession_blacksmith_consequence(CharacterCreation characterCreation)
+		{
+			RefreshPropsAndClothing(characterCreation, false, "peasant_hammer_1_t1", true, "");
+		}
+		protected void Profession_hunter_consequence(CharacterCreation characterCreation)
+		{
+			RefreshPropsAndClothing(characterCreation, false, "hunting_bow", true, "");
+		}
+		protected void Profession_fisher_consequence(CharacterCreation characterCreation)
+		{
+			RefreshPropsAndClothing(characterCreation, false, "northern_javelin_1_t2", true, "");
+		}
+
+		protected void Profession_sheep_consequence(CharacterCreation characterCreation)
+		{
+			RefreshPropsAndClothing(characterCreation, false, "carry_bostaff_rogue1", true, "");
+		}
+		protected void Profession_trolloc_consequence(CharacterCreation characterCreation)
+		{
+			RefreshPropsAndClothing(characterCreation, false, "western_javelin_3_t4", true, "");
+		}
+		protected void Profession_fortify_consequence(CharacterCreation characterCreation)
+		{
+			RefreshPropsAndClothing(characterCreation, false, "peasant_hammer_2_t1", true, "");
+		}
+
+		protected void Profession_raider_consequence(CharacterCreation characterCreation)
+		{
+			RefreshPropsAndClothing(characterCreation, false, "aserai_axe_1_t2", true, "");
+		}
+		protected void Profession_pirate_consequence(CharacterCreation characterCreation)
+		{
+			RefreshPropsAndClothing(characterCreation, false, "crossbow_a", true, "");
+		}
+		protected void Profession_horse_consequence(CharacterCreation characterCreation)
+		{
+			RefreshPropsAndClothing(characterCreation, false, "horse_whip", true, "");
+		}
+		protected void Profession_healer_consequence(CharacterCreation characterCreation)
+		{
+			RefreshPropsAndClothing(characterCreation, false, "the_scalpel_sword_t3", true, "");
+		}
+
+
+		protected bool Channeler_on_condition()
+		{
+			return channeler;
+		}
+		protected bool NO_Channeler_on_condition()
+		{
+			return !channeler;
+		}
+		protected bool No_Channeler_but_horse_on_condition()
+		{
+			return !channeler && base.GetSelectedCulture().StringId != "khuzait";
+		}
+		protected bool No_Channeler_no_horse_on_condition()
+		{
+			return !channeler && base.GetSelectedCulture().StringId == "khuzait";
+		}
+
+		
+		protected void Talent_Fireball_Consequence(CharacterCreation characterCreation)
+		{
+			RefreshPlayerAppearance(characterCreation);
+			weapon = "onepowerblossomsoffiresingle";
+			ApplyEquipments(characterCreation);
+			RefreshPlayerAppearance(characterCreation);
+
+		}
+		protected void Talent_Windstorms_Consequence(CharacterCreation characterCreation)
+		{
+			RefreshPlayerAppearance(characterCreation);
+			weapon = "onepowerwindstorm1FireBall";
+			ApplyEquipments(characterCreation);
+			RefreshPlayerAppearance(characterCreation);
+
+		}
+		protected void Talent_Lightning_Consequence(CharacterCreation characterCreation)
+		{
+			RefreshPlayerAppearance(characterCreation);
+			weapon = "onepowerwindstorm1Lightningammo";
+			ApplyEquipments(characterCreation);
+			RefreshPlayerAppearance(characterCreation);
+
+		}
+		protected void Talent_Earth_Consequence(CharacterCreation characterCreation)
+		{
+			RefreshPlayerAppearance(characterCreation);
+			weapon = "onepowerwindstormearthammo";
+			ApplyEquipments(characterCreation);
+			RefreshPlayerAppearance(characterCreation);
+
+		}
+		protected void Talent_Shield_Consequence(CharacterCreation characterCreation)
+		{
+			RefreshPlayerAppearance(characterCreation);
+			weapon = "OnePowerAirShield";
+			ApplyEquipments(characterCreation);
+			RefreshPlayerAppearance(characterCreation);
+
+		}
+		protected void Talent_Spear_Consequence(CharacterCreation characterCreation)
+		{
+			RefreshPlayerAppearance(characterCreation);
+			weapon = "western_spear_1_t2";
+			ApplyEquipments(characterCreation);
+			RefreshPlayerAppearance(characterCreation);
+
+		}
+		protected void Talent_Bow_Consequence(CharacterCreation characterCreation)
+		{
+			RefreshPlayerAppearance(characterCreation);
+			weapon = "steppe_bow";
+			ApplyEquipments(characterCreation);
+			RefreshPlayerAppearance(characterCreation);
+
+		}
+		protected void Talent_CrossBow_Consequence(CharacterCreation characterCreation)
+		{
+			RefreshPlayerAppearance(characterCreation);
+			weapon = "crossbow_a";
+			ApplyEquipments(characterCreation);
+			RefreshPlayerAppearance(characterCreation);
+
+		}
+		protected void Talent_throwing_Consequence(CharacterCreation characterCreation)
+		{
+			RefreshPlayerAppearance(characterCreation);
+			weapon = "western_javelin_1_t2";
+			ApplyEquipments(characterCreation);
+			RefreshPlayerAppearance(characterCreation);
+
+		}
+		protected void Talent_sword_Consequence(CharacterCreation characterCreation)
+		{
+			RefreshPlayerAppearance(characterCreation);
+			weapon = "vlandia_sword_1_t2";
+			ApplyEquipments(characterCreation);
+			RefreshPlayerAppearance(characterCreation);
+
+		}
+		protected void Talent_horse_Consequence(CharacterCreation characterCreation)
+		{
+			RefreshPlayerAppearance(characterCreation);
+			weapon = "aserai_mace_3_t3";
+			ApplyEquipments(characterCreation);
+			RefreshPlayerAppearance(characterCreation);
+
+		}
+		protected void Talent_buckler_Consequence(CharacterCreation characterCreation)
+		{
+			RefreshPlayerAppearance(characterCreation);
+			weapon = "Aiel_shield";
+			ApplyEquipments(characterCreation);
+			RefreshPlayerAppearance(characterCreation);
+
+		}
+		protected void Talent_longbow_Consequence(CharacterCreation characterCreation)
+		{
+			RefreshPlayerAppearance(characterCreation);
+			weapon = "Aielbowlevel1";
+			ApplyEquipments(characterCreation);
+			RefreshPlayerAppearance(characterCreation);
+
 		}
 
 
@@ -730,14 +994,7 @@ namespace WoT_Main
 			characterCreation.HasSecondaryCharacter = false;
 			characterCreation.ClearFaceGenPrefab();
 			characterCreation.ChangeFaceGenChars(WoTCharacterCreation.ChangePlayerFaceWithAge((float)this.ChildhoodAge, "act_childhood_schooled"));
-			string text = string.Concat(new object[]
-			{
-				"player_char_creation_childhood_age_",
-				base.GetSelectedCulture().StringId,
-				"_",
-				base.SelectedParentType
-			});
-			text += (Hero.MainHero.IsFemale ? "_f" : "_m");
+			string text = clothing;
 			this.ChangePlayerOutfit(characterCreation, text);
 			characterCreation.ChangeCharsAnimation(new List<string>
 			{
@@ -840,14 +1097,7 @@ namespace WoT_Main
 			TextObject textObject2 = new TextObject("{=DsCkf6Pb}Growing up, you spent most of your time...", null);
 			this._educationIntroductoryText.SetTextVariable("EDUCATION_INTRO", this.RuralType() ? textObject : textObject2);
 			characterCreation.ChangeFaceGenChars(WoTCharacterCreation.ChangePlayerFaceWithAge((float)this.EducationAge, "act_childhood_schooled"));
-			string text = string.Concat(new object[]
-			{
-				"player_char_creation_education_age_",
-				base.GetSelectedCulture().StringId,
-				"_",
-				base.SelectedParentType
-			});
-			text += (Hero.MainHero.IsFemale ? "_f" : "_m");
+			string text = clothing;
 			this.ChangePlayerOutfit(characterCreation, text);
 			characterCreation.ChangeCharsAnimation(new List<string>
 			{
@@ -897,20 +1147,7 @@ namespace WoT_Main
 		{
 			characterCreation.ClearFaceGenPrefab();
 			characterCreation.ClearCharactersEquipment();
-			string text = isChildhoodStage ? string.Concat(new object[]
-			{
-				"player_char_creation_childhood_age_",
-				base.GetSelectedCulture().StringId,
-				"_",
-				base.SelectedParentType
-			}) : string.Concat(new object[]
-			{
-				"player_char_creation_education_age_",
-				base.GetSelectedCulture().StringId,
-				"_",
-				base.SelectedParentType
-			});
-			text += (Hero.MainHero.IsFemale ? "_f" : "_m");
+			string text = clothing;
 			Equipment equipment = this.ChangePlayerOutfit(characterCreation, text).Clone(false);
 			if (Game.Current.ObjectManager.GetObject<ItemObject>(itemId) != null)
 			{
@@ -1126,15 +1363,8 @@ namespace WoT_Main
 		// Token: 0x06002603 RID: 9731 RVA: 0x00099788 File Offset: 0x00097988
 		protected void RefreshPlayerAppearance(CharacterCreation characterCreation)
 		{
-			string text = string.Concat(new object[]
-			{
-				"player_char_creation_",
-				base.GetSelectedCulture().StringId,
-				"_",
-				base.SelectedTitleType
-			});
-			text += (Hero.MainHero.IsFemale ? "_f" : "_m");
-			this.ChangePlayerOutfit(characterCreation, text);
+			
+			this.ChangePlayerOutfit(characterCreation, clothing);
 			this.ApplyEquipments(characterCreation);
 		}
 
@@ -1677,24 +1907,21 @@ namespace WoT_Main
 		protected void ApplyEquipments(CharacterCreation characterCreation)
 		{
 			WoTCharacterCreation.ClearMountEntity(characterCreation);
-			string text = string.Concat(new object[]
-			{
-				"player_char_creation_",
-				base.GetSelectedCulture().StringId,
-				"_",
-				base.SelectedTitleType
-			});
-			text += (Hero.MainHero.IsFemale ? "_f" : "_m");
+			string text = clothing;
 			MBEquipmentRoster @object = Game.Current.ObjectManager.GetObject<MBEquipmentRoster>(text);
 			base.PlayerStartEquipment = (((@object != null) ? @object.DefaultEquipment : null) ?? MBEquipmentRoster.EmptyEquipment);
 			base.PlayerCivilianEquipment = (((@object != null) ? @object.GetCivilianEquipments().FirstOrDefault<Equipment>() : null) ?? MBEquipmentRoster.EmptyEquipment);
 			if (base.PlayerStartEquipment != null && base.PlayerCivilianEquipment != null)
 			{
+				ItemObject @object1 = Game.Current.ObjectManager.GetObject<ItemObject>(weapon);
+				base.PlayerStartEquipment.AddEquipmentToSlotWithoutAgent(EquipmentIndex.Weapon1, new EquipmentElement(@object1, null, null, false));
 				CharacterObject.PlayerCharacter.Equipment.FillFrom(base.PlayerStartEquipment, true);
 				CharacterObject.PlayerCharacter.FirstCivilianEquipment.FillFrom(base.PlayerCivilianEquipment, true);
 			}
 			WoTCharacterCreation.ChangePlayerMount(characterCreation, Hero.MainHero);
 		}
+		
+		
 
 		// Token: 0x0600264A RID: 9802 RVA: 0x0009A0B9 File Offset: 0x000982B9
 		protected void SetHeroAge(float age)
@@ -1713,6 +1940,31 @@ namespace WoT_Main
 				"act_childhood_schooled"
 			});
 			this.RefreshPlayerAppearance(characterCreation);
+		}
+		protected void TalentOnInit(CharacterCreation characterCreation)
+		{
+			characterCreation.IsPlayerAlone = true;
+			characterCreation.HasSecondaryCharacter = false;
+			characterCreation.ClearFaceGenPrefab();
+			characterCreation.ChangeFaceGenChars(WoTCharacterCreation.ChangePlayerFaceWithAge((float)this.AccomplishmentAge, "act_childhood_schooled"));
+			characterCreation.ChangeCharsAnimation(new List<string>
+			{
+				"act_childhood_schooled"
+			});
+			this.RefreshPlayerAppearance(characterCreation);
+		}
+		
+		protected void ProfessionOnInit(CharacterCreation characterCreation)
+		{
+			characterCreation.IsPlayerAlone = true;
+			characterCreation.HasSecondaryCharacter = false;
+			//characterCreation.ClearFaceGenPrefab();
+			//characterCreation.ChangeFaceGenChars(WoTCharacterCreation.ChangePlayerFaceWithAge((float)this.AccomplishmentAge, "act_childhood_schooled"));
+			characterCreation.ChangeCharsAnimation(new List<string>
+			{
+				"act_childhood_schooled"
+			});
+			//this.RefreshPlayerAppearance(characterCreation);
 		}
 
 		// Token: 0x04000D42 RID: 3394
