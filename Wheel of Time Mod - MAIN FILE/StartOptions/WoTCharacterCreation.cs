@@ -11,11 +11,10 @@ using TaleWorlds.ObjectSystem;
 
 namespace WoT_Main
 {
-	// Token: 0x02000222 RID: 546
+
 	public class WoTCharacterCreation : CharacterCreationContentBase
 	{
-		// Token: 0x17000A22 RID: 2594
-		// (get) Token: 0x06002573 RID: 9587 RVA: 0x00095B19 File Offset: 0x00093D19
+		
 		private string clothing = "";
 		private string weapon = "";
 		private bool channeler = false;
@@ -28,8 +27,7 @@ namespace WoT_Main
 			}
 		}
 
-		// Token: 0x17000A23 RID: 2595
-		// (get) Token: 0x06002574 RID: 9588 RVA: 0x00095B26 File Offset: 0x00093D26
+	
 		public override IEnumerable<Type> CharacterCreationStages
 		{
 			get
@@ -45,7 +43,7 @@ namespace WoT_Main
 			}
 		}
 
-		// Token: 0x06002575 RID: 9589 RVA: 0x00095B2F File Offset: 0x00093D2F
+		
 		protected override void OnCultureSelected()
 		{
 			base.SelectedTitleType = 1;
@@ -53,13 +51,13 @@ namespace WoT_Main
 			Clan.PlayerClan.ChangeClanName(FactionHelper.GenerateClanNameforPlayer());
 		}
 
-		// Token: 0x06002576 RID: 9590 RVA: 0x00095B4E File Offset: 0x00093D4E
+		
 		public override int GetSelectedParentType()
 		{
 			return base.SelectedParentType;
 		}
 
-		// Token: 0x06002577 RID: 9591 RVA: 0x00095B58 File Offset: 0x00093D58
+		
 		public override void OnCharacterCreationFinalized()
 		{
 			
@@ -93,10 +91,49 @@ namespace WoT_Main
 
 			
 			CharacterCreationMenu characterCreationMenu = new CharacterCreationMenu(new TextObject("Origin", null), new TextObject("You were...", null), new CharacterCreationOnInit(this.OriginOnInit), CharacterCreationMenu.MenuTypes.MultipleChoice);
+			CharacterCreationCategory characterCreationCategory1 = characterCreationMenu.AddMenuCategory(Aiel_condition);
+
+
+			//Aiel
+
+			characterCreationCategory1.AddCategoryOption(new TextObject("an offshot of a cheftan's family", null), new List<SkillObject>{
+				DefaultSkills.Tactics,
+				DefaultSkills.Steward
+				},
+				DefaultCharacterAttributes.Intelligence, this.FocusToAdd, this.SkillLevelToAdd, this.AttributeLevelToAdd, null, Aiel_chieftan_OnApply, Aiel_chieftan_OnApply, new TextObject("Your uncle was a chieftan of a smaller sept, a great opportunity for you! He took you under his wing, showed you what governing was about and let you do minor tasks around the management of the sept. Who knows, maybe some day you'll take his position.", null), null, 0, 0, 0, 0, 0);
+
+			characterCreationCategory1.AddCategoryOption(new TextObject("born into a family of farmers", null), new List<SkillObject>{
+				DefaultSkills.Athletics,
+				DefaultSkills.Throwing
+				},
+				DefaultCharacterAttributes.Social, this.FocusToAdd, this.SkillLevelToAdd, this.AttributeLevelToAdd, null, Aiel_farmer_OnApply, Aiel_farmer_OnApply, new TextObject("Although many think Aiel are all warriors, they are mistaken. There are people like you as well, who for generations tend to the gardens in the hold, producing all kinds of food to fuel the empty bellys of the renowned warriors.", null), null, 0, 0, 0, 0, 0);
+			characterCreationCategory1.AddCategoryOption(new TextObject("a part of a craftsmans family", null), new List<SkillObject>{
+				DefaultSkills.Trade,
+				DefaultSkills.Crafting
+				},
+				DefaultCharacterAttributes.Control, this.FocusToAdd, this.SkillLevelToAdd, this.AttributeLevelToAdd, null, Aiel_craftsmen_OnApply, Aiel_craftsmen_OnApply, new TextObject("In the forges and shops of a hold your family was to be found, ernest folk who earned their living not by killing and stealing, but by crafting and building. An added bonus was the status some of you had as blacksmiths, giving you the possibility not to fight at all, but to live in peace and focus on your craft.", null), null, 0, 0, 0, 0, 0);
+			characterCreationCategory1.AddCategoryOption(new TextObject("closely connected to a wise one", null), new List<SkillObject>{
+				DefaultSkills.Medicine,
+				DefaultSkills.Leadership
+				},
+				DefaultCharacterAttributes.Intelligence, this.FocusToAdd, this.SkillLevelToAdd, this.AttributeLevelToAdd, null, Aiel_wisefolk_OnApply, Aiel_wisefolk_OnApply, new TextObject("Wise ones were the dispensers of peace and herbes in the life of Aiel. You had the luck of beeing kin of a relativly known Wise one, you learned a great deal from hear, even inheriting the talent to channel.", null), null, 0, 0, 0, 0, 0);
+
+			characterCreationCategory1.AddCategoryOption(new TextObject("born into a family of warriors", null), new List<SkillObject>{
+				DefaultSkills.OneHanded,
+				DefaultSkills.Polearm
+				},
+				DefaultCharacterAttributes.Vigor, this.FocusToAdd, this.SkillLevelToAdd, this.AttributeLevelToAdd, null, Aiel_raiders_OnApply, Aiel_raiders_OnApply, new TextObject("Although most soldiers came from the ordinary folk, you were born into a family of warriors who did war for a living, raiding mostly, as the feuds between cland usually went. A bloody and cruel buisness, but it granted you a lot of experience.", null), null, 0, 0, 0, 0, 0);
+			characterCreationCategory1.AddCategoryOption(new TextObject("kin to wasteland traders", null), new List<SkillObject>{
+				DefaultSkills.Trade,
+				DefaultSkills.Engineering
+				},
+				DefaultCharacterAttributes.Cunning, this.FocusToAdd, this.SkillLevelToAdd, this.AttributeLevelToAdd, null, Aiel_traiders_OnApply, Aiel_traiders_OnApply, new TextObject("You crisscrossed the waste, buying and selling wares from one hold to another. Gold, jewlery and especially books were all wares, everybody needed.", null), null, 0, 0, 0, 0, 0);
+
+
 			
 			//Shadowspawn Origin
 
-			CharacterCreationCategory characterCreationCategory = characterCreationMenu.AddMenuCategory(null);
+			CharacterCreationCategory characterCreationCategory = characterCreationMenu.AddMenuCategory(default_condition);
 			List<SkillObject> effectedSkills1 = new List<SkillObject>
 			{
 				DefaultSkills.Riding,
@@ -144,6 +181,11 @@ namespace WoT_Main
 
 
 			characterCreation.AddNewMenu(characterCreationMenu);
+
+
+			//aiel
+
+			
 		}
 		protected void AddProfessionMenu(CharacterCreation characterCreation)
 		{
@@ -418,11 +460,126 @@ namespace WoT_Main
 			RefreshPlayerAppearance(characterCreation);
 			channeler = false;
 		}
-		
-		protected void Shadowspawn_Origin_Kidnapped_Child_Origin_On_Consequence(CharacterCreation characterCreation)
+
+		// aiel origin applys
+
+		protected void Aiel_chieftan_OnApply(CharacterCreation characterCreation)
 		{
+			ChangePlayerOutfit(characterCreation, "rich_CC_chieftan_aiel");
+			clothing = "rich_CC_chieftan_aiel";
+			ApplyEquipments(characterCreation);
+			RefreshPlayerAppearance(characterCreation);
+			channeler = false;
+		}
+
+		protected void Aiel_farmer_OnApply(CharacterCreation characterCreation)
+		{
+            if (Hero.MainHero.IsFemale)
+            {
+				ChangePlayerOutfit(characterCreation, "poor_CC_farmers_aiel_F");
+				clothing = "poor_CC_farmers_aiel_F";
+			}
+            else
+            {
+				ChangePlayerOutfit(characterCreation, "poor_CC_farmers_aiel_M");
+				clothing = "poor_CC_farmers_aiel_M";
+			}
+
+			
+			ApplyEquipments(characterCreation);
+			RefreshPlayerAppearance(characterCreation);
+			channeler = false;
+		}
+
+		protected void Aiel_craftsmen_OnApply(CharacterCreation characterCreation)
+		{
+			if (Hero.MainHero.IsFemale)
+			{
+				ChangePlayerOutfit(characterCreation, "middle_CC_craftsmen_aiel_F");
+				clothing = "middle_CC_craftsmen_aiel_F";
+			}
+			else
+			{
+				ChangePlayerOutfit(characterCreation, "middle_CC_craftsmen_aiel_M");
+				clothing = "middle_CC_craftsmen_aiel_M";
+			}
+
+
+			ApplyEquipments(characterCreation);
+			RefreshPlayerAppearance(characterCreation);
+			channeler = false;
+		}
+
+		protected void Aiel_wisefolk_OnApply(CharacterCreation characterCreation)
+		{
+			if (Hero.MainHero.IsFemale)
+			{
+				ChangePlayerOutfit(characterCreation, "channeler_CC_wisefolk_aiel_F");
+				clothing = "channeler_CC_wisefolk_aiel_F";
+			}
+			else
+			{
+				ChangePlayerOutfit(characterCreation, "channeler_CC_wisefolk_aiel_M");
+				clothing = "channeler_CC_wisefolk_aiel_M";
+			}
+
+
+			ApplyEquipments(characterCreation);
+			RefreshPlayerAppearance(characterCreation);
+			channeler = true;
+		}
+
+		protected void Aiel_raiders_OnApply(CharacterCreation characterCreation)
+		{
+			if (Hero.MainHero.IsFemale)
+			{
+				ChangePlayerOutfit(characterCreation, "warrior_CC_raider_aiel_F");
+				clothing = "warrior_CC_raider_aiel_F";
+			}
+			else
+			{
+				ChangePlayerOutfit(characterCreation, "warrior_CC_raider_aiel_M");
+				clothing = "warrior_CC_raider_aiel_M";
+			}
+
+
+			ApplyEquipments(characterCreation);
+			RefreshPlayerAppearance(characterCreation);
+			channeler = false;
+		}
+
+		protected void Aiel_traiders_OnApply(CharacterCreation characterCreation)
+		{
+			if (Hero.MainHero.IsFemale)
+			{
+				ChangePlayerOutfit(characterCreation, "rich2_CC_trader_aiel_F");
+				clothing = "rich2_CC_trader_aiel_F";
+			}
+			else
+			{
+				ChangePlayerOutfit(characterCreation, "rich2_CC_trader_aiel_M");
+				clothing = "rich2_CC_trader_aiel_M";
+			}
+
+
+			ApplyEquipments(characterCreation);
+			RefreshPlayerAppearance(characterCreation);
+			channeler = false;
+		}
+		protected bool default_condition()
+        {
+            if (!Aiel_condition())
+            {
+				return true;
+            }
+			return false;
+        }
+		protected bool Aiel_condition()
+		{
+			return base.GetSelectedCulture().StringId == "khuzait";
 
 		}
+
 
 
 		protected bool Profession_fisher_condition()
@@ -646,7 +803,7 @@ namespace WoT_Main
 			return list;
 		}
 
-		// Token: 0x060025D4 RID: 9684 RVA: 0x00098F5C File Offset: 0x0009715C
+		
 		protected Equipment ChangePlayerOutfit(CharacterCreation characterCreation, string outfit)
 		{
 			List<Equipment> list = new List<Equipment>();
@@ -662,7 +819,7 @@ namespace WoT_Main
 			return equipment;
 		}
 
-		// Token: 0x060025D5 RID: 9685 RVA: 0x00098FD4 File Offset: 0x000971D4
+	
 		protected static void ChangePlayerMount(CharacterCreation characterCreation, Hero hero)
 		{
 			List<FaceGenMount> list = new List<FaceGenMount>();
@@ -673,14 +830,12 @@ namespace WoT_Main
 				characterCreation.ChangeFaceGenMounts(list);
 			}
 		}
-
-		// Token: 0x060025D6 RID: 9686 RVA: 0x0009906B File Offset: 0x0009726B
+		
 		protected static void ClearMountEntity(CharacterCreation characterCreation)
 		{
 			characterCreation.ClearFaceGenMounts();
 		}
 
-	
 		protected void RefreshPropsAndClothing(CharacterCreation characterCreation, bool isChildhoodStage, string itemId, bool isLeftHand, string secondItemId = "")
 		{
 			characterCreation.ClearFaceGenPrefab();
@@ -706,21 +861,12 @@ namespace WoT_Main
 				equipment
 			});
 		}
-
-		// Token: 0x060025EC RID: 9708 RVA: 0x000994C5 File Offset: 0x000976C5
-	
-		// Token: 0x06002603 RID: 9731 RVA: 0x00099788 File Offset: 0x00097988
 		protected void RefreshPlayerAppearance(CharacterCreation characterCreation)
 		{
 			
 			this.ChangePlayerOutfit(characterCreation, clothing);
 			this.ApplyEquipments(characterCreation);
 		}
-
-		
-
-	
-		
 
 		protected void ApplyEquipments(CharacterCreation characterCreation)
 		{
@@ -741,7 +887,7 @@ namespace WoT_Main
 		
 		
 
-		// Token: 0x0600264A RID: 9802 RVA: 0x0009A0B9 File Offset: 0x000982B9
+		
 		protected void SetHeroAge(float age)
 		{
 			Hero.MainHero.SetBirthDay(CampaignTime.YearsFromNow(-age));
@@ -776,103 +922,39 @@ namespace WoT_Main
 		{
 			characterCreation.IsPlayerAlone = true;
 			characterCreation.HasSecondaryCharacter = false;
-			//characterCreation.ClearFaceGenPrefab();
-			//characterCreation.ChangeFaceGenChars(WoTCharacterCreation.ChangePlayerFaceWithAge((float)this.AccomplishmentAge, "act_childhood_schooled"));
-			characterCreation.ChangeCharsAnimation(new List<string>
-			{
-				"act_childhood_schooled"
-			});
-			//this.RefreshPlayerAppearance(characterCreation);
 		}
 		protected void SpawnOnInit(CharacterCreation characterCreation)
 		{
 			characterCreation.IsPlayerAlone = true;
 			characterCreation.HasSecondaryCharacter = false;
-			//characterCreation.ClearFaceGenPrefab();
-			//characterCreation.ChangeFaceGenChars(WoTCharacterCreation.ChangePlayerFaceWithAge((float)this.AccomplishmentAge, "act_childhood_schooled"));
-			characterCreation.ChangeCharsAnimation(new List<string>
-			{
-				"act_childhood_schooled"
-			});
-			//this.RefreshPlayerAppearance(characterCreation);
 		}
 
-		// Token: 0x04000D42 RID: 3394
-		protected const int FocusToAddYouthStart = 2;
-
-		// Token: 0x04000D43 RID: 3395
-		protected const int FocusToAddAdultStart = 4;
-
-		// Token: 0x04000D44 RID: 3396
-		protected const int FocusToAddMiddleAgedStart = 6;
-
-		// Token: 0x04000D45 RID: 3397
-		protected const int FocusToAddElderlyStart = 8;
-
-		// Token: 0x04000D46 RID: 3398
-		protected const int AttributeToAddYouthStart = 1;
-
-		// Token: 0x04000D47 RID: 3399
-		protected const int AttributeToAddAdultStart = 2;
-
-		// Token: 0x04000D48 RID: 3400
-		protected const int AttributeToAddMiddleAgedStart = 3;
-
-		// Token: 0x04000D49 RID: 3401
-		protected const int AttributeToAddElderlyStart = 4;
+	
 
 		
 
-		// Token: 0x04000D4B RID: 3403
+	
 		protected WoTCharacterCreation.SandboxAgeOptions _startingAge = WoTCharacterCreation.SandboxAgeOptions.YoungAdult;
 
-		// Token: 0x04000D4C RID: 3404
-		protected WoTCharacterCreation.OccupationTypes _familyOccupationType;
-
-		// Token: 0x04000D4D RID: 3405
+		
 		protected TextObject _educationIntroductoryText = new TextObject("{=!}{EDUCATION_INTRO}", null);
 
-		// Token: 0x04000D4E RID: 3406
+		
 		protected TextObject _youthIntroductoryText = new TextObject("{=!}{YOUTH_INTRO}", null);
 
-		// Token: 0x020005BA RID: 1466
+		
 		protected enum SandboxAgeOptions
 		{
-			// Token: 0x0400177C RID: 6012
+			
 			YoungAdult = 20,
-			// Token: 0x0400177D RID: 6013
+			
 			Adult = 30,
-			// Token: 0x0400177E RID: 6014
+			
 			MiddleAged = 40,
-			// Token: 0x0400177F RID: 6015
+			
 			Elder = 50
 		}
 
-		// Token: 0x020005BB RID: 1467
-		protected enum OccupationTypes
-		{
-			// Token: 0x04001781 RID: 6017
-			Artisan,
-			// Token: 0x04001782 RID: 6018
-			Bard,
-			// Token: 0x04001783 RID: 6019
-			Retainer,
-			// Token: 0x04001784 RID: 6020
-			Merchant,
-			// Token: 0x04001785 RID: 6021
-			Farmer,
-			// Token: 0x04001786 RID: 6022
-			Hunter,
-			// Token: 0x04001787 RID: 6023
-			Vagabond,
-			// Token: 0x04001788 RID: 6024
-			Mercenary,
-			// Token: 0x04001789 RID: 6025
-			Herder,
-			// Token: 0x0400178A RID: 6026
-			Healer,
-			// Token: 0x0400178B RID: 6027
-			NumberOfTypes
-		}
+		
 	}
 }
