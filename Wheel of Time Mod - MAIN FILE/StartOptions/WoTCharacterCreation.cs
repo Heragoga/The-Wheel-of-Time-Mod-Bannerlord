@@ -17,6 +17,7 @@ namespace WoT_Main
 		
 		private string clothing = "";
 		private string weapon = "";
+		private string amunition = "none";
 		private bool channeler = false;
 		private Vec2 positionToSpawnTo;
 		public override TextObject ReviewPageDescription
@@ -71,7 +72,7 @@ namespace WoT_Main
 			this.SetHeroAge((float)this._startingAge);
 		}
 
-		// Token: 0x06002578 RID: 9592 RVA: 0x00095BF2 File Offset: 0x00093DF2
+		
 		protected override void OnInitialized(CharacterCreation characterCreation)
 		{
 			this.AddOriginMenu(characterCreation);
@@ -80,12 +81,12 @@ namespace WoT_Main
 			this.AddSpawnMenu(characterCreation);
 		}
 
-		// Token: 0x06002579 RID: 9593 RVA: 0x00095C1E File Offset: 0x00093E1E
+		
 		protected override void OnApplyCulture()
 		{
 		}
 
-		// Token: 0x0600257A RID: 9594 RVA: 0x00095C20 File Offset: 0x00093E20
+
 		protected void AddOriginMenu(CharacterCreation characterCreation)
         {
 
@@ -133,7 +134,7 @@ namespace WoT_Main
 			
 			//Shadowspawn Origin
 
-			CharacterCreationCategory characterCreationCategory = characterCreationMenu.AddMenuCategory(default_condition);
+			CharacterCreationCategory characterCreationCategory = characterCreationMenu.AddMenuCategory(Shadowspawn_condition);
 			List<SkillObject> effectedSkills1 = new List<SkillObject>
 			{
 				DefaultSkills.Riding,
@@ -158,20 +159,31 @@ namespace WoT_Main
 
 
            
-				characterCreationCategory.AddCategoryOption(new TextObject("a member of the black Ajah / a male Aiel channeler", null), new List<SkillObject>{
+				characterCreationCategory.AddCategoryOption(new TextObject("a member of the black Ajah", null), new List<SkillObject>{
 				DefaultSkills.Throwing,
 				DefaultSkills.Medicine
 				},
-				DefaultCharacterAttributes.Intelligence, this.FocusToAdd, this.SkillLevelToAdd, this.AttributeLevelToAdd, null, Shadowspawn_Origin_Channeler_Origin_On_Apply, Shadowspawn_Origin_Channeler_Origin_On_Apply, new TextObject("As soon as you obtained the shal, you joined the black Ajah. The reasons were many: the normal sisters simply didn't understand you, you despised the laws forbidding research in dark parts of channeling and either way the lord of chaos was your prefered master, not some mortal Amyrlin. / Involuntarily or out of your free will you landed in the ranks of the Samma N'Sei, channeling the one power for the dark one.", null), null, 0, 0, 0, 0, 0);
-			
-			
-			
+				DefaultCharacterAttributes.Intelligence, this.FocusToAdd, this.SkillLevelToAdd, this.AttributeLevelToAdd, Female, Shadowspawn_Origin_Channeler_Origin_On_Apply, Shadowspawn_Origin_Channeler_Origin_On_Apply, new TextObject("As soon as you obtained the shal, you joined the black Ajah. The reasons were many: the normal sisters simply didn't understand you, you despised the laws forbidding research in dark parts of channeling and either way the lord of chaos was your prefered master, not some mortal Amyrlin..", null), null, 0, 0, 0, 0, 0);
+			characterCreationCategory.AddCategoryOption(new TextObject("a male Aiel channeler", null), new List<SkillObject>{
+				DefaultSkills.Throwing,
+				DefaultSkills.Medicine
+				},
+				DefaultCharacterAttributes.Intelligence, this.FocusToAdd, this.SkillLevelToAdd, this.AttributeLevelToAdd, Male, Shadowspawn_Origin_Channeler_Origin_On_Apply, Shadowspawn_Origin_Channeler_Origin_On_Apply, new TextObject("Involuntarily or out of your free will you landed in the ranks of the Samma N'Sei, channeling the one power for the dark one.", null), null, 0, 0, 0, 0, 0);
 
-				characterCreationCategory.AddCategoryOption(new TextObject("a daughter/son of a dreadlord", null), new List<SkillObject>{
+
+
+
+			characterCreationCategory.AddCategoryOption(new TextObject("a daughter of a dreadlord", null), new List<SkillObject>{
 				DefaultSkills.Tactics,
 				DefaultSkills.Steward
 				},
-				DefaultCharacterAttributes.Intelligence, this.FocusToAdd, this.SkillLevelToAdd, this.AttributeLevelToAdd, null, Shadowspawn_Origin_Dreadlord_Origin_On_Apply, Shadowspawn_Origin_Dreadlord_Origin_On_Apply, new TextObject("You were part of the ruling class of the shadowspawn. Your father, a powerful dreadlord insured an excellent childhood, away from slaves, trollocs and filth. You were tought in many disciplines, mainly how to command and organise troops.", null), null, 0, 0, 0, 0, 0);
+				DefaultCharacterAttributes.Intelligence, this.FocusToAdd, this.SkillLevelToAdd, this.AttributeLevelToAdd, Female, Shadowspawn_Origin_Dreadlord_Origin_On_Apply, Shadowspawn_Origin_Dreadlord_Origin_On_Apply, new TextObject("You were part of the ruling class of the shadowspawn. Your father, a powerful dreadlord insured an excellent childhood, away from slaves, trollocs and filth. You were tought in many disciplines, mainly how to command and organise troops.", null), null, 0, 0, 0, 0, 0);
+
+			characterCreationCategory.AddCategoryOption(new TextObject("a son of a dreadlord", null), new List<SkillObject>{
+				DefaultSkills.Tactics,
+				DefaultSkills.Steward
+				},
+				DefaultCharacterAttributes.Intelligence, this.FocusToAdd, this.SkillLevelToAdd, this.AttributeLevelToAdd, Male, Shadowspawn_Origin_Dreadlord_Origin_On_Apply, Shadowspawn_Origin_Dreadlord_Origin_On_Apply, new TextObject("You were part of the ruling class of the shadowspawn. Your father, a powerful dreadlord insured an excellent childhood, away from slaves, trollocs and filth. You were tought in many disciplines, mainly how to command and organise troops.", null), null, 0, 0, 0, 0, 0);
 
 			characterCreationCategory.AddCategoryOption(new TextObject("an offspring of slaves", null), new List<SkillObject>{
 				DefaultSkills.Roguery,
@@ -180,12 +192,205 @@ namespace WoT_Main
 				DefaultCharacterAttributes.Cunning, this.FocusToAdd, this.SkillLevelToAdd, this.AttributeLevelToAdd, null, Shadowspawn_Origin_Slaves_Origin_On_Apply, Shadowspawn_Origin_Slaves_Origin_On_Apply, new TextObject("Your life was hard, working from morning till dawn. As an offspring of slaves you had no saying in what was done to you, your darkfriend-owner decided everything about you.", null), null, 0, 0, 0, 0, 0);
 
 
-			characterCreation.AddNewMenu(characterCreationMenu);
+			
 
 
-			//aiel
+			//default
+
+			CharacterCreationCategory characterCreationCategoryDefault = characterCreationMenu.AddMenuCategory(default_condition);
+
 
 			
+
+			characterCreationCategoryDefault.AddCategoryOption(new TextObject("part of a farmer's household", null), new List<SkillObject>{
+				DefaultSkills.Athletics,
+				DefaultSkills.Riding
+				},
+				DefaultCharacterAttributes.Endurance, this.FocusToAdd, this.SkillLevelToAdd, this.AttributeLevelToAdd, null, default_poor_1_OnApply, default_poor_1_OnApply, new TextObject("You were raised at a farm in a rural area. A poor living and since you had elder brothers, they inhereted most of the farm, you were only left with your brains and clothes after you left the household.", null), null, 0, 0, 0, 0, 0);
+			characterCreationCategoryDefault.AddCategoryOption(new TextObject("a relative of a wisdom", null), new List<SkillObject>{
+				DefaultSkills.Medicine,
+				DefaultSkills.Charm
+				},
+				DefaultCharacterAttributes.Social, this.FocusToAdd, this.SkillLevelToAdd, this.AttributeLevelToAdd, null, default_channeler_1_OnApply, default_channeler_1_OnApply, new TextObject("As a relative of your villages wisdom you had a good living, learning a lot from her. You even inherited the ability to channel from her, incredible luck.", null), null, 0, 0, 0, 0, 0);
+			characterCreationCategoryDefault.AddCategoryOption(new TextObject("a daughter of a labourer", null), new List<SkillObject>{
+				DefaultSkills.Crafting,
+				DefaultSkills.OneHanded
+				},
+				DefaultCharacterAttributes.Vigor, this.FocusToAdd, this.SkillLevelToAdd, this.AttributeLevelToAdd, Female, default_poor_2_OnApply, default_poor_2_OnApply, new TextObject("Your father was a labourer, heading from town to town in search of jobs that suited his craft. He was working at construction sites, harbours and reparing for his entire life, sharing a great deal of that experience with you.", null), null, 0, 0, 0, 0, 0);
+			characterCreationCategoryDefault.AddCategoryOption(new TextObject("a son of a labourer", null), new List<SkillObject>{
+				DefaultSkills.Crafting,
+				DefaultSkills.OneHanded
+				},
+				DefaultCharacterAttributes.Vigor, this.FocusToAdd, this.SkillLevelToAdd, this.AttributeLevelToAdd, Male, default_poor_2_OnApply, default_poor_2_OnApply, new TextObject("Your father was a labourer, heading from town to town in search of jobs that suited his craft. He was working at construction sites, harbours and reparing for his entire life, sharing a great deal of that experience with you.", null), null, 0, 0, 0, 0, 0);
+			characterCreationCategoryDefault.AddCategoryOption(new TextObject("an offspring of a noble", null), new List<SkillObject>{
+				DefaultSkills.TwoHanded,
+				DefaultSkills.Leadership
+				},
+				DefaultCharacterAttributes.Intelligence, this.FocusToAdd, this.SkillLevelToAdd, this.AttributeLevelToAdd, null, default_rich_1_OnApply, default_rich_1_OnApply, new TextObject("You were a fourth child of some minor country nobleman, which meant you couldn't inherit his estates and were left with two options: stay with one of your brothers, looking after the estates as a squire or going of on a life of adventure. You decided on the second option.", null), null, 0, 0, 0, 0, 0);
+			characterCreationCategoryDefault.AddCategoryOption(new TextObject("born into a family of shopkeepers", null), new List<SkillObject>{
+				DefaultSkills.Trade,
+				DefaultSkills.Charm
+				},
+				DefaultCharacterAttributes.Social, this.FocusToAdd, this.SkillLevelToAdd, this.AttributeLevelToAdd, null, default_middle_1_OnApply, default_middle_1_OnApply, new TextObject("You were part of the town's middle class, helping out in your family's shop all your life, offering sevices of different kinds to your clients and making a decent living of it.", null), null, 0, 0, 0, 0, 0);
+			characterCreationCategoryDefault.AddCategoryOption(new TextObject("a bandit child", null), new List<SkillObject>{
+				DefaultSkills.Bow,
+				DefaultSkills.Roguery
+				},
+				DefaultCharacterAttributes.Cunning, this.FocusToAdd, this.SkillLevelToAdd, this.AttributeLevelToAdd, null, default_warrior_1_OnApply, default_warrior_1_OnApply, new TextObject("Your family was driven out of their farm a long time ago, adopting a new life of banditry. You lived in camps all your life, imitating your parents, brothers and uncles in their ways. When you didn't have the opportunity to accept a job from some gang leader you robbed people on the road.", null), null, 0, 0, 0, 0, 0);
+
+			//White tower
+
+			CharacterCreationCategory characterCreationCategoryWT = characterCreationMenu.AddMenuCategory(WT_condition);
+
+
+
+
+			characterCreationCategoryWT.AddCategoryOption(new TextObject("part of a farmer's household", null), new List<SkillObject>{
+				DefaultSkills.Athletics,
+				DefaultSkills.Riding
+				},
+				DefaultCharacterAttributes.Endurance, this.FocusToAdd, this.SkillLevelToAdd, this.AttributeLevelToAdd, null, default_poor_1_OnApply, default_poor_1_OnApply, new TextObject("You were raised at a farm in a rural area. A poor living and since you had elder brothers, they inhereted most of the farm, you were only left with your brains and clothes after you left the household.", null), null, 0, 0, 0, 0, 0);
+
+			characterCreationCategoryWT.AddCategoryOption(new TextObject("a daughter of an Aes Sedai and Warder", null), new List<SkillObject>{
+				DefaultSkills.Throwing,
+				DefaultSkills.Leadership
+				},
+				DefaultCharacterAttributes.Intelligence, this.FocusToAdd, this.SkillLevelToAdd, this.AttributeLevelToAdd, Female, WT_channeler_1_OnApply, WT_channeler_1_OnApply, new TextObject("You were a rare child of an Aes Sedai and her warder. You joined the white tower as your mother did as soon as you could, benefiting from a lot of advantages due to your mothers position.", null), null, 0, 0, 0, 0, 0);
+			characterCreationCategoryWT.AddCategoryOption(new TextObject("a son of an Aes Sedai and Warder", null), new List<SkillObject>{
+				DefaultSkills.Throwing,
+				DefaultSkills.Leadership
+				},
+				DefaultCharacterAttributes.Intelligence, this.FocusToAdd, this.SkillLevelToAdd, this.AttributeLevelToAdd, Male, WT_channeler_1_OnApply, WT_channeler_1_OnApply, new TextObject("You were a rare child of an Aes Sedai and her warder, yet many in the White Tower still believe the taint is present and so your mother tried to drown you. Your father managed to save you in secret, giving you to a friend to be raised. As soon as you could speak you sweared vengance on you mother, will you realise that promise?", null), null, 0, 0, 0, 0, 0);
+			characterCreationCategoryWT.AddCategoryOption(new TextObject("a daughter of a labourer", null), new List<SkillObject>{
+				DefaultSkills.Crafting,
+				DefaultSkills.OneHanded
+				},
+				DefaultCharacterAttributes.Vigor, this.FocusToAdd, this.SkillLevelToAdd, this.AttributeLevelToAdd, Female, default_poor_2_OnApply, default_poor_2_OnApply, new TextObject("Your father was a labourer, heading from town to town in search of jobs that suited his craft. He was working at construction sites, harbours and reparing for his entire life, sharing a great deal of that experience with you.", null), null, 0, 0, 0, 0, 0);
+			characterCreationCategoryWT.AddCategoryOption(new TextObject("a son of a labourer", null), new List<SkillObject>{
+				DefaultSkills.Crafting,
+				DefaultSkills.OneHanded
+				},
+				DefaultCharacterAttributes.Vigor, this.FocusToAdd, this.SkillLevelToAdd, this.AttributeLevelToAdd, Male, default_poor_2_OnApply, default_poor_2_OnApply, new TextObject("Your father was a labourer, heading from town to town in search of jobs that suited his craft. He was working at construction sites, harbours and reparing for his entire life, sharing a great deal of that experience with you.", null), null, 0, 0, 0, 0, 0);
+			characterCreationCategoryWT.AddCategoryOption(new TextObject("an offspring of a noble", null), new List<SkillObject>{
+				DefaultSkills.TwoHanded,
+				DefaultSkills.Leadership
+				},
+				DefaultCharacterAttributes.Intelligence, this.FocusToAdd, this.SkillLevelToAdd, this.AttributeLevelToAdd, null, default_rich_1_OnApply, default_rich_1_OnApply, new TextObject("You were a fourth child of some minor country nobleman, which meant you couldn't inherit his estates and were left with two options: stay with one of your brothers, looking after the estates as a squire or going of on a life of adventure. You decided on the second option.", null), null, 0, 0, 0, 0, 0);
+			characterCreationCategoryWT.AddCategoryOption(new TextObject("born into a family of shopkeepers", null), new List<SkillObject>{
+				DefaultSkills.Trade,
+				DefaultSkills.Charm
+				},
+				DefaultCharacterAttributes.Social, this.FocusToAdd, this.SkillLevelToAdd, this.AttributeLevelToAdd, null, default_middle_1_OnApply, default_middle_1_OnApply, new TextObject("You were part of the town's middle class, helping out in your family's shop all your life, offering sevices of different kinds to your clients and making a decent living of it.", null), null, 0, 0, 0, 0, 0);
+			characterCreationCategoryWT.AddCategoryOption(new TextObject("an offspring of a turned down novice", null), new List<SkillObject>{
+				DefaultSkills.Throwing,
+				DefaultSkills.Roguery
+				},
+				DefaultCharacterAttributes.Cunning, this.FocusToAdd, this.SkillLevelToAdd, this.AttributeLevelToAdd, null, WT_channeler_2_OnApply, WT_channeler_2_OnApply, new TextObject("Your mother tried to become an Aes Sedai, yet failed due to a lack of skill and dicipline. Yet she caried the spark to you, giving you the ability to channel. Will you try at what your mother failed?", null), null, 0, 0, 0, 0, 0);
+
+			CharacterCreationCategory characterCreationCategoryBT = characterCreationMenu.AddMenuCategory(BT_condition);
+
+
+
+
+			characterCreationCategoryBT.AddCategoryOption(new TextObject("part of a farmer's household", null), new List<SkillObject>{
+				DefaultSkills.Athletics,
+				DefaultSkills.Riding
+				},
+				DefaultCharacterAttributes.Endurance, this.FocusToAdd, this.SkillLevelToAdd, this.AttributeLevelToAdd, null, default_poor_1_OnApply, default_poor_1_OnApply, new TextObject("You were raised at a farm in a rural area. A poor living and since you had elder brothers, they inhereted most of the farm, you were only left with your brains and clothes after you left the household.", null), null, 0, 0, 0, 0, 0);
+
+			characterCreationCategoryBT.AddCategoryOption(new TextObject("a daughter of an Asha'man", null), new List<SkillObject>{
+				DefaultSkills.Throwing,
+				DefaultSkills.Leadership
+				},
+				DefaultCharacterAttributes.Intelligence, this.FocusToAdd, this.SkillLevelToAdd, this.AttributeLevelToAdd, Female, BT_channeler_2_OnApply, BT_channeler_2_OnApply, new TextObject("You are a child of an Asha'man and his bonded Aes Sedai, yet you decided against training in the black tower. You thought your family tought you enough about channeling to survive.", null), null, 0, 0, 0, 0, 0);
+			characterCreationCategoryBT.AddCategoryOption(new TextObject("a son of an Asha'man", null), new List<SkillObject>{
+				DefaultSkills.Throwing,
+				DefaultSkills.Leadership
+				},
+				DefaultCharacterAttributes.Intelligence, this.FocusToAdd, this.SkillLevelToAdd, this.AttributeLevelToAdd, Male, BT_channeler_2_OnApply, BT_channeler_2_OnApply, new TextObject("You are a child of an Asha'man and his bonded Aes Sedai, yet you decided against training in the black tower. You thought your family tought you enough about channeling to survive.", null), null, 0, 0, 0, 0, 0);
+			characterCreationCategoryBT.AddCategoryOption(new TextObject("a daughter of a labourer", null), new List<SkillObject>{
+				DefaultSkills.Crafting,
+				DefaultSkills.OneHanded
+				},
+				DefaultCharacterAttributes.Vigor, this.FocusToAdd, this.SkillLevelToAdd, this.AttributeLevelToAdd, Female, default_poor_2_OnApply, default_poor_2_OnApply, new TextObject("Your father was a labourer, heading from town to town in search of jobs that suited his craft. He was working at construction sites, harbours and reparing for his entire life, sharing a great deal of that experience with you.", null), null, 0, 0, 0, 0, 0);
+			characterCreationCategoryBT.AddCategoryOption(new TextObject("a son of a labourer", null), new List<SkillObject>{
+				DefaultSkills.Crafting,
+				DefaultSkills.OneHanded
+				},
+				DefaultCharacterAttributes.Vigor, this.FocusToAdd, this.SkillLevelToAdd, this.AttributeLevelToAdd, Male, default_poor_2_OnApply, default_poor_2_OnApply, new TextObject("Your father was a labourer, heading from town to town in search of jobs that suited his craft. He was working at construction sites, harbours and reparing for his entire life, sharing a great deal of that experience with you.", null), null, 0, 0, 0, 0, 0);
+			characterCreationCategoryBT.AddCategoryOption(new TextObject("an offspring of a noble", null), new List<SkillObject>{
+				DefaultSkills.TwoHanded,
+				DefaultSkills.Leadership
+				},
+				DefaultCharacterAttributes.Intelligence, this.FocusToAdd, this.SkillLevelToAdd, this.AttributeLevelToAdd, null, default_rich_1_OnApply, default_rich_1_OnApply, new TextObject("You were a fourth child of some minor country nobleman, which meant you couldn't inherit his estates and were left with two options: stay with one of your brothers, looking after the estates as a squire or going of on a life of adventure. You decided on the second option.", null), null, 0, 0, 0, 0, 0);
+			characterCreationCategoryBT.AddCategoryOption(new TextObject("born into a family of shopkeepers", null), new List<SkillObject>{
+				DefaultSkills.Trade,
+				DefaultSkills.Charm
+				},
+				DefaultCharacterAttributes.Social, this.FocusToAdd, this.SkillLevelToAdd, this.AttributeLevelToAdd, null, default_middle_1_OnApply, default_middle_1_OnApply, new TextObject("You were part of the town's middle class, helping out in your family's shop all your life, offering sevices of different kinds to your clients and making a decent living of it.", null), null, 0, 0, 0, 0, 0);
+			characterCreationCategoryBT.AddCategoryOption(new TextObject("a black tower initiate", null), new List<SkillObject>{
+				DefaultSkills.Throwing,
+				DefaultSkills.Roguery
+				},
+				DefaultCharacterAttributes.Cunning, this.FocusToAdd, this.SkillLevelToAdd, this.AttributeLevelToAdd, Male, BT_channeler_1_OnApply, BT_channeler_1_OnApply, new TextObject("As soon as you could, you joined the black tower to learn to channel and eventually become an Asha'man.", null), null, 0, 0, 0, 0, 0);
+
+			characterCreationCategoryBT.AddCategoryOption(new TextObject("a black tower initiate", null), new List<SkillObject>{
+				DefaultSkills.Throwing,
+				DefaultSkills.Roguery
+				},
+				DefaultCharacterAttributes.Cunning, this.FocusToAdd, this.SkillLevelToAdd, this.AttributeLevelToAdd, Female, BT_channeler_1_OnApply, BT_channeler_1_OnApply, new TextObject("You are a female channeler in the black tower, a rarity, yet you were thrown out of the white tower for a misshap and now seek your revenge here. You train with the bonded Aes Sedai and seek to become one of them or bond your own Asha'man.", null), null, 0, 0, 0, 0, 0);
+
+			// dragonsworn
+			CharacterCreationCategory characterCreationCategoryDragon = characterCreationMenu.AddMenuCategory(Dragonsworn_condition);
+
+
+
+
+			characterCreationCategoryDragon.AddCategoryOption(new TextObject("a former follower of the Prophet", null), new List<SkillObject>{
+				DefaultSkills.Polearm,
+				DefaultSkills.Roguery
+				},
+				DefaultCharacterAttributes.Cunning, this.FocusToAdd, this.SkillLevelToAdd, this.AttributeLevelToAdd, null, Dragon_warrior_2_OnApply, Dragon_warrior_2_OnApply, new TextObject("When the Prophet first said his preechings you were among many who began to follow him. At first you enjoyed it, yet soon you realised what it was getting too: an immense crowd of fanatic bandits who used every excuse to rape, steal and murder. You left the Prophet's mobs and instead joined the forces of the actual Dragon Reborn.", null), null, 0, 0, 0, 0, 0);
+			characterCreationCategoryDragon.AddCategoryOption(new TextObject("a relative of a wisdom", null), new List<SkillObject>{
+				DefaultSkills.Medicine,
+				DefaultSkills.Charm
+				},
+				DefaultCharacterAttributes.Social, this.FocusToAdd, this.SkillLevelToAdd, this.AttributeLevelToAdd, null, default_channeler_1_OnApply, default_channeler_1_OnApply, new TextObject("As a relative of your villages wisdom you had a good living, learning a lot from her. You even inherited the ability to channel from her, incredible luck.", null), null, 0, 0, 0, 0, 0);
+			characterCreationCategoryDragon.AddCategoryOption(new TextObject("a daughter of a dead Legion of the Dragon officer", null), new List<SkillObject>{
+				DefaultSkills.OneHanded,
+				DefaultSkills.TwoHanded
+				},
+				DefaultCharacterAttributes.Vigor, this.FocusToAdd, this.SkillLevelToAdd, this.AttributeLevelToAdd, Female, Dragon_warrior_1_OnApply, Dragon_warrior_1_OnApply, new TextObject("Your father joined the Legion of the Dragon at it's creation and managed to work his way up through the ranks. He died as a Captain, in some unknown skirmish, leaving you only his old armour.", null), null, 0, 0, 0, 0, 0);
+			characterCreationCategoryDragon.AddCategoryOption(new TextObject("a son of a dead Legion of the Dragon officer", null), new List<SkillObject>{
+				DefaultSkills.OneHanded,
+				DefaultSkills.TwoHanded
+				},
+				DefaultCharacterAttributes.Vigor, this.FocusToAdd, this.SkillLevelToAdd, this.AttributeLevelToAdd, Male, Dragon_warrior_1_OnApply, Dragon_warrior_1_OnApply, new TextObject("Your father joined the Legion of the Dragon at it's creation and managed to work his way up through the ranks. He died as a Captain, in some unknown skirmish, leaving you only his old armour.", null), null, 0, 0, 0, 0, 0);
+			characterCreationCategoryDragon.AddCategoryOption(new TextObject("a Two Rivers bowman", null), new List<SkillObject>{
+				DefaultSkills.Bow,
+				DefaultSkills.Athletics
+				},
+				DefaultCharacterAttributes.Endurance, this.FocusToAdd, this.SkillLevelToAdd, this.AttributeLevelToAdd, Male, Dragon_warrior_3_OnApply, Dragon_warrior_3_OnApply, new TextObject("You left your farm in the Two Rivers to join your countryman Rand, the dragon in his glorious conquests, hoping to be treated better, because you come from the same region.", null), null, 0, 0, 0, 0, 0);
+			characterCreationCategoryDragon.AddCategoryOption(new TextObject("a Two Rivers bowwoman", null), new List<SkillObject>{
+				DefaultSkills.Bow,
+				DefaultSkills.Athletics
+				},
+				DefaultCharacterAttributes.Endurance, this.FocusToAdd, this.SkillLevelToAdd, this.AttributeLevelToAdd, Female, Dragon_warrior_3_OnApply, Dragon_warrior_3_OnApply, new TextObject("You left your farm in the Two Rivers to join your countryman Rand, the dragon in his glorious conquests, hoping to be treated better, because you come from the same region.", null), null, 0, 0, 0, 0, 0);
+			characterCreationCategoryDragon.AddCategoryOption(new TextObject("born into a family of shopkeepers", null), new List<SkillObject>{
+				DefaultSkills.Trade,
+				DefaultSkills.Charm
+				},
+				DefaultCharacterAttributes.Social, this.FocusToAdd, this.SkillLevelToAdd, this.AttributeLevelToAdd, null, default_middle_1_OnApply, default_middle_1_OnApply, new TextObject("You were part of the town's middle class, helping out in your family's shop all your life, offering sevices of different kinds to your clients and making a decent living of it.", null), null, 0, 0, 0, 0, 0);
+			characterCreationCategoryDragon.AddCategoryOption(new TextObject("a recruit of the Band of the Red Hand", null), new List<SkillObject>{
+				DefaultSkills.TwoHanded,
+				DefaultSkills.Tactics
+				},
+				DefaultCharacterAttributes.Intelligence, this.FocusToAdd, this.SkillLevelToAdd, this.AttributeLevelToAdd, null, Dragon_warrior_4_OnApply, Dragon_warrior_4_OnApply, new TextObject("The second you heared the songs about war, the soldiers of Matt's band sung as they marched through your town, you knew where you belonged: in the Band. You joined immedeatly, hoping to follow Matt's example and maybe become an officer or even lead your own band one day.", null), null, 0, 0, 0, 0, 0);
+
+
+
+
+			characterCreation.AddNewMenu(characterCreationMenu);
 		}
 		protected void AddProfessionMenu(CharacterCreation characterCreation)
 		{
@@ -212,7 +417,7 @@ namespace WoT_Main
 				DefaultSkills.Trade,
 				DefaultSkills.Leadership
 				},
-				DefaultCharacterAttributes.Social, this.FocusToAdd, this.SkillLevelToAdd, this.AttributeLevelToAdd, null, Profession_trader_consequence, null, new TextObject("Travelling from town to town, buying and selling, this is how you pased your days, a job which gave you a lot of profit, yet involved the risks of the dangerous roads.", null), null, 0, 0, 0, 0, 0);
+				DefaultCharacterAttributes.Social, this.FocusToAdd, this.SkillLevelToAdd, this.AttributeLevelToAdd, null, Profession_trader_consequence, null, new TextObject("Travelling from town to town, buying and selling, this is how you pased your days, a job which gave you a lot of profit, yet involved the risks of being robed.", null), null, 0, 0, 0, 0, 0);
 			characterCreationCategory.AddCategoryOption(new TextObject("as a fisher", null), new List<SkillObject>{
 				DefaultSkills.Throwing,
 				DefaultSkills.Medicine
@@ -438,8 +643,17 @@ namespace WoT_Main
 		
 		protected void Shadowspawn_Origin_Channeler_Origin_On_Apply(CharacterCreation characterCreation)
 		{
-			ChangePlayerOutfit(characterCreation, "channeler_CC_1");
-			clothing = "channeler_CC_1";
+
+			if (Hero.MainHero.IsFemale)
+			{
+				ChangePlayerOutfit(characterCreation, "channeler_CC_1_F");
+				clothing = "channeler_CC_1_F";
+			}
+			else
+			{
+				ChangePlayerOutfit(characterCreation, "channeler_CC_1_M");
+				clothing = "channeler_CC_1_M";
+			}
 			ApplyEquipments(characterCreation);
 			RefreshPlayerAppearance(characterCreation);
 			channeler = true;
@@ -566,18 +780,265 @@ namespace WoT_Main
 			RefreshPlayerAppearance(characterCreation);
 			channeler = false;
 		}
-		protected bool default_condition()
+
+		protected void default_poor_1_OnApply(CharacterCreation characterCreation)
+		{
+			if (Hero.MainHero.IsFemale)
+			{
+				ChangePlayerOutfit(characterCreation, "default_poor_CC_1_F");
+				clothing = "default_poor_CC_1_F";
+			}
+			else
+			{
+				ChangePlayerOutfit(characterCreation, "default_poor_CC_1_M");
+				clothing = "default_poor_CC_1_M";
+			}
+			ApplyEquipments(characterCreation);
+			RefreshPlayerAppearance(characterCreation);
+			channeler = false;
+		}
+		protected void default_poor_2_OnApply(CharacterCreation characterCreation)
+		{
+			if (Hero.MainHero.IsFemale)
+			{
+				ChangePlayerOutfit(characterCreation, "default_poor_CC_2_F");
+				clothing = "default_poor_CC_2_F";
+			}
+			else
+			{
+				ChangePlayerOutfit(characterCreation, "default_poor_CC_2_M");
+				clothing = "default_poor_CC_2_M";
+			}
+			ApplyEquipments(characterCreation);
+			RefreshPlayerAppearance(characterCreation);
+			channeler = false;
+		}
+		protected void default_middle_1_OnApply(CharacterCreation characterCreation)
+		{
+			if (Hero.MainHero.IsFemale)
+			{
+				ChangePlayerOutfit(characterCreation, "default_middle_CC_1_F");
+				clothing = "default_middle_CC_1_F";
+			}
+			else
+			{
+				ChangePlayerOutfit(characterCreation, "default_middle_CC_1_M");
+				clothing = "default_middle_CC_1_M";
+			}
+			ApplyEquipments(characterCreation);
+			RefreshPlayerAppearance(characterCreation);
+			channeler = false;
+		}
+		protected void default_rich_1_OnApply(CharacterCreation characterCreation)
+		{
+			if (Hero.MainHero.IsFemale)
+			{
+				ChangePlayerOutfit(characterCreation, "default_rich_CC_1_F");
+				clothing = "default_rich_CC_1_F";
+			}
+			else
+			{
+				ChangePlayerOutfit(characterCreation, "default_rich_CC_1_M");
+				clothing = "default_rich_CC_1_M";
+			}
+			ApplyEquipments(characterCreation);
+			RefreshPlayerAppearance(characterCreation);
+			channeler = false;
+		}
+		protected void default_warrior_1_OnApply(CharacterCreation characterCreation)
+		{
+			if (Hero.MainHero.IsFemale)
+			{
+				ChangePlayerOutfit(characterCreation, "default_warrior_CC_1_F");
+				clothing = "default_warrior_CC_1_F";
+			}
+			else
+			{
+				ChangePlayerOutfit(characterCreation, "default_warrior_CC_1_M");
+				clothing = "default_warrior_CC_1_M";
+			}
+			ApplyEquipments(characterCreation);
+			RefreshPlayerAppearance(characterCreation);
+			channeler = false;
+		}
+		protected void default_channeler_1_OnApply(CharacterCreation characterCreation)
+		{
+			if (Hero.MainHero.IsFemale)
+			{
+				ChangePlayerOutfit(characterCreation, "default_channeler_CC_1_F");
+				clothing = "default_channeler_CC_1_F";
+			}
+			else
+			{
+				ChangePlayerOutfit(characterCreation, "default_channeler_CC_1_M");
+				clothing = "default_channeler_CC_1_M";
+			}
+			ApplyEquipments(characterCreation);
+			RefreshPlayerAppearance(characterCreation);
+			channeler = true;
+		}
+
+		protected void WT_channeler_1_OnApply(CharacterCreation characterCreation)
+		{
+			if (Hero.MainHero.IsFemale)
+			{
+				ChangePlayerOutfit(characterCreation, "wt_channeler_CC_1_F");
+				clothing = "wt_channeler_CC_1_F";
+			}
+			else
+			{
+				ChangePlayerOutfit(characterCreation, "wt_channeler_CC_1_M");
+				clothing = "wt_channeler_CC_1_M";
+			}
+			ApplyEquipments(characterCreation);
+			RefreshPlayerAppearance(characterCreation);
+			channeler = true;
+		}
+		protected void WT_channeler_2_OnApply(CharacterCreation characterCreation)
+		{
+			if (Hero.MainHero.IsFemale)
+			{
+				ChangePlayerOutfit(characterCreation, "wt_channeler_CC_2_F");
+				clothing = "wt_channeler_CC_2_F";
+			}
+			else
+			{
+				ChangePlayerOutfit(characterCreation, "wt_channeler_CC_2_M");
+				clothing = "wt_channeler_CC_2_M";
+			}
+			ApplyEquipments(characterCreation);
+			RefreshPlayerAppearance(characterCreation);
+			channeler = true;
+		}
+		protected void BT_channeler_1_OnApply(CharacterCreation characterCreation)
+		{
+			if (Hero.MainHero.IsFemale)
+			{
+				ChangePlayerOutfit(characterCreation, "bt_channeler_CC_1_F");
+				clothing = "bt_channeler_CC_1_F";
+			}
+			else
+			{
+				ChangePlayerOutfit(characterCreation, "bt_channeler_CC_1_M");
+				clothing = "bt_channeler_CC_1_M";
+			}
+			ApplyEquipments(characterCreation);
+			RefreshPlayerAppearance(characterCreation);
+			channeler = true;
+		}
+		protected void BT_channeler_2_OnApply(CharacterCreation characterCreation)
+		{
+			if (Hero.MainHero.IsFemale)
+			{
+				ChangePlayerOutfit(characterCreation, "bt_channeler_CC_2_F");
+				clothing = "bt_channeler_CC_2_F";
+			}
+			else
+			{
+				ChangePlayerOutfit(characterCreation, "bt_channeler_CC_2_M");
+				clothing = "bt_channeler_CC_2_M";
+			}
+			ApplyEquipments(characterCreation);
+			RefreshPlayerAppearance(characterCreation);
+			channeler = true;
+		}
+
+		protected void Dragon_warrior_1_OnApply(CharacterCreation characterCreation)
+		{
+			if (Hero.MainHero.IsFemale)
+			{
+				ChangePlayerOutfit(characterCreation, "dragon_warrior_CC_1_F");
+				clothing = "dragon_warrior_CC_1_F";
+			}
+			else
+			{
+				ChangePlayerOutfit(characterCreation, "dragon_warrior_CC_1_M");
+				clothing = "dragon_warrior_CC_1_M";
+			}
+			ApplyEquipments(characterCreation);
+			RefreshPlayerAppearance(characterCreation);
+			channeler = false;
+		}
+		protected void Dragon_warrior_2_OnApply(CharacterCreation characterCreation)
+		{
+			if (Hero.MainHero.IsFemale)
+			{
+				ChangePlayerOutfit(characterCreation, "dragon_warrior_CC_2_F");
+				clothing = "dragon_warrior_CC_2_F";
+			}
+			else
+			{
+				ChangePlayerOutfit(characterCreation, "dragon_warrior_CC_2_M");
+				clothing = "dragon_warrior_CC_2_M";
+			}
+			ApplyEquipments(characterCreation);
+			RefreshPlayerAppearance(characterCreation);
+			channeler = false;
+		}
+
+		protected void Dragon_warrior_3_OnApply(CharacterCreation characterCreation)
+		{
+			if (Hero.MainHero.IsFemale)
+			{
+				ChangePlayerOutfit(characterCreation, "two_river_warrior_CC_1_F");
+				clothing = "two_river_warrior_CC_1_F";
+			}
+			else
+			{
+				ChangePlayerOutfit(characterCreation, "two_river_warrior_CC_1_M");
+				clothing = "two_river_warrior_CC_1_M";
+			}
+			ApplyEquipments(characterCreation);
+			RefreshPlayerAppearance(characterCreation);
+			channeler = false;
+		}
+		protected void Dragon_warrior_4_OnApply(CharacterCreation characterCreation)
+		{
+			if (Hero.MainHero.IsFemale)
+			{
+				ChangePlayerOutfit(characterCreation, "dragon_warrior_CC_3_F");
+				clothing = "dragon_warrior_CC_3_F";
+			}
+			else
+			{
+				ChangePlayerOutfit(characterCreation, "dragon_warrior_CC_3_M");
+				clothing = "dragon_warrior_CC_3_M";
+			}
+			ApplyEquipments(characterCreation);
+			RefreshPlayerAppearance(characterCreation);
+			channeler = false;
+		}
+
+		protected bool Shadowspawn_condition()
         {
-            if (!Aiel_condition())
-            {
-				return true;
-            }
-			return false;
-        }
+			return base.GetSelectedCulture().StringId == "sturgia";
+		}
+		protected bool WT_condition()
+		{
+			return base.GetSelectedCulture().StringId == "WhiteTower";
+		}
+
 		protected bool Aiel_condition()
 		{
 			return base.GetSelectedCulture().StringId == "khuzait";
 
+		}
+		protected bool BT_condition()
+		{
+			return base.GetSelectedCulture().StringId == "BlackTower";
+		}
+		protected bool Dragonsworn_condition()
+		{
+			return base.GetSelectedCulture().StringId == "Dragonsworn";
+		}
+
+		protected bool default_condition()
+		{
+			if(!Shadowspawn_condition() && !Aiel_condition() && !WT_condition() && !BT_condition() && !Dragonsworn_condition())
+            {
+				return true;
+            }
+			return false;
 		}
 
 
@@ -686,11 +1147,19 @@ namespace WoT_Main
 			return !channeler && base.GetSelectedCulture().StringId == "khuzait";
 		}
 
-		
+		protected bool Female()
+        {
+			return Hero.MainHero.IsFemale;
+        }
+		protected bool Male()
+		{
+			return !Hero.MainHero.IsFemale;
+		}
 		protected void Talent_Fireball_Consequence(CharacterCreation characterCreation)
 		{
 			RefreshPlayerAppearance(characterCreation);
 			weapon = "onepowerblossomsoffiresingle";
+			amunition = "none";
 			ApplyEquipments(characterCreation);
 			RefreshPlayerAppearance(characterCreation);
 
@@ -699,6 +1168,7 @@ namespace WoT_Main
 		{
 			RefreshPlayerAppearance(characterCreation);
 			weapon = "onepowerwindstorm1FireBall";
+			amunition = "none";
 			ApplyEquipments(characterCreation);
 			RefreshPlayerAppearance(characterCreation);
 
@@ -707,6 +1177,7 @@ namespace WoT_Main
 		{
 			RefreshPlayerAppearance(characterCreation);
 			weapon = "onepowerwindstorm1Lightningammo";
+			amunition = "none";
 			ApplyEquipments(characterCreation);
 			RefreshPlayerAppearance(characterCreation);
 
@@ -715,7 +1186,9 @@ namespace WoT_Main
 		{
 			RefreshPlayerAppearance(characterCreation);
 			weapon = "onepowerwindstormearthammo";
+			amunition = "none";
 			ApplyEquipments(characterCreation);
+
 			RefreshPlayerAppearance(characterCreation);
 
 		}
@@ -723,6 +1196,7 @@ namespace WoT_Main
 		{
 			RefreshPlayerAppearance(characterCreation);
 			weapon = "OnePowerAirShield";
+			amunition = "none";
 			ApplyEquipments(characterCreation);
 			RefreshPlayerAppearance(characterCreation);
 
@@ -731,6 +1205,7 @@ namespace WoT_Main
 		{
 			RefreshPlayerAppearance(characterCreation);
 			weapon = "western_spear_1_t2";
+			amunition = "none";
 			ApplyEquipments(characterCreation);
 			RefreshPlayerAppearance(characterCreation);
 
@@ -738,6 +1213,7 @@ namespace WoT_Main
 		protected void Talent_Bow_Consequence(CharacterCreation characterCreation)
 		{
 			RefreshPlayerAppearance(characterCreation);
+			amunition = "default_arrows";
 			weapon = "steppe_bow";
 			ApplyEquipments(characterCreation);
 			RefreshPlayerAppearance(characterCreation);
@@ -746,6 +1222,7 @@ namespace WoT_Main
 		protected void Talent_CrossBow_Consequence(CharacterCreation characterCreation)
 		{
 			RefreshPlayerAppearance(characterCreation);
+			amunition = "bolt_a";
 			weapon = "crossbow_a";
 			ApplyEquipments(characterCreation);
 			RefreshPlayerAppearance(characterCreation);
@@ -754,6 +1231,7 @@ namespace WoT_Main
 		protected void Talent_throwing_Consequence(CharacterCreation characterCreation)
 		{
 			RefreshPlayerAppearance(characterCreation);
+			amunition = "none";
 			weapon = "western_javelin_1_t2";
 			ApplyEquipments(characterCreation);
 			RefreshPlayerAppearance(characterCreation);
@@ -763,6 +1241,7 @@ namespace WoT_Main
 		{
 			RefreshPlayerAppearance(characterCreation);
 			weapon = "vlandia_sword_1_t2";
+			amunition = "none";
 			ApplyEquipments(characterCreation);
 			RefreshPlayerAppearance(characterCreation);
 
@@ -771,6 +1250,8 @@ namespace WoT_Main
 		{
 			RefreshPlayerAppearance(characterCreation);
 			weapon = "aserai_mace_3_t3";
+			amunition = "western_kite_shield";
+			ChangePlayerMount(characterCreation, Hero.MainHero);
 			ApplyEquipments(characterCreation);
 			RefreshPlayerAppearance(characterCreation);
 
@@ -779,6 +1260,7 @@ namespace WoT_Main
 		{
 			RefreshPlayerAppearance(characterCreation);
 			weapon = "Aiel_shield";
+			amunition = "AielSpeargrade1";
 			ApplyEquipments(characterCreation);
 			RefreshPlayerAppearance(characterCreation);
 
@@ -787,6 +1269,7 @@ namespace WoT_Main
 		{
 			RefreshPlayerAppearance(characterCreation);
 			weapon = "Aielbowlevel1";
+			amunition = "default_arrows";
 			ApplyEquipments(characterCreation);
 			RefreshPlayerAppearance(characterCreation);
 
@@ -831,10 +1314,10 @@ namespace WoT_Main
 			}
 		}
 		
-		protected static void ClearMountEntity(CharacterCreation characterCreation)
-		{
-			characterCreation.ClearFaceGenMounts();
-		}
+			protected static void ClearMountEntity(CharacterCreation characterCreation)
+			{
+				characterCreation.ClearFaceGenMounts();
+			}
 
 		protected void RefreshPropsAndClothing(CharacterCreation characterCreation, bool isChildhoodStage, string itemId, bool isLeftHand, string secondItemId = "")
 		{
@@ -879,6 +1362,8 @@ namespace WoT_Main
 			{
 				ItemObject @object1 = Game.Current.ObjectManager.GetObject<ItemObject>(weapon);
 				base.PlayerStartEquipment.AddEquipmentToSlotWithoutAgent(EquipmentIndex.Weapon1, new EquipmentElement(@object1, null, null, false));
+				ItemObject @object2 = Game.Current.ObjectManager.GetObject<ItemObject>(amunition);
+				base.PlayerStartEquipment.AddEquipmentToSlotWithoutAgent(EquipmentIndex.Weapon2, new EquipmentElement(@object2, null, null, false));
 				CharacterObject.PlayerCharacter.Equipment.FillFrom(base.PlayerStartEquipment, true);
 				CharacterObject.PlayerCharacter.FirstCivilianEquipment.FillFrom(base.PlayerCivilianEquipment, true);
 			}
@@ -898,7 +1383,7 @@ namespace WoT_Main
 			characterCreation.IsPlayerAlone = true;
 			characterCreation.HasSecondaryCharacter = false;
 			characterCreation.ClearFaceGenPrefab();
-			characterCreation.ChangeFaceGenChars(WoTCharacterCreation.ChangePlayerFaceWithAge((float)this.AccomplishmentAge, "act_childhood_schooled"));
+			characterCreation.ChangeFaceGenChars(WoTCharacterCreation.ChangePlayerFaceWithAge((float)this._startingAge, "act_childhood_schooled"));
 			characterCreation.ChangeCharsAnimation(new List<string>
 			{
 				"act_childhood_schooled"
@@ -910,7 +1395,7 @@ namespace WoT_Main
 			characterCreation.IsPlayerAlone = true;
 			characterCreation.HasSecondaryCharacter = false;
 			characterCreation.ClearFaceGenPrefab();
-			characterCreation.ChangeFaceGenChars(WoTCharacterCreation.ChangePlayerFaceWithAge((float)this.AccomplishmentAge, "act_childhood_schooled"));
+			characterCreation.ChangeFaceGenChars(WoTCharacterCreation.ChangePlayerFaceWithAge((float)this._startingAge, "act_childhood_schooled"));
 			characterCreation.ChangeCharsAnimation(new List<string>
 			{
 				"act_childhood_schooled"
@@ -934,7 +1419,7 @@ namespace WoT_Main
 		
 
 	
-		protected WoTCharacterCreation.SandboxAgeOptions _startingAge = WoTCharacterCreation.SandboxAgeOptions.YoungAdult;
+		protected WoTCharacterCreation.SandboxAgeOptions _startingAge = WoTCharacterCreation.SandboxAgeOptions.MiddleAged;
 
 		
 		protected TextObject _educationIntroductoryText = new TextObject("{=!}{EDUCATION_INTRO}", null);

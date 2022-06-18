@@ -51,8 +51,8 @@ namespace WoT_Main.Patches
    //}
    //
    //[HarmonyPatch]
-   public static class CultureStageSkiper
-   {
+   //public static class CultureStageSkiper
+   //{
        
        //[HarmonyPrefix]
        //[HarmonyPatch(typeof(CharacterCreationContentBase), "GetSelectedCulture")]
@@ -95,5 +95,35 @@ namespace WoT_Main.Patches
        //
        //     return false;
        //}
-   }
+   //
+   //[HarmonyPatch]
+   //public static class CultureSorter
+   //{
+   //
+   //    [HarmonyPrefix]
+   //    [HarmonyPatch(typeof(CharacterCreationContentBase), "GetCultures")]
+   //    public static bool Prefix( ref IEnumerable<CultureObject> __result)
+   //    {
+   //        campaignSupport.displayMessageInChat("sfafg");
+   //        IEnumerable<CultureObject> cultures = new List<CultureObject>();
+   //        foreach (CultureObject cultureObject in MBObjectManager.Instance.GetObjectTypeList<CultureObject>())
+   //        {
+   //            if (cultureObject.IsMainCulture && (cultureObject.Id.ToString() == "empire" || /cultureObject.Id.ToString/() == "sturgia" || cultureObject.Id.ToString() == "Dragonsworn" || /cultureObject.Id.ToString() == /"Seanchan" || cultureObject.Id.ToString() == "WhiteTower"))
+   //            {
+   //                cultures.AddItem(cultureObject);
+   //            }
+   //        }
+   //
+   //        foreach (CultureObject cultureObject in MBObjectManager.Instance.GetObjectTypeList<CultureObject>())
+   //        {
+   //            if (cultureObject.IsMainCulture && !cultures.Contains(cultureObject))
+   //            {
+   //                cultures.AddItem(cultureObject);
+   //            }
+   //        }
+   //        __result = cultures;
+   //        campaignSupport.displayMessageInChat("sfafg");
+   //        return false;
+   //    }
+   //}
 }
