@@ -19,12 +19,13 @@ using TaleWorlds.SaveSystem;
 using TaleWorlds.SaveSystem.Load;
 using WoT_Main.Cheats;
 using WoT_Main.Behaviours.Campaign;
+using Newtonsoft.Json.Linq;
 
 namespace WoT_Main
 {
     public class Main : MBSubModuleBase
     {
-        
+        private JObject config;
         protected override void OnBeforeInitialModuleScreenSetAsRoot()
         {
 
@@ -38,6 +39,14 @@ namespace WoT_Main
         {
 
             base.OnSubModuleLoad();
+
+            try
+            {
+                this.config = JObject.Parse(File.ReadAllText(Path.GetFullPath(BasePath.Name + "Modules/Wheel of Time Mod - MAIN FILE/config.json")));
+            }
+            catch (Exception)
+            {
+            }
 
             TextObject coreContentDisabledReason = new TextObject("Disabled during installation.", null);
 
@@ -70,6 +79,8 @@ namespace WoT_Main
 
             //Mission behaviour which disables friendly fire
             mission.AddMissionBehavior(new NoFriendlyFire());
+            mission.AddMissionBehavior(new ChannelingSound());
+            mission.AddMissionBehavior(new DeathBarrier2());
 
         }
       
@@ -91,6 +102,7 @@ namespace WoT_Main
                 starter.AddBehavior(new RandomEvents(constantWars));
                 starter.AddBehavior(new ShadowAlwaysAtWar(constantWars));
                 starter.AddBehavior(new PartyMapStuckFix());
+                
             }
         }  
         
