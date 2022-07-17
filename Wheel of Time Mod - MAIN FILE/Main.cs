@@ -102,6 +102,10 @@ namespace WoT_Main
                 starter.AddBehavior(new RandomEvents(constantWars));
                 starter.AddBehavior(new ShadowAlwaysAtWar(constantWars));
                 starter.AddBehavior(new PartyMapStuckFix());
+                //
+                //
+                //
+                //config.Value<string[]>("")
                 
             }
         }  

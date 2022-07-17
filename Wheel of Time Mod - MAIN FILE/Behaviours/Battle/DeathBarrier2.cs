@@ -24,20 +24,29 @@ namespace WoT_Main.Behaviours
                 //campaignSupport.displayMessageInChat(missionObject.ToString() + " " + missionObject.GetType().Name);
                 if(missionObject.GetType().Name == "DeathBarrier")
                 {
-                    campaignSupport.displayMessageInChat(Agent.Main.Position.x - missionObject.GameEntity.GetBoundingBoxMax().x + "");campaignSupport.displayMessageInChat(Agent.Main.Position.x - missionObject.GameEntity.GetBoundingBoxMax().y + "");campaignSupport.displayMessageInChat(Agent.Main.Position.z - missionObject.GameEntity.GetBoundingBoxMax().z + "");
+                    
+               
+
                     Agent[] agents = Mission.Current.Agents.ToArray();
                     foreach (Agent agent in agents)
                     {
                        
-                        if (agent.Position.x < missionObject.GameEntity.GetBoundingBoxMax().x &&
-                            agent.Position.y < missionObject.GameEntity.GetBoundingBoxMax().y && 
-                            agent.Position.z < missionObject.GameEntity.GetBoundingBoxMax().z && 
-                            agent.Position.x > missionObject.GameEntity.GetBoundingBoxMin().x && 
-                            agent.Position.y > missionObject.GameEntity.GetBoundingBoxMin().y && 
-                            agent.Position.z > missionObject.GameEntity.GetBoundingBoxMin().z)
+                        if (agent.Position.x < missionObject.GameEntity.GlobalPosition.x + 2.5f &&
+                            agent.Position.y < missionObject.GameEntity.GlobalPosition.y + 2.5f && 
+                            agent.Position.z < missionObject.GameEntity.GlobalPosition.z + 2.5f && 
+                            agent.Position.x > missionObject.GameEntity.GlobalPosition.x - 2.5f && 
+                            agent.Position.y > missionObject.GameEntity.GlobalPosition.y - 2.5f && 
+                            agent.Position.z > missionObject.GameEntity.GlobalPosition.z - 2.5f)
                         {
-                            campaignSupport.displayMessageInChat("ded");
-                            agent.Health = 0;
+
+
+                           
+                                agent.Die(CreateMissileBlow(Agent.Main));
+                            
+                         
+
+
+
                         }
 
                     }
@@ -45,5 +54,34 @@ namespace WoT_Main.Behaviours
             }
 
         }
-    }
+
+		private Blow CreateMissileBlow(Agent attackerAgent)
+		{
+			Blow blow = new Blow(attackerAgent.Index);
+            
+            blow.BlowFlag = BlowFlags.NoSound;
+
+			blow.Direction = Vec3.Forward;
+			blow.SwingDirection = blow.Direction;
+
+			blow.Position = Vec3.Zero;
+			
+			blow.BoneIndex = 0;
+			
+			blow.StrikeType = StrikeType.Swing;
+			
+			blow.DamageType = DamageTypes.Cut;
+
+			blow.VictimBodyPart = BoneBodyPartType.Head; 
+				
+			blow.BaseMagnitude = 1.0f;
+			blow.MovementSpeedDamageModifier = 1;
+			blow.AbsorbedByArmor = 1f;
+			blow.InflictedDamage = 169;
+			blow.SelfInflictedDamage = 69;
+			blow.DamageCalculated = true;
+			return blow;
+		}
+	}
+
 }
