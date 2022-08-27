@@ -4,6 +4,9 @@ using System.Linq;
 using Helpers;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.CharacterCreationContent;
+using TaleWorlds.CampaignSystem.Extensions;
+using TaleWorlds.CampaignSystem.GameState;
+using TaleWorlds.CampaignSystem.Party;
 using TaleWorlds.Core;
 using TaleWorlds.Library;
 using TaleWorlds.Localization;
@@ -74,7 +77,7 @@ namespace WoT_Main
 			MapState mapState;
 			if ((mapState = (GameStateManager.Current.ActiveState as MapState)) != null)
 			{
-				mapState.Handler.ResetCamera();
+				mapState.Handler.ResetCamera(true, true);
 				mapState.Handler.TeleportCameraToMainParty();
 			}
 			this.SetHeroAge((float)this._startingAge);

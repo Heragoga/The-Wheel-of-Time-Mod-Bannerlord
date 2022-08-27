@@ -10,7 +10,7 @@ using WoT_Main.Support;
 using TaleWorlds.Library;
 using System.Collections.Generic;
 using System.Reflection;
-using WoT_Main.CampaignEventSystem;
+
 using System.IO;
 using TaleWorlds.Engine.Screens;
 using SandBox.View;
@@ -79,7 +79,7 @@ namespace WoT_Main
 
             //Mission behaviour which disables friendly fire
             mission.AddMissionBehavior(new NoFriendlyFire());
-            mission.AddMissionBehavior(new ChannelingSound());
+            //mission.AddMissionBehavior(new ChannelingSound());
             mission.AddMissionBehavior(new DeathBarrier2());
 
         }
@@ -95,17 +95,16 @@ namespace WoT_Main
                 CampaignGameStarter starter = gameStarterObject as CampaignGameStarter;
 
                 
-                ConstantWars constantWars = new ConstantWars();
+                
 
-                starter.AddBehavior(constantWars);
-                starter.AddBehavior(new ShayolGhulCaptureMechanic());
-                starter.AddBehavior(new RandomEvents(constantWars));
-                starter.AddBehavior(new ShadowAlwaysAtWar(constantWars));
+                //starter.AddBehavior(constantWars);
+                //starter.AddBehavior(new ShayolGhulCaptureMechanic());
+                //starter.AddBehavior(new RandomEvents(constantWars));
+                starter.AddBehavior(new ShadowAlwaysAtWar());
+
+
                 starter.AddBehavior(new PartyMapStuckFix());
-                //
-                //
-                //
-                //config.Value<string[]>("")
+
                 
             }
         }  

@@ -10,7 +10,8 @@ using TaleWorlds.MountAndBlade;
 
 using TaleWorlds.Engine.Screens;
 using TaleWorlds.InputSystem;
-
+using TaleWorlds.CampaignSystem.Party;
+using TaleWorlds.CampaignSystem.Settlements;
 
 namespace WoT_Main.Behaviours.Campaign
 {

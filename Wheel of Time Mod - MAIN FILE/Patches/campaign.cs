@@ -8,7 +8,9 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using TaleWorlds.CampaignSystem;
-using TaleWorlds.CampaignSystem.SandBox.GameComponents.Map;
+using TaleWorlds.CampaignSystem.GameComponents;
+
+using TaleWorlds.CampaignSystem.Settlements;
 using TaleWorlds.Engine;
 using TaleWorlds.Library;
 using WoT_Main.Support;

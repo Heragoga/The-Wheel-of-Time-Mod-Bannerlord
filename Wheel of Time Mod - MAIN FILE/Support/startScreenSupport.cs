@@ -6,7 +6,8 @@ using TaleWorlds.Library;
 using TaleWorlds.Core;
 using TaleWorlds.Localization;
 using TaleWorlds.CampaignSystem;
-using TaleWorlds.CampaignSystem.SandBox.GameComponents.Map;
+using TaleWorlds.CampaignSystem.GameComponents;
+using TaleWorlds.CampaignSystem.ComponentInterfaces;
 
 namespace WoT_Main.Support
 {

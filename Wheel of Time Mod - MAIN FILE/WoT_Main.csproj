@@ -223,26 +223,16 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Behaviours\Battle\ChannelingSound.cs" />
     <Compile Include="Behaviours\Battle\DeathBarrier2.cs" />
     <Compile Include="Behaviours\Campaign\PartyMapStuckFix.cs" />
-    <Compile Include="Behaviours\Campaign\RandomEvents.cs" />
-    <Compile Include="Behaviours\Campaign\ConstantWars.cs" />
     <Compile Include="Behaviours\Battle\NoFriendlyFire.cs" />
     <Compile Include="Behaviours\Campaign\ShadowAlwaysAtWar.cs" />
-    <Compile Include="Behaviours\Campaign\ShayolGhulCaptureMechanic.cs" />
-    <Compile Include="CampaignEventSystem\innerFactionWarEvents.cs" />
-    <Compile Include="CampaignEventSystem\Scenarios\Scenario.cs" />
-    <Compile Include="CampaignEventSystem\Scenarios\TaxCollectorArrivesToRegion.cs" />
-    <Compile Include="CampaignEventSystem\war.cs" />
     <Compile Include="Cheats\DebugCheats.cs" />
     <Compile Include="Cheats\eventSystemCheats.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="Mission\DeathBarrier.cs" />
     <Compile Include="Patches\battle_id_patch.cs" />
     <Compile Include="Patches\campaign.cs" />
-    <Compile Include="Patches\characterCreation.cs" />
-    <Compile Include="Patches\xmlLoading.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Support\campaignSupport.cs" />
     <Compile Include="Support\startScreenSupport.cs" />
