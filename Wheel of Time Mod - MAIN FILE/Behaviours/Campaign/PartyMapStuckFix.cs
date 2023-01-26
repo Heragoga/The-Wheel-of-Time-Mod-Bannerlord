@@ -79,7 +79,7 @@ namespace WoT_Main.Behaviours.Campaign
 
                         try
                         {
-                            if(mobileParty != MobileParty.MainParty && !mobileParty.AtCampMode && mobileParty.IsMoving)
+                            if(mobileParty != MobileParty.MainParty && mobileParty.IsMoving)
                             {
                                 MapScene scene = (TaleWorlds.CampaignSystem.Campaign.Current.MapSceneWrapper as MapScene);
 

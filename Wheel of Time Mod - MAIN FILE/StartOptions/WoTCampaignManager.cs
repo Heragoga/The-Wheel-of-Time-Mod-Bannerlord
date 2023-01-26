@@ -5,7 +5,6 @@ using TaleWorlds.CampaignSystem.CharacterCreationContent;
 using TaleWorlds.CampaignSystem.Encounters;
 using TaleWorlds.CampaignSystem.GameState;
 using TaleWorlds.CampaignSystem.Party;
-
 using TaleWorlds.CampaignSystem.Settlements;
 using TaleWorlds.Core;
 using TaleWorlds.Engine;
@@ -61,13 +60,13 @@ namespace SandBox
 						MBDebug.Print("Initializing new game begin...", 0, Debug.DebugColor.White, 17592186044416UL);
 						Campaign campaign = new Campaign(CampaignGameMode.Campaign);
 						Game.CreateGame(campaign, this);
-						campaign.SetLoadingParameters(Campaign.GameLoadingType.NewCampaign, this._seed);
+						campaign.SetLoadingParameters(Campaign.GameLoadingType.NewCampaign);
 						MBDebug.Print("Initializing new game end...", 0, Debug.DebugColor.White, 17592186044416UL);
 					}
 					else
 					{
 						MBDebug.Print("Initializing saved game begin...", 0, Debug.DebugColor.White, 17592186044416UL);
-						((Campaign)Game.LoadSaveGame(this._loadedGameResult, this).GameType).SetLoadingParameters(Campaign.GameLoadingType.SavedCampaign, this._seed);
+						((Campaign)Game.LoadSaveGame(this._loadedGameResult, this).GameType).SetLoadingParameters(Campaign.GameLoadingType.SavedCampaign);
 						this._loadedGameResult = null;
 						Common.MemoryCleanupGC(false);
 						MBDebug.Print("Initializing saved game end...", 0, Debug.DebugColor.White, 17592186044416UL);

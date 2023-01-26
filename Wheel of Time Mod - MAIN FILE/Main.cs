@@ -13,10 +13,9 @@ using System.Reflection;
 
 using System.IO;
 using TaleWorlds.Engine.Screens;
-using SandBox.View;
+
 using SandBox;
-using TaleWorlds.SaveSystem;
-using TaleWorlds.SaveSystem.Load;
+
 using WoT_Main.Cheats;
 using WoT_Main.Behaviours.Campaign;
 using Newtonsoft.Json.Linq;
@@ -68,6 +67,7 @@ namespace WoT_Main
             TaleWorlds.MountAndBlade.Module.CurrentModule.AddInitialStateOption(initialStateOption);
 
             Harmony harmony = new Harmony("WoT_Main.HarmonyPatches");
+            Harmony.DEBUG = true;
             harmony.PatchAll();
         }
         

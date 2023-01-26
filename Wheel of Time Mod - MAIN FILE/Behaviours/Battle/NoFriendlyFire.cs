@@ -12,24 +12,22 @@ namespace WoT_Main.Behaviours
 {
     class NoFriendlyFire : MissionLogic
     {
-        //On Agent Hit is called every time and agent (unit, including including the player) receives damage
-        public override void OnAgentHit(Agent affectedAgent, Agent affectorAgent, int damage, in MissionWeapon affectorWeapon)
+        
+        public override void OnAgentHit(Agent affectedAgent, Agent affectorAgent, in MissionWeapon affectorWeapon, in Blow blow, in AttackCollisionData attackCollisionData)
         {
-            //One Power no friendly Fire
-            //Checks the name of the Weapon used
-            
-
+            base.OnAgentHit(affectedAgent, affectorAgent, affectorWeapon, blow, attackCollisionData);
             if (affectorWeapon.Item != null && affectorWeapon.Item.Name.Contains("onepower"))
             {
-                
-                if(affectedAgent.Team == affectorAgent.Team)
+
+                if (affectedAgent.Team == affectorAgent.Team)
                 {
-                    
-                    affectedAgent.Health = affectedAgent.Health + damage;
-                    
+
+                    affectedAgent.Health = affectedAgent.Health + blow.InflictedDamage;
+
                 }
             }
         }
-        
+       
+
     }
 }

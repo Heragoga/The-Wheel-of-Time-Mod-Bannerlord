@@ -7,9 +7,6 @@ using TaleWorlds.CampaignSystem;
 using TaleWorlds.Core;
 using TaleWorlds.Library;
 using System.Reflection;
-using TaleWorlds.CampaignSystem.Party;
-using TaleWorlds.Core;
-using TaleWorlds.Core;
 using TaleWorlds.CampaignSystem.Settlements;
 
 namespace WoT_Main.Support

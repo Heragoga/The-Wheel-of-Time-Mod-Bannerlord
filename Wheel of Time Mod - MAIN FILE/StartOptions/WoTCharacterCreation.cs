@@ -60,7 +60,10 @@ namespace WoT_Main
 		{
 			base.SelectedTitleType = 1;
 			base.SelectedParentType = 0;
-			Clan.PlayerClan.ChangeClanName(FactionHelper.GenerateClanNameforPlayer());
+	
+			TextObject textObject = FactionHelper.GenerateClanNameforPlayer();
+			Clan.PlayerClan.ChangeClanName(textObject, textObject);
+			
 		}
 
 		
@@ -2004,10 +2007,12 @@ namespace WoT_Main
 		
 		protected static List<FaceGenChar> ChangePlayerFaceWithAge(float age, string actionName = "act_childhood_schooled")
 		{
+			
+
 			List<FaceGenChar> list = new List<FaceGenChar>();
 			BodyProperties bodyProperties = CharacterObject.PlayerCharacter.GetBodyProperties(CharacterObject.PlayerCharacter.Equipment, -1);
 			bodyProperties = FaceGen.GetBodyPropertiesWithAge(ref bodyProperties, age);
-			list.Add(new FaceGenChar(bodyProperties, new Equipment(), CharacterObject.PlayerCharacter.IsFemale, actionName));
+			list.Add(new FaceGenChar(bodyProperties, CharacterObject.PlayerCharacter.Race, new Equipment(), CharacterObject.PlayerCharacter.IsFemale, actionName));
 			return list;
 		}
 
@@ -2035,7 +2040,8 @@ namespace WoT_Main
 			{
 				ItemObject item = hero.CharacterObject.Equipment[EquipmentIndex.ArmorItemEndSlot].Item;
 				list.Add(new FaceGenMount(MountCreationKey.GetRandomMountKey(item, hero.CharacterObject.GetMountKeySeed()), hero.CharacterObject.Equipment[EquipmentIndex.ArmorItemEndSlot].Item, hero.CharacterObject.Equipment[EquipmentIndex.HorseHarness].Item, "act_horse_stand_1"));
-				characterCreation.ChangeFaceGenMounts(list);
+				//characterCreation.ChangeFaceGenMounts(list);
+				
 			}
 		}
 		
@@ -2062,7 +2068,9 @@ namespace WoT_Main
 			}
 			else
 			{
-				characterCreation.ChangeCharacterPrefab(itemId, isLeftHand ? Game.Current.HumanMonster.MainHandItemBoneIndex : Game.Current.HumanMonster.OffHandItemBoneIndex);
+				Monster baseMonsterFromRace = FaceGen.GetBaseMonsterFromRace(characterCreation.FaceGenChars[0].Race);
+				characterCreation.ChangeCharacterPrefab(itemId, isLeftHand ? baseMonsterFromRace.MainHandItemBoneIndex : baseMonsterFromRace.OffHandItemBoneIndex);
+				
 			}
 			characterCreation.ChangeCharactersEquipment(new List<Equipment>
 			{

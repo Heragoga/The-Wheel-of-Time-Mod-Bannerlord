@@ -6,7 +6,7 @@ using TaleWorlds.Engine;
 using TaleWorlds.InputSystem;
 using TaleWorlds.Library;
 using TaleWorlds.MountAndBlade;
-using TaleWorlds.ObjectSystem;
+
 using WoT_Main.Support;
 
 namespace WoT_Main.Behaviours

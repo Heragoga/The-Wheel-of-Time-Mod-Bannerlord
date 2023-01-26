@@ -6,8 +6,7 @@ using TaleWorlds.Library;
 using TaleWorlds.Core;
 using TaleWorlds.Localization;
 using TaleWorlds.CampaignSystem;
-using TaleWorlds.CampaignSystem.GameComponents;
-using TaleWorlds.CampaignSystem.ComponentInterfaces;
+
 
 namespace WoT_Main.Support
 {
@@ -52,43 +51,43 @@ namespace WoT_Main.Support
                 campaignSupport.displayMessageInChat(ex.Message, Color.White);
             }
         }
-        public static void removeGameModel(IGameStarter gameStarter)
-        {   
-
-            //Doesn't work properly, was experimenting with it
-            try
-            {
-
-                FieldInfo fieldInfo = typeof(CampaignGameStarter).GetField("_models", BindingFlags.NonPublic | BindingFlags.Instance);
-                var v = fieldInfo.GetValue(gameStarter);
-                List<GameModel> newGameModels;
-
-                if (v.GetType() == typeof(List<GameModel>))
-                {
-                    newGameModels = (List<GameModel>)v;
-                }
-                else
-                {
-                    return;
-                }
-                foreach (GameModel gameModel in newGameModels)
-                {
-                    if (gameModel.GetType() == typeof(DefaultMapDistanceModel) || gameModel.GetType() == typeof(MapDistanceModel))
-                    {
-
-                        newGameModels.Remove(gameModel);
-
-                    }
-
-                }
-                fieldInfo.SetValue(typeof(CampaignGameStarter).GetField("_models", BindingFlags.NonPublic | BindingFlags.Instance), newGameModels);
-            }
-            catch (Exception ex)
-            {
-
-                campaignSupport.displayMessageInChat(ex.Message, Color.White);
-            }
-        }
+        //public static void removeGameModel(IGameStarter gameStarter)
+        //{   
+        //
+        //    //Doesn't work properly, was experimenting with it
+        //    try
+        //    {
+        //
+        //        FieldInfo fieldInfo = typeof(CampaignGameStarter).GetField("_models", BindingFlags.NonPublic | BindingFlags.Instance);
+        //        var v = fieldInfo.GetValue(gameStarter);
+        //        List<GameModel> newGameModels;
+        //
+        //        if (v.GetType() == typeof(List<GameModel>))
+        //        {
+        //            newGameModels = (List<GameModel>)v;
+        //        }
+        //        else
+        //        {
+        //            return;
+        //        }
+        //        foreach (GameModel gameModel in newGameModels)
+        //        {
+        //            if (gameModel.GetType() == typeof(DefaultMapDistanceModel) || gameModel.GetType() == typeof(MapDistanceModel))
+        //            {
+        //
+        //                newGameModels.Remove(gameModel);
+        //
+        //            }
+        //
+        //        }
+        //        fieldInfo.SetValue(typeof(CampaignGameStarter).GetField("_models", BindingFlags.NonPublic | BindingFlags.Instance), newGameModels);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //
+        //        campaignSupport.displayMessageInChat(ex.Message, Color.White);
+        //    }
+        //}
 
         public static void changeInitialStateOptionName(String initialStateOptionName, String newName)
         {
