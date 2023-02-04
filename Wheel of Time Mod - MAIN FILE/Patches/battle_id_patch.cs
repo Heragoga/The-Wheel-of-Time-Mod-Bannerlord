@@ -10,7 +10,10 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using TaleWorlds.CampaignSystem;
+using TaleWorlds.CampaignSystem.BarterSystem;
+using TaleWorlds.CampaignSystem.BarterSystem.Barterables;
 using TaleWorlds.CampaignSystem.CampaignBehaviors;
+using TaleWorlds.CampaignSystem.CampaignBehaviors.BarterBehaviors;
 using TaleWorlds.CampaignSystem.CharacterDevelopment;
 using TaleWorlds.CampaignSystem.Encounters;
 using TaleWorlds.CampaignSystem.Extensions;
@@ -300,6 +303,107 @@ namespace WoT_Main.Patches
 				}
 				
 
+			}
+
+			return false;
+		}
+	}
+
+
+	[HarmonyPatch]
+	public static class ItemBarterBehaviorPatch
+	{
+	
+		[HarmonyPrefix]
+		[HarmonyPatch(typeof(ItemBarterBehavior), "CheckForBarters")]
+		public static bool PreFix(ref BarterData args)
+		{
+			
+			Vec2 asVec;
+			if (args.OffererHero != null)
+			{
+				asVec = args.OffererHero.GetPosition().AsVec2;
+			}
+			else if (args.OffererParty != null)
+			{
+				asVec = args.OffererParty.MobileParty.GetPosition().AsVec2;
+			}
+			else
+			{
+				asVec = args.OtherHero.GetPosition().AsVec2;
+			}
+
+
+			List<Settlement> closestSettlements = new List<Settlement>();
+
+			foreach(Settlement s in Settlement.All)
+            {
+				if(closestSettlements.Count != 3)
+                {
+					closestSettlements.Add(s);
+                }
+				else if(s.Position2D.Distance(asVec) < closestSettlements[0].Position2D.Distance(asVec))
+                {
+					closestSettlements[0] = s;
+                }
+				else if (s.Position2D.Distance(asVec) < closestSettlements[1].Position2D.Distance(asVec))
+				{
+					closestSettlements[1] = s;
+				}
+				else if (s.Position2D.Distance(asVec) < closestSettlements[2].Position2D.Distance(asVec))
+				{
+					closestSettlements[2] = s;
+				}
+			}
+
+
+			if (args.OffererParty != null && args.OtherParty != null)
+			{
+				for (int i = 0; i < args.OffererParty.ItemRoster.Count; i++)
+				{
+					ItemRosterElement elementCopyAtIndex = args.OffererParty.ItemRoster.GetElementCopyAtIndex(i);
+					if (elementCopyAtIndex.Amount > 0 && elementCopyAtIndex.EquipmentElement.GetBaseValue() > 100)
+					{
+						
+
+						int num = 0;
+						if (!closestSettlements.IsEmpty<Settlement>())
+						{
+							foreach (Settlement settlement in closestSettlements)
+							{
+								num += settlement.Town.GetItemPrice(elementCopyAtIndex.EquipmentElement, args.OffererParty.MobileParty, true);
+							}
+							num /= closestSettlements.Count;
+						}
+						int averageValueOfItemInNearbySettlements = num;
+
+						Barterable barterable = new ItemBarterable(args.OffererHero, args.OtherHero, args.OffererParty, args.OtherParty, elementCopyAtIndex, averageValueOfItemInNearbySettlements);
+						args.AddBarterable<ItemBarterGroup>(barterable, false);
+					}
+				}
+				for (int j = 0; j < args.OtherParty.ItemRoster.Count; j++)
+				{
+					ItemRosterElement elementCopyAtIndex2 = args.OtherParty.ItemRoster.GetElementCopyAtIndex(j);
+					if (elementCopyAtIndex2.Amount > 0 && elementCopyAtIndex2.EquipmentElement.GetBaseValue() > 100)
+					{
+						
+
+
+						int num = 0;
+						if (!closestSettlements.IsEmpty<Settlement>())
+						{
+							foreach (Settlement settlement in closestSettlements)
+							{
+								num += settlement.Town.GetItemPrice(elementCopyAtIndex2.EquipmentElement, args.OffererParty.MobileParty, true);
+							}
+							num /= closestSettlements.Count;
+						}
+						int averageValueOfItemInNearbySettlements2 = num;
+
+						Barterable barterable2 = new ItemBarterable(args.OtherHero, args.OffererHero, args.OtherParty, args.OffererParty, elementCopyAtIndex2, averageValueOfItemInNearbySettlements2);
+						args.AddBarterable<ItemBarterGroup>(barterable2, false);
+					}
+				}
 			}
 
 			return false;
