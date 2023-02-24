@@ -41,7 +41,7 @@ namespace WoT_Main
 
             try
             {
-                this.config = JObject.Parse(File.ReadAllText(Path.GetFullPath(BasePath.Name + "Modules/Wheel of Time Mod - MAIN FILE/config.json")));
+                this.config = JObject.Parse(File.ReadAllText(Path.GetFullPath(BasePath.Name + "Modules/Wheel of Time Mod/config.json")));
             }
             catch (Exception)
             {
@@ -62,9 +62,12 @@ namespace WoT_Main
                 MBGameManager.StartNewGame(new WoTCampaignManager());
             }, () => new ValueTuple<bool, TextObject>(TaleWorlds.MountAndBlade.Module.CurrentModule.IsOnlyCoreContentEnabled, coreContentDisabledReason)));
 
+
+
             //Bread
             InitialStateOption initialStateOption = new InitialStateOption("Donate", new TextObject("Donate"), 1233, Donate, menuFunc);
             TaleWorlds.MountAndBlade.Module.CurrentModule.AddInitialStateOption(initialStateOption);
+
 
             Harmony harmony = new Harmony("WoT_Main.HarmonyPatches");
             Harmony.DEBUG = true;
@@ -114,7 +117,9 @@ namespace WoT_Main
             //Open browser and navigate to given link
             System.Diagnostics.Process.Start("https://www.patreon.com/WoT_Mod");
         }
-        
+
+       
+
         private (bool, TextObject) menuFunc()
         {
             return (false, null);
